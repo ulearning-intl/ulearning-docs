@@ -1,0 +1,51 @@
+{
+  "products": {
+    "title": "产品列表",
+    "type": "menu",
+    "items": {
+      "ULearning": {
+        "title": "Ulearning LMS",
+        "href": "/ulearning/getting-started"
+      },
+      "UClass": {
+        "title": "UClass 智慧课堂",
+        "href": "/uclass"
+      },
+      "utest": {
+        "title": "UTest 考试系统",
+        "href": "/utest"
+      }
+    }
+  },
+  "index": {
+    "title": "介绍",
+    "type": "page",
+    "display": "hidden"
+  },
+  "ulearning": {
+    "title": "ULearning LMS",
+    "type": "page",
+    "display": "hidden"
+  },
+  "docs": {
+    "title": "Docs",
+    "type": "page",
+    "href": "/docs/getting-started"
+  },
+  "solutions": {
+    "title": "解决方案",
+    "type": "page"
+  },
+  "practices": {
+    "title": "最佳实践",
+    "type": "page"
+  },
+  "blog": {
+    "title": "博客",
+    "type": "page",
+    "href": "/blog",
+    "theme": {
+      "sidebar": false
+    }
+  }
+}

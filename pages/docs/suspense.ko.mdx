@@ -1,0 +1,78 @@
+import { Callout } from 'nextra-theme-docs'
+
+# 서스펜스
+
+<Callout emoji="🚨" type="error">
+  리액트는 여전히 SWR(<a href="https://reactjs.org/blog/2022/03/29/react-v18.html#suspense-in-data-frameworks" target="_blank" rel="noopener">추가 정보</a>) 과 같은 데이터 프레임워크에서 서스펜스를 사용하는 것을 권장하지 않습니다. 이러한 API는 향후 연구 결과에 따라 변경될 수 있습니다.
+</Callout>
+
+React 서스펜스를 SWR과 함께 사용하려면 `suspense` 옵션을 활성화하세요.
+
+```jsx
+import { Suspense } from 'react'
+import useSWR from 'swr'
+
+function Profile () {
+  const { data } = useSWR('/api/user', fetcher, { suspense: true })
+  return <div>hello, {data.name}</div>
+}
+
+function App () {
+  return (
+    <Suspense fallback={<div>loading...</div>}>
+      <Profile/>
+    </Suspense>
+  )
+}
+```
+
+<Callout>
+  `suspense` 옵션은 생명 주기 내에서 변경을 허용하지 않습니다.
+</Callout>
+
+서스펜스 모드에서 `data`는 항상 응답을 가져옵니다(따라서 `undefined`를 검사할 필요가 없습니다).
+하지만 에러가 발생할 경우 [에러 경계](https://reactjs.org/docs/concurrent-mode-suspense.html#handling-errors)를 사용해 캐치해야 합니다.
+
+```jsx
+<ErrorBoundary fallback={<h2>Could not fetch posts.</h2>}>
+  <Suspense fallback={<h1>Loading posts...</h1>}>
+    <Profile />
+  </Suspense>
+</ErrorBoundary>
+```
+
+<Callout>
+Suspense mode suspends rendering until the data is ready, which means it causes waterfall problems easily. To avoid that, you should prefetch resources before rendering. [More information](/docs/prefetching)
+</Callout>
+
+---
+
+### 노트: 조건부 가져오기와 함께 [#note-with-conditional-fetching]
+
+일반적으로 `suspense`를 활성화하면 렌더링 시에 `data`가 항상 준비됩니다.
+
+```jsx
+function Profile () {
+  const { data } = useSWR('/api/user', fetcher, { suspense: true })
+
+  // `data`는 절대 `undefined`가 되지 않습니다
+  // ...
+}
+```
+
+하지만 조건부 가져오기나 의존적 가져오기와 함께 사용되면 `data`는 요청이 **일시 중단**된 경우 `undefined`가 됩니다.
+
+```jsx
+function Profile () {
+  const { data } = useSWR(isReady ? '/api/user' : null, fetcher, { suspense: true })
+
+  // `isReady`가 false이면 `data`는 `undefined`입니다
+  // ...
+}
+```
+
+이 제한에 대한 더 기술적인 상세 내용을 읽으려면 [여기를](https://github.com/vercel/swr/pull/357#issuecomment-627089889) 확인해 보세요.
+
+### 서버 사이드 렌더링 [#server-side-rendering]
+
+서스펜스 모드를 서버 사이드에서 사용할 때 (Next.js에서의 pre-rendering 포함), [fallbackData 또는 fallback](/docs/with-nextjs#pre-rendering-with-default-data)을 통해 초기 데이터를 **제공해야만 합니다**. 즉, 서버 사이드에서`Suspense`를 사용 할 수 없지만, 클라이언트 측 데이터 불러오기나, 프레임워크 수준의 데이터 불러오기(Next.js의 getStaticProps 등)는 가능합니다. 더 많은 정보는 [여기서](https://github.com/vercel/swr/issues/1906) 찾아보세요.
