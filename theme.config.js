@@ -17,7 +17,7 @@ import {
 
 /** @type {import('nextra-theme-docs').DocsThemeConfig} */
 const themeConfig = {
-  docsRepositoryBase: "https://github.dev/VfanLee/ulearning-docs/tree/main",
+  docsRepositoryBase: "https://github.dev/ulearning-intl/ulearning-docs/blob/test",
   useNextSeoProps() {
     return {
       titleTemplate: "Ulearning - %s",
