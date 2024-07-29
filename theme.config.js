@@ -17,7 +17,7 @@ import {
 
 /** @type {import('nextra-theme-docs').DocsThemeConfig} */
 const themeConfig = {
-  docsRepositoryBase: "https://github.com/vercel/swr-site/blob/main",
+  docsRepositoryBase: "https://github.dev/VfanLee/ulearning-docs/tree/main",
   useNextSeoProps() {
     return {
       titleTemplate: "Ulearning - %s",
