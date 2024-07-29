@@ -1,12 +1,11 @@
 import { useRouter } from "next/router";
 import { useConfig } from "nextra-theme-docs";
 import Logo from "./components/logo";
-import Vercel from "./components/vercel";
+import Footer from "./components/footer";
 import useLocalesMap from "./components/use-locales-map";
 import {
   editTextMap,
   feedbackLinkMap,
-  footerTextMap,
   gitTimestampMap,
   headDescriptionMap,
   languageMap,
@@ -17,7 +16,7 @@ import {
 
 /** @type {import('nextra-theme-docs').DocsThemeConfig} */
 const themeConfig = {
-  docsRepositoryBase: "https://github.dev/ulearning-intl/ulearning-docs/blob/test",
+  docsRepositoryBase: "https://github.com/ulearning-intl/ulearning-docs",
   useNextSeoProps() {
     return {
       titleTemplate: "Ulearning - %s",
@@ -31,7 +30,12 @@ const themeConfig = {
     placeholder: () => useLocalesMap(searchPlaceholderMap),
   },
   editLink: {
-    text: () => useLocalesMap(editTextMap),
+    component: ({ className, filePath }) => {
+      const docsRepositoryDevBase = "https://github.dev/ulearning-intl/ulearning-docs/blob/test/"
+      return (
+        <a className={ className } href={ docsRepositoryDevBase + filePath } target="_blank" rel="noreferrer">{ useLocalesMap(editTextMap) }</a>
+      )
+    }
   },
   feedback: {
     content: () => useLocalesMap(feedbackLinkMap),
@@ -105,33 +109,18 @@ const themeConfig = {
         <meta property="og:description" content={ogDescription} />
         <meta property="og:image" content={ogImage} />
         <meta property="og:locale" content={locale} />
-        {locales
+        {
+          locales
           .filter((l) => l !== locale)
           .map((l) => (
             <meta property="og:locale:alternate" content={l} key={l} />
-          ))}
+          ))
+        }
       </>
     );
   },
   footer: {
-    text: () => {
-      const { utmSource, text, suffix } = useLocalesMap(footerTextMap);
-
-      return (
-        <a
-          href={`https://vercel.com/?utm_source=${utmSource}`}
-          target="_blank"
-          rel="noopener"
-          className="inline-flex items-center no-underline text-current font-semibold"
-        >
-          <span className="mr-2">{text}</span>
-          <span>
-            <Vercel />
-          </span>
-          {suffix ? <span className="ml-2">{suffix}</span> : null}
-        </a>
-      );
-    },
+    component: () => Footer(),
   },
   gitTimestamp({ timestamp }) {
     const { locale } = useRouter();
@@ -153,6 +142,7 @@ const themeConfig = {
   i18n: Object.entries(languageMap).map(([locale, text]) => ({
     locale,
     text,
+    direction: locale === 'ar' ? 'rtl' : 'ltr'
   })),
 };
 

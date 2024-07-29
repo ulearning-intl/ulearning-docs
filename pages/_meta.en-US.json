@@ -23,9 +23,9 @@
     "display": "hidden"
   },
   "ulearning": {
-    "title": "ULearning",
+    "title": "Docs",
     "type": "page",
-    "display": "hidden"
+    "href": "/ulearning/getting-started"
   },
   "utest": {
     "title": "UTest",
@@ -35,7 +35,8 @@
   "docs": {
     "title": "Api Docs",
     "type": "page",
-    "href": "/docs/api"
+    "href": "/docs/api",
+    "display": "hidden"
   },
   "solutions": {
     "title": "Solutions",
