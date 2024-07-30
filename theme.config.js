@@ -142,7 +142,7 @@ const themeConfig = {
   i18n: Object.entries(languageMap).map(([locale, text]) => ({
     locale,
     text,
-    direction: locale === 'ar' ? 'rtl' : 'ltr'
+    direction: locale === "ar" ? "rtl" : "ltr"
   })),
 };
 

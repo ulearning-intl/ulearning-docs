@@ -2,9 +2,17 @@
 title: 智慧教育提供商
 ---
 
-import Link from 'next/link'
+import { useEffect } from "react";
+import Link from "next/link";
 
-<div className="container mx-auto px-4 py-8 max-w-5xl">
+export function Content() {
+    useEffect(() => {
+        if(!document.cookie.includes('NEXT_LOCALE')) {
+            location.href = '/en-US'
+        }
+    }, [])
+
+return <div className="container mx-auto px-4 py-8 max-w-5xl">
 
     <div className="mt-6 mb-16">
         <h1 className="text-4xl font-bold text-gray-800">Ulearning文档中心</h1>
@@ -14,7 +22,7 @@ import Link from 'next/link'
             <button className="bg-blue-600 text-white py-2 px-4 rounded-md shadow-md hover:bg-blue-700 transition-colors">
               探索视频教程
             </button>
-          </a>        
+          </a>
         </div>
     </div>
 
@@ -161,7 +169,7 @@ import Link from 'next/link'
 
       </div>
     </div>
-           
+
     <div className="container mx-auto mt-12 mb-16">
         <h2 className="text-2xl font-bold text-gray-800 leading-tight mb-4">最佳实践</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -295,3 +303,6 @@ import Link from 'next/link'
     </div>
 
 </div>
+}
+
+<Content></Content>
