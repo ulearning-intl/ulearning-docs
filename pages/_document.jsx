@@ -5,7 +5,7 @@ import { SkipNavLink } from "nextra-theme-docs";
 class MyDocument extends Document {
   render() {
     return (
-      <Html lang="en">
+      <Html>
         <Head />
         <body>
           <SkipNavLink styled />

@@ -8,25 +8,26 @@ const withNextra = require("nextra")({
   defaultShowCopyCode: true,
 });
 
-const languageMap = {
-  "en-US": "English",
-  // "es-ES": "Español",
-  "fr-FR": "Français",
-  // "id-ID": "Bahasa Indonesia",
-  // "th-TH": "ไทย",
-  "ar": "العربية",
-  "zh-CN": "简体中文",
-  // "zh-TW": "繁體中文",
-  // "ja": "日本語",
-  // "ko": "한국어",
-  // "ru": "Русский",
-  // "pt-BR": "Português Brasileiro",
-};
+const locales = [
+  "en-US",
+  // "es-ES",
+  "fr-FR",
+  // "id-ID",
+  // "th-TH",
+  "ar",
+  "zh-CN",
+  // "zh-TW",
+  // "ja",
+  // "ko",
+  // "ru",
+  // "pt-BR",
+];
 
 module.exports = withNextra({
   i18n: {
-    locales: Object.keys(languageMap),
+    locales,
     defaultLocale: "en-US",
+    localeDetection: false,
   },
   async redirects() {
     return [
