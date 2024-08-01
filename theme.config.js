@@ -14,18 +14,28 @@ import {
 
 /** @type {import('nextra-theme-docs').DocsThemeConfig} */
 const themeConfig = {
+  // Global
   docsRepositoryBase: "https://github.com/ulearning-intl/ulearning-docs",
   useNextSeoProps() {
     return {
       titleTemplate: "Ulearning - %s",
     };
   },
+  head: Head,
+
+  // Navbar
+  logo: Logo,
+  search: {
+    placeholder: () => useLocalesMap(searchPlaceholderMap),
+  },
+
+  // Sidebar
+  // ...
+
+  // TOC Sidebar
   toc: {
     float: true,
     title: () => useLocalesMap(tableOfContentsTitleMap),
-  },
-  search: {
-    placeholder: () => useLocalesMap(searchPlaceholderMap),
   },
   editLink: {
     component: ({ className, filePath }) => {
@@ -46,11 +56,8 @@ const themeConfig = {
   feedback: {
     content: () => useLocalesMap(feedbackLinkMap),
   },
-  logo: Logo,
-  head: Head,
-  footer: {
-    component: Footer,
-  },
+
+  // End of Page
   gitTimestamp({ timestamp }) {
     const { locale } = useRouter();
     const lastUpdatedOn = useLocalesMap(gitTimestampMap);
@@ -68,6 +75,13 @@ const themeConfig = {
       </>
     );
   },
+
+  // Footer
+  footer: {
+    component: Footer,
+  },
+
+  // I18n
   i18n: Object.entries(languageMap).map(([locale, text]) => ({
     locale,
     text,
