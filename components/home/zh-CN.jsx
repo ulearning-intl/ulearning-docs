@@ -31,7 +31,7 @@ export default function HomePage() {
             </h3>
             <ul className="mt-4 text-blue-600">
               <li className="mt-1 mb-1">
-                <Link href="/ulearning/admin">管理员</Link>
+                <Link href="/ulearning/admin/overview">管理员</Link>
               </li>
               <li className="mt-1 mb-1">教师</li>
               <li className="mt-1 mb-1">学生</li>
