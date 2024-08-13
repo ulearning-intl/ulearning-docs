@@ -8,12 +8,28 @@ const withNextra = require("nextra")({
   defaultShowCopyCode: true,
 });
 
+const locales = [
+  "en-US",
+  // "es-ES",
+  "fr-FR",
+  // "id-ID",
+  // "th-TH",
+  "ar",
+  "zh-CN",
+  // "zh-TW",
+  // "ja",
+  // "ko",
+  // "ru",
+  // "pt-BR",
+];
+
 module.exports = withNextra({
   i18n: {
-    locales: ["en-US", "zh-CN",'zh-TW', "es-ES", "fr-FR", "pt-BR", "ja", "ko", "ru", 'id-ID', 'th-TH', 'ar'],
+    locales,
     defaultLocale: "en-US",
+    localeDetection: false,
   },
-  redirects: () => {
+  async redirects() {
     return [
       {
         source: "/docs",
