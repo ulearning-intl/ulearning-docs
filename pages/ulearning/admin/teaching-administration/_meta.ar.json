@@ -1,8 +1,8 @@
 {
-  "announcements": "Announcements",
-  "classes": "Classes",
-  "courses": "Courses",
-  "exams": "Exams",
-  "student": "Student",
-  "teacher": "Teacher"
+  "announcements": " الإعلانات",
+  "classes": " الفصول",
+  "courses": " المقررات الدراسية",
+  "exams": "الامتحانات",
+  "student": "الطلاب",
+  "teacher": "المعلمين"
 }
