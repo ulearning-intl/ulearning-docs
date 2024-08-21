@@ -1,3 +1,12 @@
 {
-  "overview": "Overview"
+  "overview": "نظرة عامة",
+  "preparing-course": "إعداد المقررات",
+  "classes-and-members": "الفصول الدراسية والاعضاء",
+  "announcements": "الاعلانات",
+  "resources": "الموارد التعليمية",
+  "assignments": "المهام و الواجبات",
+  "discussions": "المناقشات",
+  "exams": "الامتحانات",
+  "grades": "الدرجات",
+  "analytics": "التحليل"
 }
