@@ -5,10 +5,11 @@ export default function HomePage() {
     <>
       <div className="container mx-auto px-4 py-8 max-w-5xl">
         <div className="mt-6 mb-16">
+          机翻
           <h1 className="text-4xl font-bold text-gray-800">Documentation</h1>
           <p className="text-xl text-gray-600 mt-4">
-            Explore our guides and examples to unlock the full potential of
-            Smart Education.
+          Explorez nos guides et exemples pour libérer tout le potentiel de 
+          Éducation intelligente.
           </p>
           <div className="mt-8">
             <a
@@ -17,7 +18,7 @@ export default function HomePage() {
               rel="noopener noreferrer"
             >
               <button className="bg-blue-600 text-white py-2 px-4 rounded-md shadow-md hover:bg-blue-700 transition-colors">
-                Explore video tutorials
+                Explorez les tutoriels vidéo
               </button>
             </a>
           </div>
@@ -30,35 +31,35 @@ export default function HomePage() {
             </h3>
             <ul className="mt-4 text-blue-600">
               <li className="mt-1 mb-1">
-                <Link href="/ulearning/admin/overview">Administrator</Link>
+                <Link href="/ulearning/admin/overview">Administrateur</Link>
               </li>
               <li className="mt-1 mb-1">
-                <Link href="/ulearning/teacher/overview">Teacher</Link>
+                <Link href="/ulearning/teacher/overview">Professeur</Link>
               </li>
               <li className="mt-1 mb-1">
-                <Link href="/ulearning/student/overview">Student</Link>
+                <Link href="/ulearning/student/overview">Étudiant</Link>
               </li>
             </ul>
           </div>
           <div>
             <h3 className="text-xl text-gray-800 font-semibold">
-              UClass Smart Classroom
+              Salle de classe intelligente UClass
             </h3>
             <ul className="mt-4 text-blue-600">
-              <li className="mt-1 mb-1">Administrator</li>
-              <li className="mt-1 mb-1">Instructor</li>
-              <li className="mt-1 mb-1">Learner</li>
-              <li className="mt-1 mb-1">All Features</li>
-              <li className="mt-1 mb-1">Best Practice</li>
+              <li className="mt-1 mb-1">Administrateur</li>
+              <li className="mt-1 mb-1">Instructeur</li>
+              <li className="mt-1 mb-1">Apprenant</li>
+              <li className="mt-1 mb-1">Toutes les caractéristiques</li>
+              <li className="mt-1 mb-1">Meilleures pratiques</li>
             </ul>
           </div>
           <div>
             <h3 className="text-xl text-gray-800 font-semibold">
-              UTest Online Exam
+              Examen en ligne UTest
             </h3>
             <ul className="mt-4 text-blue-600">
               <li className="mt-1 mb-1">
-                <Link href="/utest/teacher">Teacher</Link>
+                <Link href="/utest/teacher">Professeur</Link>
               </li>
             </ul>
           </div>
@@ -66,7 +67,7 @@ export default function HomePage() {
 
         <div className="container  mt-12 mb-16">
           <h2 className="text-2xl font-bold text-gray-800 leading-tight mb-4">
-            Our Solutions
+            Nos solutions
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
@@ -88,12 +89,12 @@ export default function HomePage() {
               </div>
               <div>
                 <a href="#" className="font-semibold text-gray-900">
-                  Huawei-ULearning Smart Education Solution
+                  Solution d'éducation intelligente Huawei-ULearning
                   <span className="absolute inset-0"></span>
                 </a>
                 <p className="mt-1  text-sm text-gray-600">
-                  Integrated total solution for Digital Transformation of
-                  Education{" "}
+                Solution totale intégrée pour la transformation numérique de 
+                Éducation{" "}
                 </p>
               </div>
             </div>
@@ -122,11 +123,11 @@ export default function HomePage() {
               </div>
               <div>
                 <a href="#" className="font-semibold text-gray-900">
-                  Higher Education
+                  Enseignement supérieur
                   <span className="absolute inset-0"></span>
                 </a>
                 <p className="mt-1 text-sm text-gray-600">
-                  Unleash the Power of Higher Education.
+                  Libérez le pouvoir de l'enseignement supérieur.
                 </p>
               </div>
             </div>
@@ -149,11 +150,11 @@ export default function HomePage() {
               </div>
               <div>
                 <a href="#" className="font-semibold text-gray-900">
-                  TVET Education and Training
+                  TVET Éducation et formation
                   <span className="absolute inset-0"></span>
                 </a>
                 <p className="mt-1 text-sm text-gray-600">
-                  TVET platform and content for over 20 industries
+                  Plateforme et contenu TVET pour plus de 20 industries
                 </p>
               </div>
             </div>
@@ -176,11 +177,11 @@ export default function HomePage() {
               </div>
               <div>
                 <a href="#" className="font-semibold text-gray-900">
-                  K12 Education
+                  Éducation K12
                   <span className="absolute inset-0"></span>
                 </a>
                 <p className="mt-1 text-sm text-gray-600">
-                  Smart Class Solution for K12 Education
+                  Solution de classe intelligente pour l'éducation K12
                 </p>
               </div>
             </div>
@@ -203,12 +204,12 @@ export default function HomePage() {
               </div>
               <div>
                 <a href="#" className="font-semibold text-gray-900">
-                  Industry Training Solution
+                  Solution de formation de l'industrie
                   <span className="absolute inset-0"></span>
                 </a>
                 <p className="mt-1  text-sm text-gray-600">
-                  Empowering Your Professional Growth with Ulearning Classroom
-                  and Industry-Specific Content.
+                Responsabiliser votre croissance professionnelle avec Ulearning Classroom 
+                Et le contenu spécifique à l'industrie.
                 </p>
               </div>
             </div>
@@ -231,11 +232,11 @@ export default function HomePage() {
               </div>
               <div>
                 <a href="#" className="font-semibold text-gray-900">
-                  ICT Academy
+                  Académie des TIC
                   <span className="absolute inset-0"></span>
                 </a>
                 <p className="mt-1 text-sm text-gray-600">
-                  Build your ICT Academy with Ulearning And HuaWei
+                  Construisez votre académie des TIC avec Ulearning et HuaWei
                 </p>
               </div>
             </div>
@@ -259,12 +260,12 @@ export default function HomePage() {
               </div>
               <div>
                 <a href="#" className="font-semibold text-gray-900">
-                  Content Cloud
+                  Nuage de contenu
                   <span className="absolute inset-0"></span>
                 </a>
                 <p className="mt-1 text-sm text-gray-600">
-                  Ulearning Learning Repository: Driving Digital Transformation
-                  in Education.
+                 Référentiel d'apprentissage Ulearning : Conduire la transformation numérique 
+                 Dans l'éducation.
                 </p>
               </div>
             </div>
@@ -273,7 +274,7 @@ export default function HomePage() {
 
         <div className="container mx-auto mt-12 mb-16">
           <h2 className="text-2xl font-bold text-gray-800 leading-tight mb-4">
-            Best Practices
+            Meilleures pratiques
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
@@ -300,11 +301,11 @@ export default function HomePage() {
               </div>
               <div>
                 <a href="#" className="font-semibold text-gray-800">
-                  Migration Guide
+                  Guide de migration
                   <span className="absolute inset-0"></span>
                 </a>
                 <p className="mt-1 text-sm text-gray-600">
-                  Seamless Migration to Ulearning LMS: Easy-to-Follow Steps.
+                  Migration transparente vers Ulearning LMS : étapes faciles à suivre.
                 </p>
               </div>
             </div>
@@ -327,11 +328,11 @@ export default function HomePage() {
               </div>
               <div>
                 <a href="#" className="font-semibold text-gray-800">
-                  Prepare New Semester
+                  Préparer le nouveau semestre
                   <span className="absolute inset-0"></span>
                 </a>
                 <p className="mt-1 text-sm text-gray-600">
-                  Get Ready for Your Next Academic Term Effortlessly
+                  Préparez-vous pour votre prochain trimestre académique sans effort
                 </p>
               </div>
             </div>
@@ -354,11 +355,11 @@ export default function HomePage() {
               </div>
               <div>
                 <a href="#" className="font-semibold text-gray-800">
-                  5E Classroom with UClass
+                  Salle de classe 5E avec UClass
                   <span className="absolute inset-0"></span>
                 </a>
                 <p className="mt-1 text-sm text-gray-600">
-                  Sparking Vitality and Energy in your Classroom
+                  Stimuler la vitalité et l'énergie dans votre salle de classe
                 </p>
               </div>
             </div>
@@ -381,11 +382,11 @@ export default function HomePage() {
               </div>
               <div>
                 <a href="#" className="font-semibold text-gray-800">
-                  Prepare Large-scale Examnation
+                  Préparer Un Examen À Grande Échelle
                   <span className="absolute inset-0"></span>
                 </a>
                 <p className="mt-1 text-sm text-gray-600">
-                  Organize a large-scale examination using Utest.
+                  Organisez un examen à grande échelle à l'aide d'Utest.
                 </p>
               </div>
             </div>
@@ -408,11 +409,11 @@ export default function HomePage() {
               </div>
               <div>
                 <a href="#" className="font-semibold text-gray-800">
-                  Content Digitalization Practice
+                  Pratique de la numérisation du contenu
                   <span className="absolute inset-0"></span>
                 </a>
                 <p className="mt-1 text-sm text-gray-600">
-                  Accumulate digital content with quality and quantity
+                  Accumuler du contenu numérique avec qualité et quantité
                 </p>
               </div>
             </div>
@@ -436,11 +437,11 @@ export default function HomePage() {
               </div>
               <div>
                 <a href="#" className="font-semibold text-gray-800">
-                  Transnational TVET Training
+                  Formation transnationale à la TVET
                   <span className="absolute inset-0"></span>
                 </a>
                 <p className="mt-1 text-sm text-gray-600">
-                  Best Practices for Transnational TVET Training
+                  Meilleures pratiques pour la formation transnationale à l'ETVT
                 </p>
               </div>
             </div>
@@ -449,7 +450,7 @@ export default function HomePage() {
 
         <div className="mb-40 blue-links max-w-4xl">
           <h2 className="text-2xl font-bold text-gray-800 leading-tight mb-4">
-            Change Log
+            Journal des modifications
           </h2>
 
           <div className="max-w-3xl">
@@ -463,28 +464,28 @@ export default function HomePage() {
                 </div>
                 <ul className="list-disc text-sm pl-4 text-gray-600">
                   <li>
-                    Added new feature: Smart Notifications for improved user
-                    engagement.
+                    Ajout d'une nouvelle fonctionnalité : Notifications intelligentes pour améliorer l'utilisateur 
+                    Engagement.
                   </li>
                   <li>
-                    Enhanced performance and stability for a smoother user
-                    experience.
+                    Performances et stabilité améliorées pour un utilisateur plus fluide 
+                    Expérience.
                   </li>
                   <li>
-                    Fixed minor bugs and improved overall app reliability.
+                    Correction de bugs mineurs et amélioration de la fiabilité globale de l'application.
                   </li>
                   <li>
-                    Updated user interface with a refreshed design and improved
-                    accessibility.
+                    Interface utilisateur mise à jour avec un design rafraîchi et amélioré 
+                    Accessibilité.
                   </li>
                 </ul>
                 <div className="text-sm text-blue-600 mt-2 ">
                   <a href="#" className="underline">
-                    User guide
+                    Guide de l'utilisateur
                   </a>
                   ,{" "}
                   <a href="#" className="underline">
-                    Upgrade guide
+                    Guide de mise à niveau
                   </a>
                 </div>
               </div>
@@ -496,25 +497,25 @@ export default function HomePage() {
               </div>
               <div className="flex-1 ml-8">
                 <div className="text-lg font-semibold mb-2">
-                  UClass Release202311: add AI support
+                  UClass Release202311 : ajouter la prise en charge de l'IA
                 </div>
                 <p className="text-sm mt-2 text-gray-600">
-                  {" "}
-                  UClass platform has been enriched with AI capabilities,
-                  empowering advanced learning features. Experience personalized
-                  content suggestions through an integrated AI-powered
-                  recommendation system. Gain accurate feedback with AI-based
-                  assessment tools. Enjoy an enhanced user experience with
-                  intelligent content organization driven by AI algorithms.
-                  Rigorous testing ensures seamless integration of AI features.
+                  {" "} 
+                  La plate-forme UClass a été enrichie de capacités d'IA, 
+                  Renforcer les fonctionnalités d'apprentissage avancées. Expérience personnalisée 
+                  Suggestions de contenu grâce à une IA intégrée 
+                  Système de recommandation. Obtenez une rétroaction précise avec l'IA 
+                  Outils d'évaluation. Profitez d'une expérience utilisateur améliorée avec 
+                  Organisation intelligente du contenu pilotée par des algorithmes d'IA. 
+                  Des tests rigoureux garantissent une intégration transparente des fonctionnalités d'IA.
                 </p>
                 <div className="text-sm text-blue-600 mt-2">
                   <a href="#" className="underline">
-                    User guide
+                    Guide de l'utilisateur
                   </a>
                   ,{" "}
                   <a href="#" className="underline">
-                    Upgrade guide
+                    Guide de mise à niveau
                   </a>
                 </div>
               </div>

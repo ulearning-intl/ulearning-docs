@@ -5,10 +5,11 @@ export default function HomePage() {
     <>
       <div className="container mx-auto px-4 py-8 max-w-5xl">
         <div className="mt-6 mb-16">
-          <h1 className="text-4xl font-bold text-gray-800">Documentation</h1>
+          机翻
+          <h1 className="text-4xl font-bold text-gray-800">وثائق</h1>
           <p className="text-xl text-gray-600 mt-4">
-            Explore our guides and examples to unlock the full potential of
-            Smart Education.
+            استكشف أدلةنا وأمثلةنا لإطلاق العنان للإمكانات الكاملة ل 
+            التعليم الذكي.
           </p>
           <div className="mt-8">
             <a
@@ -17,7 +18,7 @@ export default function HomePage() {
               rel="noopener noreferrer"
             >
               <button className="bg-blue-600 text-white py-2 px-4 rounded-md shadow-md hover:bg-blue-700 transition-colors">
-                Explore video tutorials
+                استكشف دروس الفيديو
               </button>
             </a>
           </div>
@@ -26,39 +27,39 @@ export default function HomePage() {
         <div className="mt-4 grid grid-cols-3 gap-4">
           <div>
             <h3 className="text-xl text-gray-800 font-semibold">
-              ULearning LMS
+              نظام إدارة التعلم ULearning
             </h3>
             <ul className="mt-4 text-blue-600">
               <li className="mt-1 mb-1">
-                <Link href="/ulearning/admin/overview">Administrator</Link>
+                <Link href="/ulearning/admin/overview">مُوَظَّف الإدارةِ</Link>
               </li>
               <li className="mt-1 mb-1">
-                <Link href="/ulearning/teacher/overview">Teacher</Link>
+                <Link href="/ulearning/teacher/overview">مدرس</Link>
               </li>
               <li className="mt-1 mb-1">
-                <Link href="/ulearning/student/overview">Student</Link>
+                <Link href="/ulearning/student/overview">طالب</Link>
               </li>
             </ul>
           </div>
           <div>
             <h3 className="text-xl text-gray-800 font-semibold">
-              UClass Smart Classroom
+              الفصل الدراسي الذكي UClass
             </h3>
             <ul className="mt-4 text-blue-600">
-              <li className="mt-1 mb-1">Administrator</li>
-              <li className="mt-1 mb-1">Instructor</li>
-              <li className="mt-1 mb-1">Learner</li>
-              <li className="mt-1 mb-1">All Features</li>
-              <li className="mt-1 mb-1">Best Practice</li>
+              <li className="mt-1 mb-1">مُوَظَّف الإدارةِ</li>
+              <li className="mt-1 mb-1">معلم</li>
+              <li className="mt-1 mb-1">مُتَعَلِّم</li>
+              <li className="mt-1 mb-1">كل المميزات</li>
+              <li className="mt-1 mb-1">أفضل ممارسة</li>
             </ul>
           </div>
           <div>
             <h3 className="text-xl text-gray-800 font-semibold">
-              UTest Online Exam
+              امتحان UTest عبر الإنترنت
             </h3>
             <ul className="mt-4 text-blue-600">
               <li className="mt-1 mb-1">
-                <Link href="/utest/teacher">Teacher</Link>
+                <Link href="/utest/teacher">مُعَلِّم</Link>
               </li>
             </ul>
           </div>
@@ -66,7 +67,7 @@ export default function HomePage() {
 
         <div className="container  mt-12 mb-16">
           <h2 className="text-2xl font-bold text-gray-800 leading-tight mb-4">
-            Our Solutions
+            حلولنا
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
@@ -88,14 +89,14 @@ export default function HomePage() {
               </div>
               <div>
                 <a href="#" className="font-semibold text-gray-900">
-                  Huawei-ULearning Smart Education Solution
+                  حل التعليم الذكي Huawei-ULearning
                   <span className="absolute inset-0"></span>
                 </a>
                 <p className="mt-1  text-sm text-gray-600">
-                  Integrated total solution for Digital Transformation of
-                  Education{" "}
+                  الحل الكلي المتكامل للتحول الرقمي ل 
+                  التعليم{" "}
                 </p>
-              </div>
+              </div>u
             </div>
 
             <div className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
@@ -122,11 +123,11 @@ export default function HomePage() {
               </div>
               <div>
                 <a href="#" className="font-semibold text-gray-900">
-                  Higher Education
+                  تَعْليم عالٍ
                   <span className="absolute inset-0"></span>
                 </a>
                 <p className="mt-1 text-sm text-gray-600">
-                  Unleash the Power of Higher Education.
+                  أطلق العنان لقوة التعليم العالي.
                 </p>
               </div>
             </div>
@@ -149,11 +150,11 @@ export default function HomePage() {
               </div>
               <div>
                 <a href="#" className="font-semibold text-gray-900">
-                  TVET Education and Training
+                  التعليم والتدريب التقني والمهني  
                   <span className="absolute inset-0"></span>
                 </a>
                 <p className="mt-1 text-sm text-gray-600">
-                  TVET platform and content for over 20 industries
+                  منصة ومحتوى التعليم والتعلم التقني والمهني لأكثر من 20 صناعة
                 </p>
               </div>
             </div>
@@ -176,11 +177,11 @@ export default function HomePage() {
               </div>
               <div>
                 <a href="#" className="font-semibold text-gray-900">
-                  K12 Education
+                  التعليم K12
                   <span className="absolute inset-0"></span>
                 </a>
                 <p className="mt-1 text-sm text-gray-600">
-                  Smart Class Solution for K12 Education
+                  حل الصف الذكي للتعليم K12
                 </p>
               </div>
             </div>
@@ -203,12 +204,12 @@ export default function HomePage() {
               </div>
               <div>
                 <a href="#" className="font-semibold text-gray-900">
-                  Industry Training Solution
+                  حل التدريب الصناعي
                   <span className="absolute inset-0"></span>
                 </a>
                 <p className="mt-1  text-sm text-gray-600">
-                  Empowering Your Professional Growth with Ulearning Classroom
-                  and Industry-Specific Content.
+                  تمكين نموك المهني من خلال Ulearning Classroom رقم 
+                  والمحتوى الخاص بالصناعة.
                 </p>
               </div>
             </div>
@@ -231,11 +232,11 @@ export default function HomePage() {
               </div>
               <div>
                 <a href="#" className="font-semibold text-gray-900">
-                  ICT Academy
+                  أكاديمية تكنولوجيا المعلومات والاتصالات
                   <span className="absolute inset-0"></span>
                 </a>
                 <p className="mt-1 text-sm text-gray-600">
-                  Build your ICT Academy with Ulearning And HuaWei
+                  قم ببناء أكاديمية تكنولوجيا المعلومات والاتصالات الخاصة بك مع Ulearning وHuaWei
                 </p>
               </div>
             </div>
@@ -259,12 +260,12 @@ export default function HomePage() {
               </div>
               <div>
                 <a href="#" className="font-semibold text-gray-900">
-                  Content Cloud
+                  سحابة المحتوى
                   <span className="absolute inset-0"></span>
                 </a>
                 <p className="mt-1 text-sm text-gray-600">
-                  Ulearning Learning Repository: Driving Digital Transformation
-                  in Education.
+                  مستودع تعلم Ulearning: قيادة التحول الرقمي 
+                  في التعليم.
                 </p>
               </div>
             </div>
@@ -273,7 +274,7 @@ export default function HomePage() {
 
         <div className="container mx-auto mt-12 mb-16">
           <h2 className="text-2xl font-bold text-gray-800 leading-tight mb-4">
-            Best Practices
+            أفضل الممارسات
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
@@ -300,11 +301,11 @@ export default function HomePage() {
               </div>
               <div>
                 <a href="#" className="font-semibold text-gray-800">
-                  Migration Guide
+                  دليل الهجرة
                   <span className="absolute inset-0"></span>
                 </a>
                 <p className="mt-1 text-sm text-gray-600">
-                  Seamless Migration to Ulearning LMS: Easy-to-Follow Steps.
+                  الانتقال السلس إلى Ulearning LMS: خطوات سهلة المتابعة.
                 </p>
               </div>
             </div>
@@ -327,11 +328,11 @@ export default function HomePage() {
               </div>
               <div>
                 <a href="#" className="font-semibold text-gray-800">
-                  Prepare New Semester
+                  قم بإعداد فصل دراسي جديد
                   <span className="absolute inset-0"></span>
                 </a>
                 <p className="mt-1 text-sm text-gray-600">
-                  Get Ready for Your Next Academic Term Effortlessly
+                  استعد لفصلك الدراسي القادم دون عناء
                 </p>
               </div>
             </div>
@@ -354,11 +355,11 @@ export default function HomePage() {
               </div>
               <div>
                 <a href="#" className="font-semibold text-gray-800">
-                  5E Classroom with UClass
+                  5E Classroom مع UClass
                   <span className="absolute inset-0"></span>
                 </a>
                 <p className="mt-1 text-sm text-gray-600">
-                  Sparking Vitality and Energy in your Classroom
+                  إثارة الحيوية والطاقة في فصلك الدراسي
                 </p>
               </div>
             </div>
@@ -381,11 +382,11 @@ export default function HomePage() {
               </div>
               <div>
                 <a href="#" className="font-semibold text-gray-800">
-                  Prepare Large-scale Examnation
+                  قم بإعداد امتحان واسع النطاق
                   <span className="absolute inset-0"></span>
                 </a>
                 <p className="mt-1 text-sm text-gray-600">
-                  Organize a large-scale examination using Utest.
+                  قم بتنظيم فحص واسع النطاق باستخدام Utest.
                 </p>
               </div>
             </div>
@@ -408,11 +409,11 @@ export default function HomePage() {
               </div>
               <div>
                 <a href="#" className="font-semibold text-gray-800">
-                  Content Digitalization Practice
+                  ممارسة رقمنة المحتوى
                   <span className="absolute inset-0"></span>
                 </a>
                 <p className="mt-1 text-sm text-gray-600">
-                  Accumulate digital content with quality and quantity
+                  تجميع المحتوى الرقمي بجودة وكمية
                 </p>
               </div>
             </div>
@@ -436,11 +437,11 @@ export default function HomePage() {
               </div>
               <div>
                 <a href="#" className="font-semibold text-gray-800">
-                  Transnational TVET Training
+                  التدريب على التعليم والتدريب التقني والمهني عبر الوطني
                   <span className="absolute inset-0"></span>
                 </a>
                 <p className="mt-1 text-sm text-gray-600">
-                  Best Practices for Transnational TVET Training
+                  أفضل الممارسات للتدريب على التعليم والتدريب التقني والمهني عبر الوطني
                 </p>
               </div>
             </div>
@@ -449,42 +450,42 @@ export default function HomePage() {
 
         <div className="mb-40 blue-links max-w-4xl">
           <h2 className="text-2xl font-bold text-gray-800 leading-tight mb-4">
-            Change Log
+            سجل التغيير
           </h2>
 
           <div className="max-w-3xl">
             <div className="flex items-start border-b border-gray-300 pb-4 mt-4 mb-8">
               <div className="text-sm text-gray-600 w-32 mt-1">
-                Oct. 25, 2023
+                أكتوبر. 25، 2023
               </div>
               <div className="flex-1 ml-8">
                 <div className="text-lg font-semibold mb-2">
-                  Ulearning Release 202312
+                  إصدار Ulearning 202312
                 </div>
                 <ul className="list-disc text-sm pl-4 text-gray-600">
                   <li>
-                    Added new feature: Smart Notifications for improved user
-                    engagement.
+                    تمت إضافة ميزة جديدة: الإشعارات الذكية للمستخدم المحسن رقم 
+                    المشاركة.
                   </li>
                   <li>
-                    Enhanced performance and stability for a smoother user
-                    experience.
+                    تحسين الأداء والاستقرار من أجل مستخدم أكثر سلاسة رقم 
+                    خبرة.
                   </li>
                   <li>
-                    Fixed minor bugs and improved overall app reliability.
+                    تم إصلاح الأخطاء الطفيفة وتحسين موثوقية التطبيق بشكل عام.
                   </li>
                   <li>
-                    Updated user interface with a refreshed design and improved
-                    accessibility.
+                    واجهة مستخدم محدثة بتصميم منتعش ومحسن 
+                    إمكانية الوصول.
                   </li>
                 </ul>
                 <div className="text-sm text-blue-600 mt-2 ">
                   <a href="#" className="underline">
-                    User guide
+                    دليل المستخدم
                   </a>
                   ,{" "}
                   <a href="#" className="underline">
-                    Upgrade guide
+                    دليل الترقية
                   </a>
                 </div>
               </div>
@@ -492,29 +493,29 @@ export default function HomePage() {
 
             <div className="flex items-start border-b border-gray-300 pb-4 mt-4 mb-8">
               <div className="text-sm text-gray-600 w-32 mt-1">
-                Oct. 25, 2023
+                أكتوبر. 25، 2023
               </div>
               <div className="flex-1 ml-8">
                 <div className="text-lg font-semibold mb-2">
-                  UClass Release202311: add AI support
+                  إصدار UClass 202311: أضف دعم الذكاء الاصطناعي
                 </div>
                 <p className="text-sm mt-2 text-gray-600">
-                  {" "}
-                  UClass platform has been enriched with AI capabilities,
-                  empowering advanced learning features. Experience personalized
-                  content suggestions through an integrated AI-powered
-                  recommendation system. Gain accurate feedback with AI-based
-                  assessment tools. Enjoy an enhanced user experience with
-                  intelligent content organization driven by AI algorithms.
-                  Rigorous testing ensures seamless integration of AI features.
+                  {" "} رقم 
+                  تم إثراء منصة UClass بقدرات الذكاء الاصطناعي، رقم 
+                  تمكين ميزات التعلم المتقدمة. تجربة شخصية رقم 
+                  اقتراحات المحتوى من خلال نظام متكامل يعمل بالذكاء الاصطناعي رقم 
+                  نظام التوصية. احصل على تعليقات دقيقة باستخدام الذكاء الاصطناعي رقم 
+                  أدوات التقييم. استمتع بتجربة مستخدم محسنة مع رقم 
+                  منظمة محتوى ذكية مدفوعة بخوارزميات الذكاء الاصطناعي. رقم 
+                  يضمن الاختبار الصارم التكامل السلس لميزات الذكاء الاصطناعي.
                 </p>
                 <div className="text-sm text-blue-600 mt-2">
                   <a href="#" className="underline">
-                    User guide
+                    دليل المستخدم  
                   </a>
                   ,{" "}
                   <a href="#" className="underline">
-                    Upgrade guide
+                    دليل الترقية
                   </a>
                 </div>
               </div>
