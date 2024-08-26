@@ -1,0 +1,107 @@
+import { Callout } from 'nextra-theme-docs'
+import Link from 'next/link'
+
+机翻
+
+# معالجة الأخطاء 
+
+ إذا تم طرح خطأ داخل [`fetcher`](/docs/data-fetching)، فسيتم إرجاعه ك "خطأ" بواسطة الخطاف.
+
+```js
+const fetcher = url => fetch(url).then(r => r.json())
+
+// ...
+const { data, error } = useSWR('/api/user', fetcher)
+```
+
+سيتم تعريف الكائن "الخطأ 22" إذا تم رفض وعد الجلب. 
+ 
+## رمز الحالة وكائن الخطأ [#status-code-and-error-object] 
+ 
+في بعض الأحيان نريد أن تقوم واجهة برمجة التطبيقات بإرجاع كائن خطأ إلى جانب رمز الحالة. 
+كلاهما مفيد للعميل. . 
+ 
+يمكننا تخصيص `fetcher` لإرجاع المزيد من المعلومات. إذا لم يكن رمز الحالة `2xx`، 
+نعتبره خطأ حتى لو كان من الممكن تحليله على أنه JSON:
+
+```js
+const fetcher = async url => {
+  const res = await fetch(url)
+
+  // If the status code is not in the range 200-299,
+  // we still try to parse and throw it.
+  if (!res.ok) {
+    const error = new Error('An error occurred while fetching the data.')
+    // Attach extra info to the error object.
+    error.info = await res.json()
+    error.status = res.status
+    throw error
+  }
+
+  return res.json()
+}
+
+// ...
+const { data, error } = useSWR('/api/user', fetcher)
+// error.info === {
+//   message: "You are not authorized to access this resource.",
+//   documentation_url: "..."
+// }
+// error.status === 403
+```
+
+<Callout emoji="💡">
+  لاحظ أن <code>معلومات</code> و <code>خطأ</code> يمكن أن يوجدا في نفس الوقت. حتى تتمكن واجهة المستخدم من عرض البيانات الموجودة،
+  بينما مع العلم أن الطلب القادم قد فشل.
+</Callout>
+
+[هنا](/examples/error-handling) لدينا مثال.
+
+## إعادة محاولة الخطأ [#إعادة محاولة الخطأ]
+
+تستخدم SWR [خوارزمية التراجع الأسي](https://en.wikipedia.org/wiki/Exponential_backoff) لإعادة محاولة الطلب عن طريق الخطأ. 
+تسمح الخوارزمية للتطبيق بالتعافي من الأخطاء بسرعة، ولكن ليس إهدار الموارد التي يتم إعادة المحاولة في كثير من الأحيان. 
+ 
+يمكنك أيضا تجاوز هذا السلوك عبر خيار [onErrorRetry](/docs/api#options):
+
+```js
+useSWR('/api/user', fetcher, {
+  onErrorRetry: (error, key, config, revalidate, { retryCount }) => {
+    // Never retry on 404.
+    if (error.status === 404) return
+
+    // Never retry for a specific key.
+    if (key === '/api/user') return
+
+    // Only retry up to 10 times.
+    if (retryCount >= 10) return
+
+    // Retry after 5 seconds.
+    setTimeout(() => revalidate({ retryCount }), 5000)
+  }
+})
+```
+
+يمنحك رد الاتصال هذا المرونة لإعادة المحاولة بناء على ظروف مختلفة. يمكنك أيضا تعطيله عن طريق تعيين `shouldRetryOnError: false`. 
+ 
+من الممكن أيضا توفيره عبر سياق [Global Configuration](/docs/global-configuration).
+
+## تقرير الخطأ العالمي  رقم [#global-error-report]
+
+ يمكنك دائما الحصول على كائن "الخطأ" داخل المكون بشكل تفاعلي. رقم 
+ ولكن في حالة رغبتك في التعامل مع الخطأ عالميا، لإخطار واجهة المستخدم لإظهار [toast](https://vercel.com/design/toast) أو [snackbar](https://material.io/components/snackbars)، أو الإبلاغ عنه في مكان ما مثل [Sentry] (https://sentry.io)، 
+هناك حدث [`onError`](/docs/api#options):
+
+
+```jsx
+<SWRConfig value={{
+  onError: (error, key) => {
+    if (error.status !== 403 && error.status !== 404) {
+      // We can send the error to Sentry,
+      // or show a notification UI.
+    }
+  }
+}}>
+  <MyApp />
+</SWRConfig>
+```

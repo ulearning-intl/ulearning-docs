@@ -1,0 +1,64 @@
+机翻
+
+# الحجج 
+
+ بشكل افتراضي، سيتم تمرير `key` إلى `fetcher` كوسيطة. لذا فإن التعبيرات الثلاثة التالية متكافئة:
+
+```js
+useSWR('/api/user', () => fetcher('/api/user'))
+useSWR('/api/user', url => fetcher(url))
+useSWR('/api/user', fetcher)
+```
+
+## حجج متعددة [# حجج متعددة] 
+
+ في بعض السيناريوهات، من المفيد تمرير وسيطات متعددة (يمكن أن تكون أي قيمة أو كائن) إلى الدالة `fetcher`. 
+ على سبيل المثال طلب جلب مصرح به:
+
+
+```js
+useSWR('/api/user', url => fetchWithToken(url, token))
+```
+
+هذا **غير صحيح**. لأن المعرف (أيضا مفتاح ذاكرة التخزين المؤقت) للبيانات هو `'/api/user'`، 
+حتى لو تغير `token`، ستظل SWR تستخدم نفس المفتاح وتعيد البيانات الخاطئة. 
+ 
+بدلا من ذلك، يمكنك استخدام **array** كمعلمة `key`، والتي تحتوي على وسيطات متعددة ل `fetcher`:
+
+```js
+const { data: user } = useSWR(['/api/user', token], ([url, token]) => fetchWithToken(url, token))
+```
+
+تقبل الدالة `fetcher` المعلمة `key` كما هي، وسيرتبط مفتاح ذاكرة التخزين المؤقت أيضا بالوسيطة `key` بأكملها. في المثال أعلاه، يرتبط كل من `url` و`token` بمفتاح ذاكرة التخزين المؤقت.
+
+<Callout emoji="⚠️">
+  في الإصدارات السابقة (< 2.0.0)، ستتلقى الدالة `fetcher` الوسيطات المنتشرة من `key` الأصلي عندما تكون الوسيطة `key` هي نوع الصفيف. على سبيل المثال، سيصبح المفتاح `[url, token]` وسيطتين `(url, token)` لوظيفة `fetcher`.
+</Callout>
+
+
+## تمرير الأشياء [#تمرير الأشياء]
+
+import { Callout } from 'nextra-theme-docs'
+
+<Callout>
+  منذ SWR 1.1.0، سيتم تسلسل المفاتيح الشبيهة بالكائنات تحت غطاء المحرك تلقائيا. 
+</Callout>
+  
+لنفترض أن لديك وظيفة أخرى تجلب البيانات مع نطاق المستخدم: `fetchWithUser(api, user)`. يمكنك القيام بما يلي:
+
+```js
+const { data: user } = useSWR(['/api/user', token], fetchWithToken)
+
+// ...and then pass it as an argument to another useSWR hook
+const { data: orders } = useSWR(user ? ['/api/orders', user] : null, fetchWithUser)
+```
+
+يمكنك تمرير كائن مباشرة كمفتاح، وسيتلقى `fetcher` هذا الكائن أيضا:
+
+```js
+const { data: orders } = useSWR({ url: '/api/orders', args: user }, fetcher)
+```
+
+<Callout emoji="⚠️">
+  In الإصدارات القديمة (< 1.1.0)، SWR **بشكل رعد** يقارن الوسيطات على كل تصيير، وتؤدي إلى إعادة التحقق من صحتها إذا تغير أي منها.
+</Callout>

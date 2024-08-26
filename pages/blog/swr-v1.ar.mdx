@@ -1,0 +1,258 @@
+---
+image: https://assets.vercel.com/image/upload/v1630059453/swr/v1.png
+description: 'قبل عامين تقريبا، فتحنا SWR، مكتبة React الصغيرة التي تجلب البيانات والتي يحبها الناس. اليوم نصل إلى معلم آخر: الإصدار 1.0 من SWR.'
+date: August 27th, 2021
+---
+
+import { Callout } from 'nextra-theme-docs'
+import { Bleed } from 'nextra-theme-docs'
+
+import Authors, { Author } from 'components/authors'
+
+机翻
+# الإعلان عن SWR 1.0 [#announcing-swr-10]
+
+<Authors date="August 27th, 2021">
+  <Author name="Shu Ding" link="https://twitter.com/shuding_" />
+  <Author name="Jiachi Liu" link="https://twitter.com/huozhi" />
+</Authors>
+
+منذ ما يقرب من عامين، [مفتوحو المصدر] (https://twitter.com/vercel/status/1188911002626097157) SWR، مكتبة React الصغيرة التي تجلب البيانات التي يحبها الناس. اليوم نصل إلى معلم آخر: الإصدار 1.0 من SWR! 
+ 
+## ما الجديد [#ما الجديد] 
+ 
+### حجم أصغر [#حجم أصغر]
+
+
+[الأداء] (/docs/advanced/performance) هي واحدة من أهم ميزات SWR. في 1.0، جعلنا المكتبة أصغر بكثير **دون إزالة أي ميزات موجودة**: 
+ 
+ - نواة أصغر بنسبة 41٪ (24٪ أصغر عند ضغطها، **3.9 كيلوبايت **) 
+ - حجم تثبيت الحزمة الأصغر بنسبة 52٪ 
+ - تحسين تهز الأشجار
+
+
+هناك العديد من الأسباب لجعل المكتبة خفيفة الوزن: سيحتوي تطبيقك على حزمة أصغر ووقت تشغيل أصغر حجما ودليل `node_modules` أصغر. 
+ 
+لقد قمنا أيضا بتحسين تجميع الحزمة، وهي تدعم الآن واردات المسار:
+
+```js
+import useSWR from 'swr'
+import useSWRInfinite from 'swr/infinite'
+```
+
+إذا كنت لا تستخدم `useSWRInfinite`، فلن يتم تضمينه في طلبك. 
+ 
+إذا كنت لا تستخدم `useSWRInfinite`، فلن يتم تضمينه في طلبك. رقم 
+ 
+### بيانات التراجع [#بيانات التراجع] رقم 
+ 
+في 1.0، هناك خيار `fallback` جديد يمكنك من خلاله توفير أي بيانات تم جلبها مسبقا كقيمة أولية لجميع خطافات SWR مع مفاتيح محددة:
+
+```jsx
+<SWRConfig value={{
+  fallback: {
+    '/api/user': { name: 'Bob', ... },
+    '/api/items': ...,
+    ...
+  }
+}}>
+  <App/>
+</SWRConfig>
+```
+
+هذا مفيد جدا لسيناريوهات مثل SSG وSSR ونموذج البيانات للاختبار. تحقق من المستندات [Next.js SSG وSSR](/docs/with-nextjs) لمزيد من التفاصيل. رقم 
+ 
+من أجل تحسين الاتساق وتجنب الارتباك، تتم الآن إعادة تسمية `initialData`  القديمة إلى `fallbackData`، والتي لا تزال توفر قيمة احتياطية واحدة للخطاف المعطى. رقم 
+ 
+### وضع غير قابل للتغيير [#وضع غير قابل للتغيير] رقم 
+ 
+في بعض الأحيان تريد وضع علامة على مورد على أنه **غير قابل للتغيير** إذا لم يتغير أبدا. من الأفضل تعطيل عمليات إعادة التحقق التلقائية لها وتقديم الطلب مرة واحدة فقط. يوجد الآن خطاف مساعد لتسهيل ذلك:
+
+```jsx
+import useSWRImmutable from 'swr/immutable'
+
+// ...
+
+useSWRImmutable(key, fetcher, options)
+```
+
+يحتوي على نفس واجهة برمجة التطبيقات بالضبط مثل خطاف `useSWR`، ولكنه لن يعيد التحقق أبدا عند تركيز علامة التبويب أو استرداد الشبكة. هناك أيضا خيار جديد، `revalidateIfStale`، يمكنك استخدامه للتحكم في السلوك بدقة. يمكن العثور على مزيد من المعلومات [هنا] (/docs/revalidation#disable-automatic-revalidations). رقم 
+ 
+### مزود ذاكرة التخزين المؤقت المخصص [#مزود ذاكرة التخزين المؤقت المخصص] رقم 
+ 
+بشكل افتراضي، يستخدم SWR ذاكرة تخزين مؤقت عالمية واحدة لتخزين جميع البيانات. في 1.0، يمكنك تخصيصه باستخدام خيار `provider` الجديد:
+
+```jsx
+<SWRConfig value={{
+  provider: () => myCache
+}}>
+  <App/>
+</SWRConfig>
+```
+
+يمكنك استخدام هذه الميزة الجديدة للقيام بالعديد من الأشياء القوية. لدينا مثالان هنا: [_Mutate Multiple Keys with RegEx_](/docs/advanced/cache#mutate-multiple-keys-from-regex), [_LocalStorage Based Persistent Cache_](/docs/advanced/cache#localstorage-based-persistent-cache), [_Reset Cache Between Tests_](/docs/advanced/cache#reset-cache-between-test-cases). رقم 
+ 
+واجهة برمجة تطبيقات مزود ذاكرة التخزين المؤقت الجديدة هذه أكثر توافقا أيضا مع العرض المتزامن ل React 18. إذا كنت تضيف مزود ذاكرة التخزين المؤقت، فتأكد من استخدام وظيفة `mutate` العالمية التي تم إرجاعها من `useSWRConfig()`. رقم 
+ 
+يمكنك قراءة المستندات [مقدم ذاكرة التخزين المؤقت](/docs/advanced/cache) لمزيد من التفاصيل. رقم 
+
+### useSWRConfig()رقم [#useswrconfig] 
+ 
+هناك واجهة برمجة تطبيقات هوك جديدة لإرجاع جميع التكوينات العالمية، بما في ذلك مزود ذاكرة التخزين المؤقت الحالي ووظيفة `التحول` العالمية:
+
+```jsx
+import { useSWRConfig } from 'swr'
+
+function Foo () {
+  const { refreshInterval, cache, mutate, ...restConfig } = useSWRConfig()
+
+  // ...
+}
+```
+
+يمكن العثور على مزيد من المعلومات [هنا](/docs/global-configuration#access-to-global-configurations). 
+ 
+### البرامج الوسيطة [#middleware] 
+ 
+توفر SWR Middleware طريقة جديدة لك لبناء وإعادة استخدام التجريدات فوق خطافات SWR:
+
+```jsx
+<SWRConfig value={{ use: [...middleware] }}>
+
+// ... or directly in `useSWR`:
+useSWR(key, fetcher, { use: [...middleware] })
+```
+
+يمكن تنفيذ الكثير من الأفكار الجديدة باستخدام هذه الميزة، وقد أنشأنا بعض الأمثلة: [_Request Logger_](/docs/middleware#request-logger)، [_Keep Previous Data When Changing the Key_](/docs/middleware#keep-previous-result)، و[_Serialize Object Key 
+ 
+تحقق من [Middleware API](/docs/middleware) لمزيد من التفاصيل. 
+ 
+### تحسينات وتغطية اختبار أفضل [#تحسينات وتغطية اختبار أفضل] 
+ 
+منذ 0.x، أجرينا المئات من التحسينات الصغيرة وإصلاح الأخطاء. لدى SWR الآن 157 اختبارا تغطي معظم حالات الحافة في جلب البيانات. اقرأ [Changelog](https://github.com/vercel/swr/releases) لمزيد من التفاصيل. 
+ 
+### ترجمات المستندات [#docs-translations] 
+ 
+بفضل [المساهمين](https://github.com/vercel/swr-site/graphs/contributors) و Nextra [ميزة i18n] (https://nextra.vercel.app/features/i18n)، نقدم الآن وثائق SWR بست لغات مختلفة: 
+ - [الإنجليزية](https://swr.vercel.app) 
+ - [إسباني](https://swr.vercel.app/es-ES) 
+ - [الصينية المبسطة](https://swr.vercel.app/zh-CN) 
+ - [اليابانية](https://swr.vercel.app/ja) 
+ - [الكورية](https://swr.vercel.app/ko) 
+ - [بالروسية](https://swr.vercel.app/ru)
+
+
+## دليل الهجرة [#دليل الهجرة] 
+ 
+### تحديث `useSWRInfinite` الواردات [#update-useswrinfinite-imports] 
+ 
+يجب استيراد `useSWRInfinite` من `swr/infinite`:
+
+
+```diff
+- import { useSWRInfinite } from 'swr'
++ import useSWRInfinite from 'swr/infinite'
+```
+
+إذا كنت تستخدم الأنواع المقابلة، فقم بتحديث مسار الاستيراد أيضا:
+
+```diff
+- import { SWRInfiniteConfiguration, SWRInfiniteResponse } from 'swr'
++ import { SWRInfiniteConfiguration, SWRInfiniteResponse } from 'swr/infinite'
+```
+
+### تغيير `revalidate` إلى `mutate` رقم [#change-revalidate-to-mutate]
+ 
+لم يعد `useSWR` يعيد طريقة `revalidate`، قم بالتغيير إلى `mutate` بدلا من ذلك:
+
+```diff
+- const { revalidate } = useSWR(key, fetcher, options)
++ const { mutate } = useSWR(key, fetcher, options)
+
+
+  // ...
+
+
+- revalidate()
++ mutate()
+```
+
+### إعادة تسمية `initialData` إلى `fallbackData` [#rename-initialdata-to-fallbackdata]
+
+```diff
+- useSWR(key, fetcher, { initialData: ... })
++ useSWR(key, fetcher, { fallbackData: ... })
+```
+
+### لا مزيد من الجلب الافتراضي  رقم [#no-more-default-fetcher]
+ 
+لم يعد SWR يوفر الجلب الافتراضي (مكالمة `fetch` التي تقوم بتحليل البيانات على أنها JSON). أسهل طريقة لترحيل التغيير هي استخدام مكون `<SWRConfig>`:
+
+```jsx
+<SWRConfig value={{ fetcher: (url) => fetch(url).then(res => res.json()) }}>
+  <App/>
+</SWRConfig>
+
+// ... or
+useSWR(key, (url) => fetch(url).then(res => res.json()))
+```
+
+### نوصي باستخدام الخطاف العائد `mutate` [#recommend-to-use-the-hook-returned-mutate] 
+ 
+هذا **ليس** تغييرا فاصلا، لكننا سنوصي الآن باستخدام `mutate` الذي تم إرجاعه دائما من خطاف `useSWRConfig`:
+
+```diff
+- import { mutate } from 'swr'
++ import { useSWRConfig } from 'swr'
+
+
+  function Foo () {
++   const { mutate } = useSWRConfig()
+
+    return <button onClick={() => mutate('key')}>
+      Mutate Key
+    </button>
+  }
+```
+
+إذا كنت لا تستخدم مزود ذاكرة التخزين المؤقت، فإن الاستيراد العالمي الحالي `import { mutate } من 'swr'` لا يزال يعمل. 
+ 
+### الأنواع المعاد تسميتها [#renamed-types] 
+ 
+إذا كنت تستخدم TypeScript، فقد تم تغيير أسماء الأنواع التالية من أجل الاتساق:
+
+
+| 0.x (deprecated)               | 1.0                        | Note                    |
+| ------------------------------ | -------------------------- | ----------------------- |
+| `ConfigInterface`              | `SWRConfiguration`         |                         |
+| `keyInterface`                 | `Key`                      |                         |
+| `responseInterface`            | `SWRResponse`              |                         |
+| `RevalidateOptionInterface`    | `RevalidatorOptions`       |                         |
+| `revalidateType`               | `Revalidator`              |                         |
+| `SWRInfiniteResponseInterface` | `SWRInfiniteResponse`      | moved to `swr/infinite` |
+| `SWRInfiniteConfigInterface`   | `SWRInfiniteConfiguration` | moved to `swr/infinite` |
+
+### مستخدمو الميزات التجريبية وغير الرسمية [#beta-and-unofficial-feature-users] 
+ 
+إذا كنت تستخدم إصدارا تجريبيا من SWR، أو تستخدم أي واجهات برمجة تطبيقات غير موثقة، فيرجى الانتباه إلى التغييرات التالية: 
+ 
+ - تمت إزالة `import { cache } من 'swr'``؛ استخدم واجهة برمجة تطبيقات [`useSWRConfig` الجديدة](#useswrconfig) بدلا من ذلك. 
+ - تمت إزالة `import { createCache } من 'swr22'`؛ استخدم [Cache Provider API] الجديد(/docs/advanced/cache) بدلا من ذلك. 
+ - تمت إعادة تسمية `revalidateWhenStale22` إلى `revalidateIfStale22`. 
+ - تمت إعادة تسمية `middlewares22` إلى `use22`. 
+
+### سجل التغيير [#changelog] 
+ 
+اقرأ سجل التغيير الكامل [على GitHub](https://github.com/vercel/swr/releases). 
+ 
+## ما التالي [#whats-next] 
+ 
+في الإصدارات المستقبلية، سنستمر في تحسين المكتبة مع الحفاظ على الاستقرار. نهدف أيضا إلى تبني إصدارات React المستقبلية، حيث تستعد العديد من الميزات والتحسينات الجديدة في 1.0 بالفعل لذلك. بالإضافة إلى ذلك، نعمل أيضا على ميزات جديدة لتحسين تجربة جلب البيانات في React وتجربة استخدام هذه المكتبة. 
+ 
+إذا كان لديك أي ملاحظات حول هذا الإصدار، فيرجى [إعلامنا](https://github.com/vercel/swr/discussions). 
+ 
+## شكرا لك! [#شكرا لك] 
+ 
+شكر خاص ل [Toru Kobayashi](https://twitter.com/koba04) و [Yixuan Xu](https://twitter.com/yixuanxu94) على مساهماتهما في المكتبة، و [Paco Coursey](https://twitter.com/pacocoursey)،[Uttk](https://github.com/uttk), [Tomohiro SHIOYA](https://github.com/shioyang), [Markoz Peña](https://github.com/markozxuu), [SeulGi Choi](https://github.com/cs09g)، [Fang Lu](https://github.com/huzhengen)، [Valentin Politov](https://github.com/valentinpolitov) لعملهم على الترجمات والمستندات. لا يمكن أن يحدث هذا الإفراج بدونهم.
+
+نود أيضا أن نشكر المجتمع بأكمله، [110 مساهمين](https://github.com/vercel/swr/graphs/contributors) (+ [45 مساهما مستندات](https://github.com/vercel/swr-site/graphs/contributors))، وكل من ساعدنا وقدم لنا ملاحظات!

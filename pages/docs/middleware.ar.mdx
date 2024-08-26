@@ -1,0 +1,211 @@
+import { Callout } from 'nextra-theme-docs'
+
+机翻
+
+# البرامج الوسيطة
+
+<Callout>
+  قم بالترقية إلى أحدث إصدار (≥ 1.0.0) لاستخدام هذه الميزة.
+</Callout>
+
+ميزة البرنامج الوسيط هي إضافة جديدة في SWR 1.0 تمكنك من تنفيذ المنطق قبل وبعد خطافات SWR.
+
+## الاستخدام [#الاستخدام] 
+
+تتلقى البرامج الوسيطة خطاف SWR ويمكنها تنفيذ المنطق قبل وبعد تشغيله. إذا كانت هناك برامج وسيطة متعددة، فإن كل برنامج وسيط يلف البرامج الوسيطة التالية. ستتلقى آخر البرامج الوسيطة في القائمة خطاف SWR الأصلي `useSWR`. 
+ 
+### واجهة برمجة التطبيقات [#api] 
+
+_ملاحظات: لا ينبغي كتابة اسم الوظيفة بحروف كبيرة (على سبيل المثال `myMiddleware` بدلا من `MyMiddleware`) أو قواعد الوبر React سترمي خطأ `Rules of Hook`_
+
+[TypeScript](https://swr.vercel.app/docs/typescript#middleware-types)
+
+```jsx
+function myMiddleware (useSWRNext) {
+  return (key, fetcher, config) => {
+    // Before hook runs...
+
+    // Handle the next middleware, or the `useSWR` hook if this is the last one.
+    const swr = useSWRNext(key, fetcher, config)
+
+    // After hook runs...
+    return swr
+  }
+}
+```
+يمكنك تمرير مجموعة من البرامج الوسيطة كخيار إلى `SWRConfig` أو `useSWR`:
+
+```jsx
+<SWRConfig value={{ use: [myMiddleware] }}>
+
+// or...
+
+useSWR(key, fetcher, { use: [myMiddleware] })
+```
+
+### تمديد [#extend] 
+
+سيتم تمديد البرامج الوسيطة مثل الخيارات العادية. على سبيل المثال:
+
+```jsx
+function Bar () {
+  useSWR(key, fetcher, { use: [c] })
+  // ...
+}
+
+function Foo() {
+  return (
+    <SWRConfig value={{ use: [a] }}>
+      <SWRConfig value={{ use: [b] }}>
+        <Bar/>
+      </SWRConfig>
+    </SWRConfig>
+  )
+}
+```
+
+يعادل:
+
+```js
+useSWR(key, fetcher, { use: [a, b, c] })
+```
+
+### برامج وسيطة متعددة [#برامج وسيطة متعددة]
+
+يلف كل برنامج وسيط البرنامج الوسيط التالي، والأخير يلتف فقط خطاف SWR. على سبيل المثال:
+
+```jsx
+useSWR(key, fetcher, { use: [a, b, c] })
+```
+
+سيكون ترتيب عمليات تنفيذ البرامج الوسيطة `a → b → c`، كما هو موضح أدناه:
+
+```plaintext
+enter a
+  enter b
+    enter c
+      useSWR()
+    exit  c
+  exit  b
+exit  a
+```
+
+## أمثلة [#أمثلة] 
+
+### مسجل الطلبات [#request-logger] 
+
+دعنا ننشئ برنامجا وسيطا بسيطا لمسجل الطلبات كمثال. إنه يطبع جميع طلبات الجلب المرسلة من خطاف SWR هذا. يمكنك أيضا استخدام هذه البرامج الوسيطة لجميع خطافات SWR عن طريق إضافتها إلى `SWRConfig`.
+
+```jsx
+function logger(useSWRNext) {
+  return (key, fetcher, config) => {
+    // Add logger to the original fetcher.
+    const extendedFetcher = (...args) => {
+      console.log('SWR Request:', key)
+      return fetcher(...args)
+    }
+
+    // Execute the hook with the new fetcher.
+    return useSWRNext(key, extendedFetcher, config)
+  }
+}
+
+// ... inside your component
+useSWR(key, fetcher, { use: [logger] })
+```
+
+في كل مرة يتم فيها إطلاق الطلب، فإنه يخرج مفتاح SWR إلى وحدة التحكم:
+
+```plaintext
+SWR Request: /api/user1
+SWR Request: /api/user2
+```
+
+### احتفظ بالنتيجة السابقة  رقم [#keep-previous-result]
+
+في بعض الأحيان تريد أن تكون البيانات التي يتم إرجاعها بواسطة `useSWR` `بطيئة`. حتى لو تغير المفتاح، رقم 
+ما زلت تريد أن تعيد النتيجة السابقة حتى يتم تحميل البيانات الجديدة. رقم 
+ 
+يمكن بناء هذا كبرنامج وسيط متأخر مع `useRef`. في هذا المثال، سنقوم أيضا رقم 
+قم بتوسيع الكائن الذي تم إرجاعه من خطاف `useSWR`:
+
+```jsx
+import { useRef, useEffect, useCallback } from 'react'
+
+// This is a SWR middleware for keeping the data even if key changes.
+function laggy(useSWRNext) {
+  return (key, fetcher, config) => {
+    // Use a ref to store previous returned data.
+    const laggyDataRef = useRef()
+
+    // Actual SWR hook.
+    const swr = useSWRNext(key, fetcher, config)
+
+    useEffect(() => {
+      // Update ref if data is not undefined.
+      if (swr.data !== undefined) {
+        laggyDataRef.current = swr.data
+      }
+    }, [swr.data])
+
+    // Expose a method to clear the laggy data, if any.
+    const resetLaggy = useCallback(() => {
+      laggyDataRef.current = undefined
+    }, [])
+
+    // Fallback to previous data if the current data is undefined.
+    const dataOrLaggyData = swr.data === undefined ? laggyDataRef.current : swr.data
+
+    // Is it showing previous data?
+    const isLagging = swr.data === undefined && laggyDataRef.current !== undefined
+
+    // Also add a `isLagging` field to SWR.
+    return Object.assign({}, swr, {
+      data: dataOrLaggyData,
+      isLagging,
+      resetLaggy,
+    })
+  }
+}
+```
+
+عندما تحتاج إلى خطاف SWR ليكون متأخرا، يمكنك بعد ذلك استخدام هذه البرامج الوسيطة:
+
+```js
+const { data, isLagging, resetLaggy } = useSWR(key, fetcher, { use: [laggy] })
+```
+
+### تسلسل مفاتيح الكائنات [#serialize-object-keys]
+
+<Callout>
+  منذ SWR 1.1.0، سيتم تسلسل المفاتيح الشبيهة بالكائنات تحت غطاء المحرك تلقائيا.
+</Callout>
+
+<Callout emoji="⚠️">
+  في الإصدارات القديمة (< 1.1.0)، يقارن SWR **ضحا** الحجج في كل عرض، ويؤدي إلى إعادة التحقق من الصحة إذا تغير أي منها. رقم 
+  إذا كنت تمرر كائنات قابلة للتسلسل كمفتاح. يمكنك تسلسل مفاتيح الكائنات لضمان استقرارها، يمكن أن تساعد البرامج الوسيطة البسيطة في:
+</Callout>
+
+```jsx
+function serialize(useSWRNext) {
+  return (key, fetcher, config) => {
+    // Serialize the key.
+    const serializedKey = Array.isArray(key) ? JSON.stringify(key) : key
+
+    // Pass the serialized key, and unserialize it in fetcher.
+    return useSWRNext(serializedKey, (k) => fetcher(...JSON.parse(k)), config)
+  }
+}
+
+// ...
+useSWR(['/api/user', { id: '73' }], fetcher, { use: [serialize] })
+
+// ... or enable it globally with
+<SWRConfig value={{ use: [serialize] }}>
+```
+
+لا داعي للقلق من أن الكائن قد يتغير بين العروض. يتم تسلسله دائما إلى نفس السلسلة، وسيظل الوثني يتلقى حجج الكائن هذه.
+
+<Callout>
+  علاوة على ذلك، يمكنك استخدام libs مثل [fast-json-stable-stringify](https://github.com/epoberezkin/fast-json-stable-stringify) بدلا من `JSON.stringify` - أسرع وأكثر استقرارا.
+</Callout>
