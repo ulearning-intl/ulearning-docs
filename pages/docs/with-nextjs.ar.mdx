@@ -1,0 +1,153 @@
+import { Callout } from 'nextra-theme-docs'
+
+机翻
+# الاستخدام مع Next.js رقم 
+
+## جهاز توجيه التطبيق [#app-dir] رقم 
+
+### مكونات الخادم [#rsc]
+
+<Callout type="default" emoji="✅">
+   في Next.js App Router، جميع المكونات هي مكونات خادم React (RSC) افتراضيا. **يمكنك فقط استيراد واجهات برمجة تطبيقات التسلسل الرئيسية من SWR في RSC.**
+</Callout>
+
+```tsx filename="app/page.tsx" copy
+import { unstable_serialize } from 'swr' // ✅ Available in server components
+import { unstable_serialize as infinite_unstable_serialize } from 'swr/infinite' // ✅ Available in server components
+```
+
+<Callout type="error">
+لا يمكنك استيراد أي واجهات برمجة تطبيقات أخرى من SWR لأنها غير متوفرة في RSC.
+</Callout>
+
+```tsx filename="app/page.tsx" highlight={1}
+import useSWR from 'swr' // ❌ This is not available in server components
+```
+
+### مكونات العميل 
+
+يمكنك وضع علامة على مكوناتك بتوجيه `'use client'` أو استيراد SWR من مكونات العميل، سيسمح لك كلا الاتجاهين باستخدام خطافات جلب بيانات عميل SWR.
+
+```tsx filename="app/page.tsx" highlight={1} copy
+'use client'
+import useSWR from 'swr'
+export default Page() {
+  const { data } = useSWR('/api/user', fetcher)
+  return <h1>{data.name}</h1>
+}
+```
+
+إذا كنت بحاجة إلى استخدام `SWRConfig` لتكوين الإعدادات العالمية في مكونات الخادم `layout` أو `page`، وإنشاء مكون عميل منفصل لمزود لإعداد المزود والتكوين، ثم استخدمه في صفحات مكون الخادم.
+
+```tsx filename="app/swr-provider.tsx" copy
+'use client';
+import { SWRConfig } from 'swr'
+export const SWRProvider = ({ children }) => {
+  return <SWRConfig>{children}</SWRConfig>
+};
+```
+
+```tsx filename="app/page.tsx" copy
+// This is still a server component
+import { SWRProvider } from './swr-provider'
+export default Page() {
+  return (
+    <SWRProvider>
+      <h1>hello SWR</h1>
+    </SWRProvider>
+  )
+}
+```
+
+
+## جلب البيانات من جانب العميل [#جلب البيانات من جانب العميل] 
+
+إذا كانت صفحتك تحتوي على بيانات يتم تحديثها بشكل متكرر، ولا تحتاج إلى تقديم البيانات مسبقا، فإن SWR مناسب تماما ولا يلزم إعداد خاص: ما عليك سوى استيراد `useSWR` واستخدام الخطاف داخل أي مكونات تستخدم البيانات. 
+ 
+إليك كيفية عمله: 
+ 
+- أولا، قم بعرض الصفحة على الفور بدون بيانات. يمكنك إظهار حالات التحميل للبيانات المفقودة. 
+- بعد ذلك، أحضر البيانات على جانب العميل وعرضها عندما تكون جاهزة.
+
+يعمل هذا النهج بشكل جيد لصفحات لوحة معلومات المستخدم، على سبيل المثال. نظرا لأن لوحة المعلومات هي صفحة خاصة بالمستخدم، فإن تحسين محركات البحث غير ذات صلة ولا تحتاج الصفحة إلى تقديمها مسبقا. يتم تحديث البيانات بشكل متكرر، مما يتطلب جلب بيانات وقت الطلب.
+
+## التقديم المسبق باستخدام البيانات الافتراضية [#pre-rendering-with-default-data] 
+ 
+إذا كان يجب تقديم الصفحة مسبقا، فإن Next.js يدعم [شكلين من أشكال التقديم المسبق](https://nextjs.org/docs/basic-features/data-fetching): 
+**الجيل الثابت (SSG)** و**التقديم من جانب الخادم (SSR)**. 
+ 
+جنبا إلى جنب مع SWR، يمكنك تقديم الصفحة مسبقا لكبار المسئولين الاقتصاديين، ولديك أيضا ميزات مثل التخزين المؤقت وإعادة التحقق من الهوية وتتبع التركيز وإعادة الجلب على الفاصل الزمني على جانب العميل. 
+ 
+يمكنك استخدام خيار `fallback` من [`SWRConfig`](/docs/global-configuration) لتمرير البيانات التي تم جلبها مسبقا كقيمة أولية لجميع خطافات SWR. 
+ 
+على سبيل المثال مع `getStaticProps`:
+
+```jsx
+ export async function getStaticProps () {
+  // `getStaticProps` is executed on the server side.
+  const article = await getArticleFromAPI()
+  return {
+    props: {
+      fallback: {
+        '/api/article': article
+      }
+    }
+  }
+}
+
+function Article() {
+  // `data` will always be available as it's in `fallback`.
+  const { data } = useSWR('/api/article', fetcher)
+  return <h1>{data.title}</h1>
+}
+
+export default function Page({ fallback }) {
+  // SWR hooks inside the `SWRConfig` boundary will use those values.
+  return (
+    <SWRConfig value={{ fallback }}>
+      <Article />
+    </SWRConfig>
+  )
+}
+```
+
+لا تزال الصفحة مقدمة مسبقا. إنه صديق لكبار المسئولين الاقتصاديين، وسريع الاستجابة، ولكنه أيضا مدعوم بالكامل من SWR من جانب العميل. يمكن أن تكون البيانات ديناميكية ومحدثة ذاتيا بمرور الوقت.
+
+<Callout emoji="💡">
+سيعرض مكون `Article` البيانات التي تم إنشاؤها مسبقا أولا، وبعد ترطيب الصفحة، سيجلب أحدث البيانات مرة أخرى للحفاظ على تحديثها.
+
+</Callout>
+
+### مفاتيح معقدة [#مفاتيح معقدة]
+
+يمكن استخدام `useSWR` مع المفاتيح التي هي أنواع `array` و`function`. يتطلب استخدام البيانات التي تم جلبها مسبقا مع هذه الأنواع من المفاتيح تسلسل مفاتيح "التراجع" باستخدام `unstable_serialize`.
+
+```jsx
+import useSWR, { unstable_serialize } from 'swr'
+
+export async function getStaticProps () {
+  const article = await getArticleFromAPI(1)
+  return {
+    props: {
+      fallback: {
+        // unstable_serialize() array style key
+        [unstable_serialize(['api', 'article', 1])]: article,
+      }
+    }
+  }
+}
+
+function Article() {
+  // using an array style key.
+  const { data } = useSWR(['api', 'article', 1], fetcher)
+  return <h1>{data.title}</h1>
+}
+
+export default function Page({ fallback }) {
+  return (
+    <SWRConfig value={{ fallback }}>
+      <Article />
+    </SWRConfig>
+  )
+}
+```

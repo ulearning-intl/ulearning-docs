@@ -1,0 +1,79 @@
+import { Callout } from 'nextra-theme-docs'
+
+机翻
+# Suspense
+
+<Callout emoji="🚨" type="error">
+  لا يزال React <strong>لا يوصي</strong> باستخدام `Suspense` في أطر البيانات مثل SWR (<a href="https://reactjs.org/blog/2022/03/29/react-v18.html#suspense-in-data-frameworks" target="_blank" rel="noopener">مزيد من المعلومات</a>).قد تتغير واجهات برمجة التطبيقات هذه في المستقبل كنتائج لأبحاثنا.
+</Callout>
+
+يمكنك تمكين خيار `suspense` لاستخدام SWR مع React Suspense:
+
+```jsx
+import { Suspense } from 'react'
+import useSWR from 'swr'
+
+function Profile () {
+  const { data } = useSWR('/api/user', fetcher, { suspense: true })
+  return <div>hello, {data.name}</div>
+}
+
+function App () {
+  return (
+    <Suspense fallback={<div>loading...</div>}>
+      <Profile/>
+    </Suspense>
+  )
+}
+```
+
+<Callout>
+  لاحظ أنه لا يسمح لخيار `suspense` بالتغيير في دورة الحياة.
+</Callout>
+
+في وضع التشويق، تكون `data` دائما استجابة الجلب (لذلك لا تحتاج إلى التحقق مما إذا كانت `undefined`). 
+ولكن في حالة حدوث خطأ، تحتاج إلى استخدام [حدود الخطأ](https://reactjs.org/docs/concurrent-mode-suspense.html#handling-errors) للقبض عليه:
+
+```jsx
+<ErrorBoundary fallback={<h2>Could not fetch posts.</h2>}>
+  <Suspense fallback={<h1>Loading posts...</h1>}>
+    <Profile />
+  </Suspense>
+</ErrorBoundary>
+```
+
+<Callout>
+يعلق وضع التشويق العرض حتى تصبح البيانات جاهزة، مما يعني أنه يسبب مشاكل في الشلال بسهولة. لتجنب ذلك، يجب عليك جلب الموارد مسبقا قبل التقديم. [مزيد من المعلومات](/docs/prefetching)
+</Callout>
+
+---
+
+### ملاحظة: مع الجلب المشروط [#note-with-conditional-fetching] 
+
+عادة، عند تمكين "التشويق"، يضمن أن "البيانات" ستكون دائما جاهزة للتصيير:
+
+```jsx
+function Profile () {
+  const { data } = useSWR('/api/user', fetcher, { suspense: true })
+
+  // `data` will never be `undefined`
+  // ...
+}
+```
+
+ومع ذلك، عند استخدامه مع الجلب المشروط أو الجلب التابع، ستكون `data` `undefined` إذا كان الطلب **متوقفا مؤقتا**:
+
+```jsx
+function Profile () {
+  const { data } = useSWR(isReady ? '/api/user' : null, fetcher, { suspense: true })
+
+  // `data` will be `undefined` if `isReady` is false
+  // ...
+}
+```
+
+إذا كنت ترغب في قراءة المزيد من التفاصيل الفنية حول هذا التقييد، فتحقق من [المناقشة هنا](https://github.com/vercel/swr/pull/357#issuecomment-627089889). رقم 
+ 
+### التقديم من جانب الخادم [#التقديم من جانب الخادم] رقم 
+ 
+عند استخدام وضع التشويق على جانب الخادم (بما في ذلك التقديم المسبق في Next.js)، **مطلوب** توفير البيانات الأولية عبر [fallbackData أو fallback](/docs/with-nextjs#pre-rendering-with-default-data). هذا يعني أنه لا يمكنك استخدام `Suspense` لجلب البيانات على جانب الخادم، ولكن إما القيام بجلب البيانات من جانب العميل بالكامل، أو جلب البيانات عبر طريقة جلب البيانات على مستوى الإطار (مثل getStaticProps في Next.js). يمكن العثور على المزيد من المناقشات [هنا](https://github.com/vercel/swr/issues/1906).

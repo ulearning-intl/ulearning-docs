@@ -1,0 +1,142 @@
+机翻
+# تايب اسكربت رقم 
+
+SWR سهل التطبيقات المكتوبة بلغة TypeScript، مع أمان النوع خارج الصندوق. رقم 
+ 
+## الاستخدام الأساسي  رقم [#الاستخدام الأساسي]
+ 
+بشكل افتراضي، سيستنتج SWR أيضا أنواع الوسيطة من `fetcher` من `key`، حتى تتمكن من الحصول على الأنواع المفضلة تلقائيا. رقم 
+ 
+### useSWR[#useswr]
+
+```typescript
+// `key` is inferred to be `string`
+useSWR('/api/user', key => {})
+useSWR(() => '/api/user', key => {})
+
+// `key` will be inferred as { a: string; b: { c: string; d: number } }
+useSWR({ a: '1', b: { c: '3', d: 2 } }, key => {})
+useSWR(() => ({ a: '1', b: { c: '3', d: 2 } }), key => {})
+
+// `arg0` will be inferred as string.  `arg1` will be inferred as number
+useSWR(['user', 8], ([arg0, arg1]) => {})
+useSWR(() => ['user', 8], ([arg0, arg1]) => {})
+```
+
+يمكنك أيضا تحديد أنواع وسيطات `key` و`fetcher` بشكل صريح.
+
+```typescript
+import useSWR, { Fetcher } from 'swr'
+
+const uid = '<user_id>'
+const fetcher: Fetcher<User, string> = (id) => getUserById(id)
+
+const { data } = useSWR(uid, fetcher)
+// `data` will be `User | undefined`.
+```
+
+بشكل افتراضي، [الخطأ الذي تم إلقاؤه](/docs/error-handling) داخل الدالة `fetcher` له نوع `any`. يمكن أيضا تحديد النوع بشكل صريح.
+
+```typescript
+const { data, error } = useSWR<User, Error>(uid, fetcher);
+// `data` will be `User | undefined`.
+// `error` will be `Error | undefined`.
+```
+
+### useSWRInfinite [#useswrinfinite] 
+
+نفس الشيء بالنسبة إلى `swr/infinite`، يمكنك إما الاعتماد على الاستدلال التلقائي للنوع أو تحديد الأنواع بنفسك بشكل صريح.
+
+```typescript
+import { SWRInfiniteKeyLoader } from 'swr/infinite'
+
+const getKey: SWRInfiniteKeyLoader = (index, previousPageData) => {
+  // ...
+}
+
+const { data } = useSWRInfinite(getKey, fetcher)
+```
+
+
+### useSWRSubscription[#useswrsubscription]
+
+* وظيفة الاشتراك المضمنة وتحديد نوع "التالي" يدويا باستخدام `SWRSubscriptionOptions`.
+
+```tsx
+import useSWRSubscription from 'swr/subscription'
+import type { SWRSubscriptionOptions } from 'swr/subscription'
+
+const { data, error } = useSWRSubscription('key', 
+  (key, { next }: SWRSubscriptionOptions<number, Error>) => {
+  //^ key will be inferred as `string`
+  //....
+  })
+  return {
+    data,
+    //^ data will be inferred as `number | undefined`
+    error
+    //^ error will be inferred as `Error | undefined`
+  }
+}
+```
+
+* أعلن عن وظيفة الاشتراك باستخدام `SWRSubscription`
+
+```tsx
+import useSWRSubscription from 'swr/subscription'
+import type { SWRSubscription } from 'swr/subscription'
+
+/** 
+ * The first generic is Key
+ * The second generic is Data
+ * The Third generic is Error
+ */
+const sub: SWRSubscription<string, number, Error> = (key, { next }) => {                         
+  //......
+}
+const { data, error } = useSWRSubscription('key', sub)
+```
+
+
+
+## الجنيس  رقم [#generics]
+
+من السهل تحديد نوع `data`. بشكل افتراضي، سيستخدم نوع الإرجاع `fetcher` (مع `undefined` للحالة غير الجاهزة) كنوع `data`، ولكن يمكنك أيضا تمريره كمعلمة:
+
+```typescript
+// 🔹 A. Use a typed fetcher:
+// `getUser` is `(endpoint: string) => User`.
+const { data } = useSWR('/api/user', getUser)
+
+// 🔹 B. Specify the data type:
+// `fetcher` is generally returning `any`.
+const { data } = useSWR<User>('/api/user', fetcher)
+```
+
+إذا كنت ترغب في إضافة أنواع لخيارات SWR الأخرى، فيمكنك أيضا استيراد هذه الأنواع مباشرة:
+
+```typescript
+import useSWR from 'swr'
+import type { SWRConfiguration } from 'swr'
+
+const config: SWRConfiguration = {
+  fallbackData: "fallback",
+  revalidateOnMount: false
+  // ...
+}
+
+const { data } = useSWR<string[]>('/api/data', fetcher, config)
+```
+
+## أنواع البرامج الوسيطة  رقم [#أنواع البرامج الوسيطة]
+
+هناك بعض تعريفات الأنواع الإضافية التي يمكنك استيرادها للمساعدة في إضافة أنواع إلى برامجك الوسيطة المخصصة.
+
+```typescript
+import useSWR, { Middleware, SWRHook } from 'swr'
+
+const swrMiddleware: Middleware = (useSWRNext: SWRHook) => (key, fetcher, config) => {
+  // ...
+  return useSWRNext(key, fetcher, config)
+}
+```
