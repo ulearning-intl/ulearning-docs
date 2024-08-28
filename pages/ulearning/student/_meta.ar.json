@@ -1,4 +1,12 @@
 {
   "overview": "Overview",
-  "login": "Login"  
+  "login": "Login",
+  "announcements": "1Announcements",
+  "courseware": "1Courseware",
+  "resources": "Resources",
+  "assignments": "Assignments",
+  "discussions": "Discussions",
+  "exams": "Exams",
+  "grades": "Grades",
+  "members": "Members"
 }
