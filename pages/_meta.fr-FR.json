@@ -32,6 +32,11 @@
     "type": "page",
     "display": "hidden"
   },
+  "uclass": {
+    "title": "UTest",
+    "type": "page",
+    "display": "hidden"
+  },
   "docs": {
     "title": "Api Docs",
     "type": "page",

@@ -1,8 +1,8 @@
 {
-  "announcements": "Announcements",
-  "classes": "Classes",
-  "courses": "Courses",
-  "exams": "Exams",
-  "student": "Student",
-  "teacher": "Teacher"
+  "announcements": "Annonces.",
+  "classes": "Cours",
+  "courses": "Cours",
+  "exams": "Examens",
+  "student": "Étudiant",
+  "teacher": "Professeur"
 }

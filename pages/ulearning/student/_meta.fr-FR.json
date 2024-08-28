@@ -1,4 +1,12 @@
 {
-  "login": "Login",
-  "overview": "Overview"
+  "overview": "Vue d'ensemble",
+  "login": "Ouverture de session",
+  "announcements": "Annonces.",
+  "courseware": "Logiciel d'enseignement à distance",
+  "resources": "Ressources",
+  "assignments": "Affectations",
+  "discussions": "Discussions",
+  "exams": "Examens",
+  "grades": "Notes",
+  "members": "Membres"
 }

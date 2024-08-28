@@ -1,0 +1,24 @@
+{
+  "getting-started": "البدء في العمل  ",
+  "api": "واجهة برمجة التطبيقات  ",
+  "global-configuration": "التكوين العالمي  ",
+  "data-fetching": "جلب البيانات (ال)  ",
+  "revalidation": "إعادة التحقق التلقائي  ",
+  "arguments": "الحجج  ",
+  "mutation": "الطفرة وإعادة التحقق من الهوية  ",
+  "error-handling": "معالجة الأخطاء  ",
+  "conditional-fetching": "جلب البيانات المشروطة  ",
+  "pagination": "ترقيم الصفحات ",
+  "subscription": "اشْتِراك  ",
+  "prefetching": "الجلب المسبق  ",
+  "with-nextjs": "Next.js SSG وSSR  ",
+  "typescript": "تايب سكربت  ",
+  "suspense": "قلق  ",
+  "middleware": "البرامج الوسيطة  ",
+  "advanced": "مُتَقَدِّم  ",
+  "change-log": {
+    "title": "سجل التغيير    ",
+    "href": "https://github.com/vercel/swr/releases",
+    "newWindow": true
+  }
+}
