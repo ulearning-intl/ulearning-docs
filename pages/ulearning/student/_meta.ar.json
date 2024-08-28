@@ -1,12 +1,12 @@
 {
-  "overview": "Overview",
-  "login": "Login",
-  "announcements": "1Announcements",
-  "courseware": "1Courseware",
-  "resources": "Resources",
-  "assignments": "Assignments",
-  "discussions": "Discussions",
-  "exams": "Exams",
-  "grades": "Grades",
-  "members": "Members"
+  "overview": "نظرة عامة",
+  "login": "تسجيل الدخول",
+  "announcements": "الاعلانات",
+  "courseware": "المحتوى الدراسي",
+  "resources": "المصادر",
+  "assignments": "المهام",
+  "discussions": "المناقشات",
+  "exams": "الامتحانات",
+  "grades": "الدرجات",
+  "members": "الاعضاء"
 }
