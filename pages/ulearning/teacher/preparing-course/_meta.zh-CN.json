@@ -1,11 +1,11 @@
 {
-  "creating-a-new-course": "Creating-a-new-course",
-  "creating-courseware": "Creating-courseware",
-  "creating-rich-text-content": "Creating-rich-text-content",
-  "embedding-a-youtube-video": "Embedding-a-youtube-video",
-  "insert-a-video-to-page": "Insert-a-video-to-page",
-  "insert-courseware-into-course": "Insert-courseware-into-course",
-  "previewing-courseware": "Previewing-courseware",
-  "publishing-courseware": "Publishing-courseware",
-  "saving-courseware": "Saving-courseware"
+  "creating-a-new-course": "创建一个新课程",
+  "creating-courseware": "创建课程软件",
+  "creating-rich-text-content": "创建丰富的文本内容",
+  "embedding-a-youtube-video": "嵌入Youtube视频 ",
+  "insert-a-video-to-page": "将视频插入页面",
+  "insert-courseware-into-course": "将课件插入课程",
+  "previewing-courseware": "预览课程软件",
+  "publishing-courseware": "出版课件",
+  "saving-courseware": "保存课件"
 }

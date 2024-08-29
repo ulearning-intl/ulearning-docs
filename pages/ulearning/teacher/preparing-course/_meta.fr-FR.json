@@ -1,11 +1,11 @@
 {
-  "creating-a-new-course": "Creating a newcourse",
-  "creating-courseware": "Creating courseware",
-  "creating-rich-text-content": "Creating rich text content",
-  "embedding-a-youtube-video": "Embedding a youtube video",
-  "insert-a-video-to-page": "Insert a video to page",
-  "insert-courseware-into-course": "Insert courseware into course",
-  "previewing-courseware": "Previewing courseware",
-  "publishing-courseware": "Publishing courseware",
-  "saving-courseware": "Saving courseware"
+  "creating-a-new-course": "Création d'un nouveau cours",
+  "creating-courseware": "Création de didacticiels",
+  "creating-rich-text-content": "Création de contenu en texte enrichi",
+  "embedding-a-youtube-video": "Intégration d'une vidéo youtube",
+  "insert-a-video-to-page": "Insérer une vidéo sur la page",
+  "insert-courseware-into-course": "Insérer des didacticiels dans le cours",
+  "previewing-courseware": "Aperçu du didacticiel",
+  "publishing-courseware": "Publication de didacticiels",
+  "saving-courseware": "Enregistrement des didacticiels"
 }

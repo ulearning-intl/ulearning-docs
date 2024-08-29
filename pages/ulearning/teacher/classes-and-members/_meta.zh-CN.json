@@ -1,7 +1,7 @@
 {
-  "adding-student-to-class": "Adding-student-to-class",
-  "adding-teacher-to-course": "Adding-teacher-to-course",
-  "assigning-teacher-to-class": "Assigning-teacher-to-class",
-  "creating-classes": "Creating-classes",
-  "viewing-class-roster": "Viewing-class-roster"
+  "adding-student-to-class": "向班级增加学生",
+  "adding-teacher-to-course": "将教师添加到课程中",
+  "assigning-teacher-to-class": "给班级分配教师",
+  "creating-classes": "创建班级",
+  "viewing-class-roster": "查看班级名册"
 }
