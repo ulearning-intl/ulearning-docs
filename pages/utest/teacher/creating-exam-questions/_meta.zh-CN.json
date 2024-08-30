@@ -1,7 +1,7 @@
 {
-  "creating-questions-in-batch": "Creating-questions-in-batch",
-  "creating-questions-one-by-one-manually": "Creating-questions-one-by-one-manually",
-  "duplicating-questions": "Duplicating-questions",
-  "importing-questions-in-batch": "Importing-questions-in-batch",
-  "question-management": "Question-management"
+  "creating-questions-in-batch": "在批处理中创建问题",
+  "creating-questions-one-by-one-manually": "逐一手动创建提问问题。",
+  "duplicating-questions": "复制问题",
+  "importing-questions-in-batch": "批量导入问题",
+  "question-management": "问题管理"
 }

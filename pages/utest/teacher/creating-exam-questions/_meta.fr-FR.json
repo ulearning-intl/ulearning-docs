@@ -1,7 +1,7 @@
 {
-  "creating-questions-in-batch": "Creating-questions-in-batch",
-  "creating-questions-one-by-one-manually": "Creating-questions-one-by-one-manually",
-  "duplicating-questions": "Duplicating-questions",
-  "importing-questions-in-batch": "Importing-questions-in-batch",
-  "question-management": "Question-management"
+  "creating-questions-in-batch": "Création de questions en lot",
+  "creating-questions-one-by-one-manually": "Création De Questions Une Par Une Manuellement",
+  "duplicating-questions": "Questions en double",
+  "importing-questions-in-batch": "Importation-de-questions-en-lot",
+  "question-management": "Gestion des questions"
 }

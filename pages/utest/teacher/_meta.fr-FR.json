@@ -1,3 +1,10 @@
 {
-  "overview": "Overview"
+  "creating-exam-questions": "Création de questions d'examen",
+  "creating-exam":"Création d'un examen",
+  "creating-exam-offering": "Création d'une offre d'examen",
+  "managing-and-delivering-exam": "Examen de gestion et de livraison",
+  "proctoring-exam": "Examen de surveillance",
+  "grading-exam-and-exam-results": "Notation des résultats des examens et des examens",
+  "exam-analysis-report": "Analyse et rapport d'examen",
+  "appendix": "Annexe"
 }

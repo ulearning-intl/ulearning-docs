@@ -1,7 +1,7 @@
 {
-  "creating-questions-in-batch": "Creating-questions-in-batch",
-  "creating-questions-one-by-one-manually": "Creating-questions-one-by-one-manually",
-  "duplicating-questions": "Duplicating-questions",
-  "importing-questions-in-batch": "Importing-questions-in-batch",
-  "question-management": "Question-management"
+  "creating-questions-in-batch": "إنشاء أسئلة في الدفعة",
+  "creating-questions-one-by-one-manually": "إنشاء أسئلة واحدة تلو الأحد يدويا",
+  "duplicating-questions": "أسئلة مكررة",
+  "importing-questions-in-batch": "استيراد الأسئلة دفعة واحدة من الأسئلة",
+  "question-management": "إدارة الأسئلة"
 }

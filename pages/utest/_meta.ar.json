@@ -1,4 +1,5 @@
 {
-  "admin": "Admin",
-  "teacher": "Teacher"
+  "introduction": "مُقَدِّمة",
+  "admin": "المشرف.",
+  "teacher": "مُعَلِّم"
 }

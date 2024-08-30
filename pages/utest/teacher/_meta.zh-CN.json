@@ -1,3 +1,10 @@
 {
-  "overview": "Overview"
+  "creating-exam-questions": "创建考试问题",
+  "creating-exam":"创建考试",
+  "creating-exam-offering": "创建考试提供",
+  "managing-and-delivering-exam": "管理考试和交付考试",
+  "proctoring-exam": "监考考试",
+  "grading-exam-and-exam-results": "评分考试和考试结果",
+  "exam-analysis-report": "考试分析和报告",
+  "appendix": "附录"
 }

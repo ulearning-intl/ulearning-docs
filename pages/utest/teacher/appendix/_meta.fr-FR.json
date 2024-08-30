@@ -1,8 +1,8 @@
 {
-  "adding-students-to-class": "Adding-students-to-class",
-  "adding-teacher-to-course": "Adding-teacher-to-course",
-  "assigning-teacher-to-class": "Assigning-teacher-to-class",
-  "creating-a-new-course": "Creating-a-new-course",
-  "creating-classes": "Creating-classes",
-  "viewing-class-roster": "Viewing-class-roster"
+  "creating-a-new-course": "Création d'un nouveau cours",
+  "creating-classes": "Création de cours",
+  "adding-students-to-class": "Ajout d'étudiants à la classe",
+  "viewing-class-roster": "Affichage de la liste des classes",
+  "adding-teacher-to-course": "Ajouter un enseignant au cours",
+  "assigning-teacher-to-class": "Affectation de l'enseignant à la classe"
 }
