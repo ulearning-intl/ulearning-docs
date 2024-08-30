@@ -1,10 +1,10 @@
 {
-  "exam-results-actions-for-graded-exam": "Exam-results-actions-for-graded-exam",
-  "exam-results-actions-for-ungraded-exam": "Exam-results-actions-for-ungraded-exam",
-  "exam-results-batch-grade": "Exam-results-batch-grade",
-  "exam-results-export-custom-result-report": "Exam-results-export-custom-result-report",
-  "exam-results-export-exam-response-report": "Exam-results-export-exam-response-report",
-  "exam-results-export-exam-score-report": "Exam-results-export-exam-score-report",
-  "exam-results-overview": "Exam-results-overview",
-  "grading-course-exam": "Grading-course-exam"
+  "exam-results-actions-for-graded-exam": "分级考试的操作",
+  "exam-results-actions-for-ungraded-exam": "未分级考试的操作",
+  "exam-results-batch-grade": "考试成绩的批量成绩 ",
+  "exam-results-export-custom-result-report": "考试成绩的批量成绩 ",
+  "exam-results-export-exam-response-report": "导出考试回复报告 ",
+  "exam-results-export-exam-score-report": "导出考试分数报告",
+  "exam-results-overview": "考试成绩概述",
+  "grading-course-exam": "课程考试评分 "
 }
