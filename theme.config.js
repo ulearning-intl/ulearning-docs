@@ -3,6 +3,7 @@ import Logo from "./components/logo";
 import Head from "./components/head";
 import Footer from "./components/footer";
 import useLocalesMap from "./components/use-locales-map";
+import { useRouter as useRouter7 } from "next/router";
 import {
   editTextMap,
   feedbackLinkMap,
@@ -52,6 +53,24 @@ const themeConfig = {
         </a>
       );
     },
+  },
+  themeSwitch: {
+    useOptions() {
+      const { locale } = useRouter7();
+      console.log('locale',locale)
+      if (locale === "zh-CN") {
+        return { dark: "\u6DF1\u8272\u4E3B\u9898", light: "\u6D45\u8272\u4E3B\u9898", system: "\u7CFB\u7EDF\u9ED8\u8BA4" };
+      }else if(locale === "fr-FR"){
+        return { dark: "Sombre", light: "Lumière", system: "Système" };
+      }else if(locale === "ar"){
+        return { dark: "مظلم", light: "ضوء .", system: "نظم" };
+      }
+      return {
+        light: 'Light',
+        dark: 'Dark',
+        system: 'System'
+      }
+    }
   },
   feedback: {
     content: () => useLocalesMap(feedbackLinkMap),
