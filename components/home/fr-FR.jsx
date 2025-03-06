@@ -5,7 +5,6 @@ export default function HomePage() {
     <>
       <div className="container mx-auto px-4 py-8 max-w-5xl">
         <div className="mt-6 mb-16">
-          机翻
           <h1 className="text-4xl font-bold text-gray-800">Documentation</h1>
           <p className="text-xl text-gray-600 mt-4">
           Explorez nos guides et exemples pour libérer tout le potentiel de 
