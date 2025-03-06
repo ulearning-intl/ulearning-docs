@@ -1,29 +1,29 @@
 {
   "products": {
-    "title": "Products",
+    "title": "Produits",
     "type": "menu",
     "items": {
       "ULearning": {
-        "title": "Ulearning",
+        "title": "ULearning LMS",
         "href": "/ulearning/getting-started"
       },
       "UClass": {
-        "title": "UClass",
+        "title": "Salle de classe intelligente",
         "href": "/uclass/start"
       },
       "utest": {
-        "title": "UTest Online Exam",
+        "title": "Examen en ligne UTest",
         "href": "/utest/introduction"
       }
     }
   },
   "index": {
-    "title": "Introduction",
+    "title": "Présentation",
     "type": "page",
     "display": "hidden"
   },
   "ulearning": {
-    "title": "Docs",
+    "title": "Documentation",
     "type": "page",
     "href": "/ulearning/getting-started"
   },
@@ -38,21 +38,21 @@
     "display": "hidden"
   },
   "docs": {
-    "title": "Api Docs",
+    "title": "API Documentation",
     "type": "page",
     "href": "/docs/api",
     "display": "hidden"
   },
   "solutions": {
-    "title": "Solutions",
+    "title": "Nos solutions",
     "type": "page"
   },
   "practices": {
-    "title": "Best Practices",
+    "title": "Meilleures pratiques",
     "type": "page"
   },
   "blog": {
-    "title": "Blog",
+    "title": "Journal des modifications",
     "type": "page",
     "href": "/blog",
     "theme": {

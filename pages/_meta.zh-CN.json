@@ -1,29 +1,29 @@
 {
   "products": {
-    "title": "Products",
+    "title": "产品",
     "type": "menu",
     "items": {
       "ULearning": {
-        "title": "Ulearning",
+        "title": "学习管理系统",
         "href": "/ulearning/getting-started"
       },
       "UClass": {
-        "title": "UClass",
+        "title": "智慧教室",
         "href": "/uclass/start"
       },
       "utest": {
-        "title": "UTest Online Exam",
+        "title": "考试系统",
         "href": "/utest/introduction"
       }
     }
   },
   "index": {
-    "title": "Introduction",
+    "title": "介绍",
     "type": "page",
     "display": "hidden"
   },
   "ulearning": {
-    "title": "Docs",
+    "title": "文档",
     "type": "page",
     "href": "/ulearning/getting-started"
   },
@@ -38,21 +38,21 @@
     "display": "hidden"
   },
   "docs": {
-    "title": "Api Docs",
+    "title": "Api 文档",
     "type": "page",
     "href": "/docs/api",
     "display": "hidden"
   },
   "solutions": {
-    "title": "Solutions",
+    "title": "解决方案",
     "type": "page"
   },
   "practices": {
-    "title": "Best Practices",
+    "title": "最佳实践",
     "type": "page"
   },
   "blog": {
-    "title": "Blog",
+    "title": "变更日志",
     "type": "page",
     "href": "/blog",
     "theme": {

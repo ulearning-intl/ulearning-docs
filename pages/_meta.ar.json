@@ -1,18 +1,18 @@
 {
   "products": {
-    "title": "Products",
+    "title": "المنتجات",
     "type": "menu",
     "items": {
       "ULearning": {
-        "title": "Ulearning",
+        "title": "نظام إدارة التعلم",
         "href": "/ulearning/getting-started"
       },
       "UClass": {
-        "title": "UClass",
+        "title": "الفصل الدراسي الذكي",
         "href": "/uclass/start"
       },
       "utest": {
-        "title": "UTest Online Exam",
+        "title": "امتحان عبر الإنترنت",
         "href": "/utest/introduction"
       }
     }
@@ -23,7 +23,7 @@
     "display": "hidden"
   },
   "ulearning": {
-    "title": "Docs",
+    "title": "الوثائق",
     "type": "page",
     "href": "/ulearning/getting-started"
   },
@@ -44,15 +44,15 @@
     "display": "hidden"
   },
   "solutions": {
-    "title": "Solutions",
+    "title": "حلولنا",
     "type": "page"
   },
   "practices": {
-    "title": "Best Practices",
+    "title": "أفضل الممارسات",
     "type": "page"
   },
   "blog": {
-    "title": "Blog",
+    "title": "سجل التغيير",
     "type": "page",
     "href": "/blog",
     "theme": {
