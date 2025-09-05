@@ -41,6 +41,11 @@
     "type": "page",
     "display": "hidden"
   },
+  "ulcms": {
+    "title": "ULCMS",
+    "type": "page",
+    "display": "hidden"
+  },
   "docs": {
     "title": "Api Docs",
     "type": "page",
