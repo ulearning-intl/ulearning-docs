@@ -6,10 +6,11 @@
     "dev": "next",
     "debug": "NODE_OPTIONS='--inspect' next",
     "start": "next start -p 3000",
-    "build": "next build"
+    "build": "cross-env NODE_OPTIONS='--max-old-space-size=8192' next build"
   },
   "author": "ulearning",
   "dependencies": {
+    "cross-env": "^10.1.0",
     "intersection-observer": "^0.12.2",
     "next": "^13.5.6",
     "nextra": "^2.13.4",
