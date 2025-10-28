@@ -1,20 +1,60 @@
 {
+  "products": {
+    "title": "Produits",
+    "type": "menu",
+    "items": {
+      "ULearning": {
+        "title": "ULearning LMS",
+        "href": "/ulearning/getting-started"
+      },
+      "UClass": {
+        "title": "Salle de classe intelligente",
+        "href": "/uclass/start"
+      },
+      "utest": {
+        "title": "Examen en ligne UTest",
+        "href": "/utest/introduction"
+      }
+    }
+  },
   "index": {
-    "title": "Introduction",
+    "title": "Présentation",
+    "type": "page",
+    "display": "hidden"
+  },
+  "ulearning": {
+    "title": "Documentation",
+    "type": "page",
+    "href": "/ulearning/getting-started"
+  },
+  "utest": {
+    "title": "UTest",
+    "type": "page",
+    "display": "hidden"
+  },
+  "uclass": {
+    "title": "UTest",
     "type": "page",
     "display": "hidden"
   },
   "docs": {
-    "title": "Docs",
+    "title": "API Documentation",
+    "type": "page",
+    "href": "/docs/api",
+    "display": "hidden"
+  },
+  "solutions": {
+    "title": "Nos solutions",
     "type": "page"
   },
-  "examples": {
-    "title": "Exemples",
+  "practices": {
+    "title": "Meilleures pratiques",
     "type": "page"
   },
   "blog": {
-    "title": "Blog",
+    "title": "Journal des modifications",
     "type": "page",
+    "href": "/blog",
     "theme": {
       "sidebar": false
     }

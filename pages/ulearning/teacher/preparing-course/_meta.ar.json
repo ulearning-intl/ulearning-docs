@@ -1,11 +1,11 @@
 {
-  "creating-a-new-course": "Creating a newcourse",
-  "creating-courseware": "Creating courseware",
-  "creating-rich-text-content": "Creating rich text content",
-  "embedding-a-youtube-video": "Embedding a youtube video",
-  "insert-a-video-to-page": "Insert a video to page",
-  "insert-courseware-into-course": "Insert courseware into course",
-  "previewing-courseware": "Previewing courseware",
-  "publishing-courseware": "Publishing courseware",
-  "saving-courseware": "Saving courseware"
+  "creating-a-new-course": "إنشاء مقرر جديد",
+  "creating-courseware": "إنشاء محتوى المقرر",
+  "creating-rich-text-content": "إنشاء محتوى نصي غني",
+  "embedding-a-youtube-video": "تضمين فيديو من يوتيوب",
+  "insert-a-video-to-page": "إدراج فيديو في الصفحة",
+  "insert-courseware-into-course": "إدراج المحتوى الدراسي في الدورة",
+  "previewing-courseware": "معاينة المحتوى التعليمي",
+  "publishing-courseware": "نشر المحتوى التعليمي",
+  "saving-courseware": "حفظ المحتوى التعليمي"
 }

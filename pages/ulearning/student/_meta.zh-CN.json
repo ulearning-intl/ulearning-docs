@@ -1,4 +1,12 @@
 {
-  "login": "Login",
-  "overview": "Overview"
+  "overview": "概述",
+  "login": "登录",
+  "announcements": "公告",
+  "courseware": "课件",
+  "resources": "资源",
+  "assignments": "作业",
+  "discussions": "讨论",
+  "exams": "考试",
+  "grades": "成绩",
+  "members": "成员"
 }

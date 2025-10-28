@@ -27,6 +27,16 @@
     "type": "page",
     "display": "hidden"
   },
+  "utest": {
+    "title": "UTest",
+    "type": "page",
+    "display": "hidden"
+  },
+  "uclass": {
+    "title": "UTest",
+    "type": "page",
+    "display": "hidden"
+  },
   "docs": {
     "title": "Docs",
     "type": "page",

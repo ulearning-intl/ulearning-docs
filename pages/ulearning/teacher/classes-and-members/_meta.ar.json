@@ -1,7 +1,7 @@
 {
-  "adding-student-to-class": "Adding-student-to-class",
-  "adding-teacher-to-course": "Adding-teacher-to-course",
-  "assigning-teacher-to-class": "Assigning-teacher-to-class",
-  "creating-classes": "Creating-classes",
-  "viewing-class-roster": "Viewing-class-roster"
+  "creating-classes": "إنشاء الفصول الدراسية",
+  "adding-student-to-class": "إضافة الطلاب إلى الفصل",
+  "adding-teacher-to-course": "إضافة معلم إلى الدورة",
+  "assigning-teacher-to-class": "تعيين معلم للفصل",
+  "viewing-class-roster": "عرض قائمة الفصول الدراسية"
 }

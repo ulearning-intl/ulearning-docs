@@ -1,0 +1,376 @@
+import { Callout } from 'nextra-theme-docs'
+
+
+# ترقيم الصفحات
+
+<Callout emoji="✅">
+  يرجى التحديث إلى أحدث إصدار (≥ 0.3.0) لاستخدام واجهة برمجة التطبيقات هذه. تم الآن إهمال واجهة برمجة تطبيقات الاستخدام السابق <code>SWRPages</code> .
+</Callout>
+
+يوفر SWR واجهة برمجة تطبيقات مخصصة `useSWRInfinite` لدعم أنماط واجهة المستخدم الشائعة مثل **ترقيم الصفحات** و **التحميل اللانهائي**. 
+ 
+## متى تستخدم `useSWR` [#when-to-use-useswr] 
+ 
+### ترقيم الصفحات [# ترقيم الصفحات] 
+ 
+بادئ ذي بدء، قد **لا نحتاج** إلى `useSWRInfinite` ولكن يمكننا استخدام `useSWR` فقط إذا كنا نبني شيئا من هذا القبيل:
+
+import { Pagination } from 'components/diagrams/pagination'
+
+<div className="mt-8">
+  <Pagination/>
+</div>
+
+...وهي واجهة مستخدم ترقيم الصفحات النموذجية. دعونا نرى كيف يمكن تنفيذه بسهولة مع
+`useSWR`:
+
+```jsx {5}
+function App () {
+  const [pageIndex, setPageIndex] = useState(0);
+
+  // The API URL includes the page index, which is a React state.
+  const { data } = useSWR(`/api/data?page=${pageIndex}`, fetcher);
+
+  // ... handle loading and error states
+
+  return <div>
+    {data.map(item => <div key={item.id}>{item.name}</div>)}
+    <button onClick={() => setPageIndex(pageIndex - 1)}>Previous</button>
+    <button onClick={() => setPageIndex(pageIndex + 1)}>Next</button>
+  </div>
+}
+```
+
+علاوة على ذلك، يمكننا إنشاء تجريد لهذا "مكون الصفحة":
+
+```jsx {13}
+function Page ({ index }) {
+  const { data } = useSWR(`/api/data?page=${index}`, fetcher);
+
+  // ... handle loading and error states
+
+  return data.map(item => <div key={item.id}>{item.name}</div>)
+}
+
+function App () {
+  const [pageIndex, setPageIndex] = useState(0);
+
+  return <div>
+    <Page index={pageIndex}/>
+    <button onClick={() => setPageIndex(pageIndex - 1)}>Previous</button>
+    <button onClick={() => setPageIndex(pageIndex + 1)}>Next</button>
+  </div>
+}
+```
+
+بسبب ذاكرة التخزين المؤقت ل SWR، نحصل على فائدة التحميل المسبق للصفحة التالية. نعرض الصفحة التالية بالداخل 
+قسم مخفي، لذلك ستقوم SWR بتشغيل جلب البيانات للصفحة التالية. عندما ينتقل المستخدم إلى الصفحة التالية، تكون البيانات موجودة بالفعل:
+
+```jsx {6}
+function App () {
+  const [pageIndex, setPageIndex] = useState(0);
+
+  return <div>
+    <Page index={pageIndex}/>
+    <div style={{ display: 'none' }}><Page index={pageIndex + 1}/></div>
+    <button onClick={() => setPageIndex(pageIndex - 1)}>Previous</button>
+    <button onClick={() => setPageIndex(pageIndex + 1)}>Next</button>
+  </div>
+}
+```
+
+مع سطر واحد فقط من التعليمات البرمجية، نحصل على تجربة مستخدم أفضل بكثير. خطاف `useSWR` قوي جدا، رقم 
+أن معظم السيناريوهات يغطيها. رقم 
+
+### تحميل لانهائي [#تحميل لانهائي] رقم 
+
+في بعض الأحيان نريد إنشاء **تحميل لانهائي** واجهة مستخدم، مع زر `Load More` الذي يلحق البيانات رقم 
+إلى القائمة (أو يتم ذلك تلقائيا عند التمرير):
+
+
+import { Infinite } from 'components/diagrams/infinite'
+
+<div className="mt-8">
+  <Infinite/>
+</div>
+
+لتنفيذ ذلك، نحتاج إلى تقديم **العدد الديناميكي للطلبات** في هذه الصفحة. تحتوي خطافات React على [قاعدتين](https://reactjs.org/docs/hooks-rules.html)، 
+لذلك لا يمكننا فعل شيء من هذا القبيل:
+
+```jsx {5,6,7,8,9}
+function App () {
+  const [cnt, setCnt] = useState(1)
+
+  const list = []
+  for (let i = 0; i < cnt; i++) {
+    // 🚨 This is wrong! Commonly, you can't use hooks inside a loop.
+    const { data } = useSWR(`/api/data?page=${i}`)
+    list.push(data)
+  }
+
+  return <div>
+    {list.map((data, i) =>
+      <div key={i}>{
+        data.map(item => <div key={item.id}>{item.name}</div>)
+      }</div>)}
+    <button onClick={() => setCnt(cnt + 1)}>Load More</button>
+  </div>
+}
+```
+بدلا من ذلك، يمكننا استخدام التجريد `<Page />` الذي أنشأناه لتحقيقه:
+
+```jsx {5,6,7}
+function App () {
+  const [cnt, setCnt] = useState(1)
+
+  const pages = []
+  for (let i = 0; i < cnt; i++) {
+    pages.push(<Page index={i} key={i} />)
+  }
+
+  return <div>
+    {pages}
+    <button onClick={() => setCnt(cnt + 1)}>Load More</button>
+  </div>
+}
+```
+
+### الحالات المتقدمة [#الحالات المتقدمة] 
+
+ومع ذلك، في بعض حالات الاستخدام المتقدمة، لا يعمل الحل أعلاه. 
+
+على سبيل المثال، ما زلنا ننفذ نفس واجهة مستخدم `Load More`، ولكننا نحتاج أيضا إلى عرض رقم 
+حول عدد العناصر الموجودة في المجموع. لا يمكننا استخدام الحل `<Page />` بعد الآن لأن 
+تحتاج واجهة مستخدم المستوى الأعلى (`<App />`) إلى البيانات داخل كل صفحة:
+
+```jsx {10}
+function App () {
+  const [cnt, setCnt] = useState(1)
+
+  const pages = []
+  for (let i = 0; i < cnt; i++) {
+    pages.push(<Page index={i} key={i} />)
+  }
+
+  return <div>
+    <p>??? items</p>
+    {pages}
+    <button onClick={() => setCnt(cnt + 1)}>Load More</button>
+  </div>
+}
+```
+
+أيضا، إذا كانت واجهة برمجة تطبيقات ترقيم الصفحات **تعتمد على مؤشر**، فإن هذا الحل لا يعمل أيضا. لأن كل صفحة 
+يحتاج إلى بيانات من الصفحة السابقة، فهي ليست معزولة. 
+
+هذه هي الطريقة التي يمكن أن يساعد بها هذا الخطاف الجديد `useSWRInfinite`. 
+
+## useSWRInfinite [#useswrinfinite] 
+ 
+يمنحنا `useSWRInfinite` القدرة على تشغيل عدد من الطلبات باستخدام خطاف واحد. هكذا يبدو الأمر:
+
+```jsx
+import useSWRInfinite from 'swr/infinite'
+
+// ...
+const { data, error, isLoading, isValidating, mutate, size, setSize } = useSWRInfinite(
+  getKey, fetcher?, options?
+)
+```
+
+على غرار `useSWR`، يقبل هذا الخطاف الجديد وظيفة ترجع مفتاح الطلب ووظيفة الجلب والخيارات. 
+يقوم بإرجاع جميع القيم التي يقوم `useSWR` بإرجاعها، بما في ذلك قيمتان إضافيتان: حجم الصفحة وواضع حجم الصفحة، مثل حالة React. 
+ 
+في التحميل اللانهائي، _page_ واحد هو طلب واحد، وهدفنا هو جلب صفحات متعددة وعرضها.
+
+<Callout emoji="⚠️">
+  إذا كنت تستخدم إصدارات SWR 0.x، فيجب استيراد `useSWRInfinite` من `swr`:<br/>
+  `import { useSWRInfinite } from 'swr'`
+</Callout>
+
+### API [#api] 
+
+#### المعلمات [#المعلمات]
+
+ - `getKey`: دالة تقبل الفهرس وبيانات الصفحة السابقة، وتعيد مفتاح الصفحة 
+ - `fetcher`: نفس [وظيفة الجلب] ل `useSWR`(/docs/data-fetching) 
+ - `options`: يقبل جميع الخيارات التي يدعمها `useSWR`، مع 4 خيارات إضافية: 
+   - `initialSize = 1`: يجب تحميل عدد الصفحات في البداية 
+   - `revalidateAll = false`: حاول دائما إعادة التحقق من جميع الصفحات 
+   - `revalidateFirstPage = true`: حاول دائما إعادة التحقق من صحة الصفحة الأولى 
+   - `persistSize = false`: لا تقم بإعادة تعيين حجم الصفحة إلى 1 (أو `initialSize` إذا تم تعيينه) عندما يتغير مفتاح الصفحة الأولى 
+   - `parallel = false`: يجلب صفحات متعددة بالتوازي
+
+
+<Callout>
+  لاحظ أنه لا يسمح بتغيير خيار `الحجم الأولي` في دورة الحياة.
+</Callout>
+
+#### قيم الإرجاع [#قيم الإرجاع] 
+
+ - `data`: مجموعة من قيم استجابة الجلب لكل صفحة 
+ - `error`: نفس `error`'s `useSWR` 
+ - `isLoading`: نفس `isLoading``useSWR` 
+ - `isValidating`: نفس `useSWR`'s `isValidating`
+ - `mutate`: نفس وظيفة التحور المرتبطة ب `useSWR` ولكنها تتلاعب بمصفوفة البيانات 
+ - `size`: عدد الصفحات التي سيتم جلبها وإعادتها 
+ - `setSize`: اضبط عدد الصفحات التي يجب جلبها 
+
+ ### مثال 1: واجهة برمجة التطبيقات المرقمة المستندة إلى الفهرس [#example-1-index-based-paginated-api]
+
+ بالنسبة لواجهات برمجة التطبيقات العادية القائمة على الفهرس:
+
+```plaintext
+GET /users?page=0&limit=10
+[
+  { name: 'Alice', ... },
+  { name: 'Bob', ... },
+  { name: 'Cathy', ... },
+  ...
+]
+```
+
+```jsx {4,5,6,7,10}
+// A function to get the SWR key of each page,
+// its return value will be accepted by `fetcher`.
+// If `null` is returned, the request of that page won't start.
+const getKey = (pageIndex, previousPageData) => {
+  if (previousPageData && !previousPageData.length) return null // reached the end
+  return `/users?page=${pageIndex}&limit=10`                    // SWR key
+}
+
+function App () {
+  const { data, size, setSize } = useSWRInfinite(getKey, fetcher)
+  if (!data) return 'loading'
+
+  // We can now calculate the number of all users
+  let totalUsers = 0
+  for (let i = 0; i < data.length; i++) {
+    totalUsers += data[i].length
+  }
+
+  return <div>
+    <p>{totalUsers} users listed</p>
+    {data.map((users, index) => {
+      // `data` is an array of each page's API response.
+      return users.map(user => <div key={user.id}>{user.name}</div>)
+    })}
+    <button onClick={() => setSize(size + 1)}>Load More</button>
+  </div>
+}
+```
+
+الدالة `getKey` هي الفرق الرئيسي بين `useSWRInfinite` و`useSWR`. 
+يقبل فهرس الصفحة الحالية، بالإضافة إلى البيانات من الصفحة السابقة. 
+لذلك يمكن دعم كل من واجهة برمجة تطبيقات ترقيم الصفحات القائمة على الفهرس والمؤشر بشكل جيد. 
+ 
+كما أن `data` لم تعد مجرد استجابة واجهة برمجة تطبيقات واحدة. إنها مجموعة من استجابات واجهة برمجة التطبيقات المتعددة:
+
+```js
+// `data` will look like this
+[
+  [
+    { name: 'Alice', ... },
+    { name: 'Bob', ... },
+    { name: 'Cathy', ... },
+    ...
+  ],
+  [
+    { name: 'John', ... },
+    { name: 'Paul', ... },
+    { name: 'George', ... },
+    ...
+  ],
+  ...
+]
+```
+
+### مثال 2: واجهة برمجة تطبيقات ترقيم الصفحات المستندة إلى المؤشر أو الإزاحة [#example-2-cursor-or-offset-based-paginated-api] 
+ 
+لنفترض أن واجهة برمجة التطبيقات تتطلب الآن مؤشرا وتعيد المؤشر التالي إلى جانب البيانات:
+
+```plaintext
+GET /users?cursor=123&limit=10
+{
+  data: [
+    { name: 'Alice' },
+    { name: 'Bob' },
+    { name: 'Cathy' },
+    ...
+  ],
+  nextCursor: 456
+}
+```
+يمكننا تغيير وظيفة `getKey` الخاصة بنا إلى:
+
+```jsx
+const getKey = (pageIndex, previousPageData) => {
+  // reached the end
+  if (previousPageData && !previousPageData.data) return null
+
+  // first page, we don't have `previousPageData`
+  if (pageIndex === 0) return `/users?limit=10`
+
+  // add the cursor to the API endpoint
+  return `/users?cursor=${previousPageData.nextCursor}&limit=10`
+}
+```
+
+### وضع الجلب المتوازي [#وضع الجلب المتوازي]
+
+<Callout emoji="✅">
+  يرجى التحديث إلى أحدث إصدار (≥ 2.1.0) لاستخدام واجهة برمجة التطبيقات هذه.
+</Callout>
+
+السلوك الافتراضي ل useSWRInfinite هو جلب البيانات لكل صفحة بالتسلسل، حيث يعتمد إنشاء المفتاح على البيانات التي تم جلبها مسبقا. ومع ذلك، قد لا يكون جلب البيانات بالتتابع لعدد كبير من الصفحات هو الأمثل، خاصة إذا لم تكن الصفحات مترابطة. من خلال تحديد خيار `parallel` إلى `true` سيسمح لك بجلب الصفحات بشكل مستقل بالتوازي، مما يمكن أن يسرع عملية التحميل بشكل كبير.
+
+```jsx
+// parallel = false (default)
+// page1 ===> page2 ===> page3 ===> done
+//
+// parallel = true
+// page1 ==> done
+// page2 =====> done
+// page3 ===> done
+//
+// previousPageData is always `null`
+const getKey = (pageIndex, previousPageData) => {
+  return `/users?page=${pageIndex}&limit=10`
+}
+
+function App () {
+  const { data } = useSWRInfinite(getKey, fetcher, { parallel: true })
+}
+```
+
+<Callout emoji="⚠️">
+   تصبح حجة `previousPageData` لوظيفة `getKey` `null` عند تمكين الخيار المتوازي".
+</Callout>
+
+### تحور عالمي باستخدام `useSWRInfinite` [#global-mutate-with-useswrinfinite] 
+
+يقوم `useSWRInfinite` بتخزين جميع بيانات الصفحة في ذاكرة التخزين المؤقت باستخدام مفتاح ذاكرة تخزين مؤقت خاص مع كل بيانات الصفحة، لذلك يجب عليك استخدام `unstable_serialize` في `swr/infinite` لإعادة التحقق من البيانات باستخدام الطفرة العالمية.
+
+```jsx
+import { useSWRConfig } from "swr"
+import { unstable_serialize } from "swr/infinite"
+
+function App() {
+    const { mutate } = useSWRConfig()
+    mutate(unstable_serialize(getKey))
+}
+```
+
+<Callout emoji="⚠️">
+    كما يوحي الاسم، فإن `unstable_serialize` ليست واجهة برمجة تطبيقات مستقرة، لذلك قد نغيرها في المستقبل.
+</Callout>
+
+### الميزات المتقدمة [#الميزات المتقدمة]
+
+[إليك مثال على ذلك](/examples/infinite-loading) showing how you can implement the following features with `useSWRInfinite`:
+
+- حالات التحميل رقم 
+- أظهر واجهة مستخدم خاصة إذا كانت فارغة رقم 
+- قم بتعطيل زر "تحميل المزيد" إذا وصل إلى النهاية رقم 
+- مصدر بيانات قابل للتغيير رقم 
+- تحديث القائمة بأكملها

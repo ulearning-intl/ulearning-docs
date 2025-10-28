@@ -1,8 +1,8 @@
 {
-  "adding-students-to-class": "Adding-students-to-class",
-  "adding-teacher-to-course": "Adding-teacher-to-course",
-  "assigning-teacher-to-class": "Assigning-teacher-to-class",
-  "creating-a-new-course": "Creating-a-new-course",
-  "creating-classes": "Creating-classes",
-  "viewing-class-roster": "Viewing-class-roster"
+  "creating-a-new-course": "创建新课程",
+  "creating-classes": "创建班级",
+  "adding-students-to-class": "将学生添加到课堂",
+  "viewing-class-roster": "查看班级名册",
+  "adding-teacher-to-course": "在课程中添加教师",
+  "assigning-teacher-to-class": "将教师分配到课堂上"
 }

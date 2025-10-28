@@ -1,20 +1,60 @@
 {
+  "products": {
+    "title": "产品",
+    "type": "menu",
+    "items": {
+      "ULearning": {
+        "title": "学习管理系统",
+        "href": "/ulearning/getting-started"
+      },
+      "UClass": {
+        "title": "智慧教室",
+        "href": "/uclass/start"
+      },
+      "utest": {
+        "title": "考试系统",
+        "href": "/utest/introduction"
+      }
+    }
+  },
   "index": {
-    "title": "简介",
+    "title": "介绍",
+    "type": "page",
+    "display": "hidden"
+  },
+  "ulearning": {
+    "title": "文档",
+    "type": "page",
+    "href": "/ulearning/getting-started"
+  },
+  "utest": {
+    "title": "UTest",
+    "type": "page",
+    "display": "hidden"
+  },
+  "uclass": {
+    "title": "UTest",
     "type": "page",
     "display": "hidden"
   },
   "docs": {
-    "title": "文档",
+    "title": "Api 文档",
+    "type": "page",
+    "href": "/docs/api",
+    "display": "hidden"
+  },
+  "solutions": {
+    "title": "解决方案",
     "type": "page"
   },
-  "examples": {
-    "title": "示例",
+  "practices": {
+    "title": "最佳实践",
     "type": "page"
   },
   "blog": {
-    "title": "博客",
+    "title": "变更日志",
     "type": "page",
+    "href": "/blog",
     "theme": {
       "sidebar": false
     }

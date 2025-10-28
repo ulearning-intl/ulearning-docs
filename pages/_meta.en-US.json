@@ -9,11 +9,15 @@
       },
       "UClass": {
         "title": "UClass",
-        "href": "/uclass"
+        "href": "/uclass/start"
       },
       "utest": {
         "title": "UTest Online Exam",
         "href": "/utest/introduction"
+      },
+      "ULCMS":{
+        "title":"ULCMS",
+        "href": "/ulcms/introduction"
       }
     }
   },
@@ -23,19 +27,30 @@
     "display": "hidden"
   },
   "ulearning": {
-    "title": "ULearning",
+    "title": "Docs",
     "type": "page",
-    "display": "hidden"
+    "href": "/ulearning/getting-started"
   },
   "utest": {
     "title": "UTest",
     "type": "page",
     "display": "hidden"
   },
+  "uclass": {
+    "title": "UTest",
+    "type": "page",
+    "display": "hidden"
+  },
+  "ulcms": {
+    "title": "ULCMS",
+    "type": "page",
+    "display": "hidden"
+  },
   "docs": {
     "title": "Api Docs",
     "type": "page",
-    "href": "/docs/api"
+    "href": "/docs/api",
+    "display": "hidden"
   },
   "solutions": {
     "title": "Solutions",

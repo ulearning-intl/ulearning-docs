@@ -1,0 +1,78 @@
+import { Callout } from 'nextra-theme-docs'
+import Link from 'next/link'
+
+
+# جلب البيانات
+
+```js
+const { data, error } = useSWR(key, fetcher)
+```
+
+هذه هي واجهة برمجة التطبيقات الأساسية جدا ل SWR. `fetcher` هنا هي دالة غير متزامنة **تقبل `key`** من SWR، وتعيد البيانات. 
+ 
+سيتم تمرير القيمة المرتجعة على أنها `data`، وإذا ألقيت، فسيتم اكتشافها على أنها `error`.
+
+<Callout emoji="💡">
+  لاحظ أنه يمكن حذف <code>fetcher</code> من المعلمات إذا كان{' '}
+  <Link href="/docs/global-configuration">يتم توفيره عالميا</Link>.
+</Callout>
+
+## Fetch [#Fetch] 
+
+ يمكنك استخدام أي مكتبة للتعامل مع جلب البيانات، على سبيل المثال polyfill `fetch` [developit/unfetch](https://github.com/developit/unfetch):
+
+```js
+import fetch from 'unfetch'
+
+const fetcher = url => fetch(url).then(r => r.json())
+
+function App () {
+  const { data, error } = useSWR('/api/data', fetcher)
+  // ...
+}
+```
+
+<Callout emoji="💡">
+  إذا كنت تستخدم <strong>Next.js</strong>، فلن تحتاج إلى استيراد هذا الملء المتعدد:<br/>
+  <a target="_blank" rel="noopener" href="https://nextjs.org/blog/next-9-1-7#new-built-in-polyfills-fetch-url-and-objectassign">Polyfills مدمجة جديدة: fetch() وعنوان URL وObject.assign</a>
+</Callout>
+
+## Axios [#axios]
+
+```js
+import axios from 'axios'
+
+const fetcher = url => axios.get(url).then(res => res.data)
+
+function App () {
+  const { data, error } = useSWR('/api/data', fetcher)
+  // ...
+}
+```
+
+## GraphQL [#graphql]
+
+أو استخدام GraphQL مع libs مثل [graphql-request](https://github.com/prisma-labs/graphql-request):
+
+```js
+import { request } from 'graphql-request'
+
+const fetcher = query => request('/api/graphql', query)
+
+function App () {
+  const { data, error } = useSWR(
+    `{
+      Movie(title: "Inception") {
+        releaseDate
+        actors {
+          name
+        }
+      }
+    }`,
+    fetcher
+  )
+  // ...
+}
+```
+
+_إذا كنت ترغب في تمرير المتغيرات إلى استعلام GraphQL، فتحقق من [وسيطات متعددة](/docs/arguments). _

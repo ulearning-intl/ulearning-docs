@@ -1,138 +1,82 @@
 import { useRouter } from "next/router";
-import { useConfig } from "nextra-theme-docs";
 import Logo from "./components/logo";
-import Vercel from "./components/vercel";
+import Head from "./components/head";
+import Footer from "./components/footer";
 import useLocalesMap from "./components/use-locales-map";
+import { useRouter as useRouter7 } from "next/router";
 import {
   editTextMap,
   feedbackLinkMap,
-  footerTextMap,
   gitTimestampMap,
-  headDescriptionMap,
   languageMap,
   searchPlaceholderMap,
   tableOfContentsTitleMap,
-  titleMap,
 } from "./translations/text";
 
 /** @type {import('nextra-theme-docs').DocsThemeConfig} */
 const themeConfig = {
-  docsRepositoryBase: "https://github.dev/VfanLee/ulearning-docs/tree/main",
+  // Global
+  docsRepositoryBase: "https://github.com/ulearning-intl/ulearning-docs",
   useNextSeoProps() {
     return {
       titleTemplate: "Ulearning - %s",
     };
   },
+  head: Head,
+
+  // Navbar
+  logo: Logo,
+  search: {
+    placeholder: () => useLocalesMap(searchPlaceholderMap),
+  },
+
+  // Sidebar
+  // ...
+
+  // TOC Sidebar
   toc: {
     float: true,
     title: () => useLocalesMap(tableOfContentsTitleMap),
   },
-  search: {
-    placeholder: () => useLocalesMap(searchPlaceholderMap),
-  },
   editLink: {
-    text: () => useLocalesMap(editTextMap),
-  },
-  feedback: {
-    content: () => useLocalesMap(feedbackLinkMap),
-  },
-  logo: () => {
-    const title = useLocalesMap(titleMap);
-    return (
-      <>
-        <Logo height={32} />
-        <span
-          className="mx-2 font-extrabold hidden md:inline select-none text-blue-600 text-xl"
-          title={`SWR: ${title}`}
-        >
-          Docs
-        </span>
-      </>
-    );
-  },
-  head: () => {
-    const { route, locales, locale } = useRouter();
-    const { frontMatter, title } = useConfig();
-    const titleSuffix = useLocalesMap(titleMap);
-    const description = useLocalesMap(headDescriptionMap);
-
-    const imageUrl = new URL("https://swr-card.vercel.app");
-
-    if (!/\/index\.+/.test(route)) {
-      imageUrl.searchParams.set("title", title || titleSuffix);
-    }
-
-    const contentLanguage = locales.join(", ");
-    const ogTitle = title ? `${title} – SWR` : `SWR: ${titleSuffix}`;
-    const ogDescription = frontMatter.description || description;
-    const ogImage = frontMatter.image || imageUrl.toString();
-
-    return (
-      <>
-        {/* Favicons, meta */}
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/favicon/apple-touch-icon.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/favicon/favicon-32x32.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/favicon/favicon-16x16.png"
-        />
-        <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
-        <link rel="manifest" href="/favicon/site.webmanifest" />
-        <link
-          rel="mask-icon"
-          href="/favicon/safari-pinned-tab.svg"
-          color="#000000"
-        />
-        <meta httpEquiv="Content-Language" content={contentLanguage} />
-        <meta name="msapplication-TileColor" content="#ffffff" />
-        <meta name="apple-mobile-web-app-title" content="SWR" />
-        <meta name="description" content={ogDescription} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@vercel" />
-        <meta name="twitter:image" content={ogImage} />
-        <meta property="og:title" content={ogTitle} />
-        <meta property="og:description" content={ogDescription} />
-        <meta property="og:image" content={ogImage} />
-        <meta property="og:locale" content={locale} />
-        {locales
-          .filter((l) => l !== locale)
-          .map((l) => (
-            <meta property="og:locale:alternate" content={l} key={l} />
-          ))}
-      </>
-    );
-  },
-  footer: {
-    text: () => {
-      const { utmSource, text, suffix } = useLocalesMap(footerTextMap);
-
+    component: ({ className, filePath }) => {
+      const docsRepositoryDevBase =
+        "https://github.dev/ulearning-intl/ulearning-docs/blob/test/";
       return (
         <a
-          href={`https://vercel.com/?utm_source=${utmSource}`}
+          className={className}
+          href={docsRepositoryDevBase + filePath}
           target="_blank"
-          rel="noopener"
-          className="inline-flex items-center no-underline text-current font-semibold"
+          rel="noreferrer"
         >
-          <span className="mr-2">{text}</span>
-          <span>
-            <Vercel />
-          </span>
-          {suffix ? <span className="ml-2">{suffix}</span> : null}
+          {useLocalesMap(editTextMap)}
         </a>
       );
     },
   },
+  themeSwitch: {
+    useOptions() {
+      const { locale } = useRouter7();
+      console.log('locale',locale)
+      if (locale === "zh-CN") {
+        return { dark: "\u6DF1\u8272\u4E3B\u9898", light: "\u6D45\u8272\u4E3B\u9898", system: "\u7CFB\u7EDF\u9ED8\u8BA4" };
+      }else if(locale === "fr-FR"){
+        return { dark: "Sombre", light: "Lumière", system: "Système" };
+      }else if(locale === "ar"){
+        return { dark: "مظلم", light: "ضوء .", system: "نظم" };
+      }
+      return {
+        light: 'Light',
+        dark: 'Dark',
+        system: 'System'
+      }
+    }
+  },
+  feedback: {
+    content: () => useLocalesMap(feedbackLinkMap),
+  },
+
+  // End of Page
   gitTimestamp({ timestamp }) {
     const { locale } = useRouter();
     const lastUpdatedOn = useLocalesMap(gitTimestampMap);
@@ -150,9 +94,17 @@ const themeConfig = {
       </>
     );
   },
+
+  // Footer
+  footer: {
+    component: Footer,
+  },
+
+  // I18n
   i18n: Object.entries(languageMap).map(([locale, text]) => ({
     locale,
     text,
+    direction: locale === "ar" ? "rtl" : "ltr",
   })),
 };
 

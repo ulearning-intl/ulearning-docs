@@ -1,9 +1,9 @@
 {
-  "alternative-verification-code": "Alternative-verification-code",
-  "assigning-and-managing-grading": "Assigning-and-managing-grading",
-  "managing-exam-facility": "Managing-exam-facility",
-  "managing-exam-session": "Managing-exam-session",
-  "scheduling-exam-facility": "Scheduling-exam-facility",
-  "student-facial-photo-verification": "Student-facial-photo-verification",
-  "viewing-and-editing-exam": "Viewing-and-editing-exam"
+  "alternative-verification-code": "رمز التحقق البديل",
+  "assigning-and-managing-grading": "تعيين الدرجات ودراسته في الإدارة",
+  "managing-exam-facility": "إدارة-امتحان-المرفق",
+  "managing-exam-session": "إدارة جلسة الامتحان",
+  "scheduling-exam-facility": "أداة الجدولة-امتحان",
+  "student-facial-photo-verification": "التحقق من صورة وجه الطالب",
+  "viewing-and-editing-exam": "التحقق من صورة وجه الطالب"
 }

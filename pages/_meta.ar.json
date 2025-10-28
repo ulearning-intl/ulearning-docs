@@ -1,0 +1,62 @@
+{
+  "products": {
+    "title": "المنتجات",
+    "type": "menu",
+    "items": {
+      "ULearning": {
+        "title": "نظام إدارة التعلم",
+        "href": "/ulearning/getting-started"
+      },
+      "UClass": {
+        "title": "الفصل الدراسي الذكي",
+        "href": "/uclass/start"
+      },
+      "utest": {
+        "title": "امتحان عبر الإنترنت",
+        "href": "/utest/introduction"
+      }
+    }
+  },
+  "index": {
+    "title": "Introduction",
+    "type": "page",
+    "display": "hidden"
+  },
+  "ulearning": {
+    "title": "الوثائق",
+    "type": "page",
+    "href": "/ulearning/getting-started"
+  },
+  "utest": {
+    "title": "UTest",
+    "type": "page",
+    "display": "hidden"
+  },
+  "uclass": {
+    "title": "UTest",
+    "type": "page",
+    "display": "hidden"
+  },
+  "docs": {
+    "title": "Api Docs",
+    "type": "page",
+    "href": "/docs/api",
+    "display": "hidden"
+  },
+  "solutions": {
+    "title": "حلولنا",
+    "type": "page"
+  },
+  "practices": {
+    "title": "أفضل الممارسات",
+    "type": "page"
+  },
+  "blog": {
+    "title": "سجل التغيير",
+    "type": "page",
+    "href": "/blog",
+    "theme": {
+      "sidebar": false
+    }
+  }
+}

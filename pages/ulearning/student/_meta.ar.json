@@ -1,4 +1,12 @@
 {
-  "login": "Login",
-  "overview": "Overview"
+  "overview": "نظرة عامة",
+  "login": "تسجيل الدخول",
+  "announcements": "الاعلانات",
+  "courseware": "المحتوى الدراسي",
+  "resources": "المصادر",
+  "assignments": "المهام",
+  "discussions": "المناقشات",
+  "exams": "الامتحانات",
+  "grades": "الدرجات",
+  "members": "الاعضاء"
 }

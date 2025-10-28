@@ -1,4 +1,5 @@
 {
-  "admin": "Admin",
-  "teacher": "Teacher"
+  "introduction": "Introduction",
+  "admin": "Administratif",
+  "teacher": "Professeur"
 }

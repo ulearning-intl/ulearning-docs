@@ -1,0 +1,105 @@
+import { Callout } from 'nextra-theme-docs'
+
+
+# الاشتراك
+
+<Callout emoji="✅">
+  يرجى التحديث إلى أحدث إصدار (≥ 2.1.0) لاستخدام واجهة برمجة التطبيقات هذه.
+</Callout>
+
+## `useSWRSubscription` [#useswrsubscription]
+
+`useSWRSubscription` هو خطاف React يسمح بالاشتراك في مصادر البيانات في الوقت الفعلي باستخدام SWR.
+
+```tsx
+useSWRSubscription<Data, Error>(key: Key, subscribe: (key: Key, options: { next: (error?: Error | null, data: Data) => void }) => () => void): { data?: Data, error?: Error }
+```
+
+### API [#api]
+
+يشترك هذا الخطاف في مصدر بيانات في الوقت الفعلي باستخدام وظيفة الاشتراك المقدمة، ويعيد أحدث البيانات المستلمة وأي أخطاء تمت مواجهتها. يقوم الخطاف تلقائيا بتحديث البيانات المرتجعة عند استلام أحداث جديدة.
+
+#### Parameters [#parameters]
+
+- `key`: مفتاح فريد يحدد البيانات التي يتم الاشتراك فيها، وهو نفس مفتاح مفتاح `useSWR`. 
+- `subscribe`: وظيفة تشترك في مصدر البيانات في الوقت الفعلي. يتلقى الحجج التالية: 
+   - `key`: نفس المفتاح على النحو الوارد أعلاه 
+   - `options`: كائن له الخصائص التالية: 
+     - `next`: دالة تقبل الخطأ والبيانات، وتقوم بتحديث الحالة بأحدث البيانات الواردة من مصدر البيانات في الوقت الفعلي.
+
+
+على سبيل المثال
+
+```tsx
+function subscribe(key, { next }) {
+  const sub = remote.subscribe(key, (err, data) => next(err, data))
+  return () => sub.close()
+}
+```
+
+يمكنك أيضا تمرير وظيفة التحديث باسم `data` إلى `next`، والتي ستتلقى البيانات السابقة كحجة أولى وتعيد البيانات الجديدة.
+
+```tsx
+function subscribe(key, { next }) {
+  const sub = remote.subscribe(key, (err, data) => next(err, prev => prev.concat(data)))
+  return () => sub.close()
+}
+```
+
+#### قيم الإرجاع [#قيم الإرجاع] 
+
+- `state`: كائن له الخصائص التالية: 
+   - `data`: أحدث البيانات الواردة من مصدر البيانات في الوقت الفعلي. 
+   - `error`: كائن خطأ في حالة حدوث خطأ أثناء الاشتراك في مصدر البيانات في الوقت الفعلي، غير محدد بخلاف ذلك.
+
+عند استلام بيانات جديدة، سيتم إعادة تعيين `error` إلى `undefined`. رقم 
+
+### الاستخدام  رقم [#الاستخدام]
+
+باستخدام `useSWRSubscription` للاشتراك في مصدر بيانات Firestore:
+
+```tsx
+import useSWRSubscription from 'swr/subscription'
+
+function Post({ id }) {
+  const { data } = useSWRSubscription(['views', id], ([_, postId], { next }) => {
+    const ref = firebase.database().ref('views/' + postId)
+    ref.on('value',
+      snapshot => next(null, snapshot.data()),
+      err => next(err)
+    )
+    return () => ref.off()
+  })
+
+  return <span>Your post has {data} views!</span>
+}
+```
+
+باستخدام `useSWRSubscription` للاشتراك في مصدر بيانات WebSocket:
+
+```tsx
+import useSWRSubscription from 'swr/subscription'
+
+function App() {
+  const { data, error } = useSWRSubscription('ws://...', (key, { next }) => {
+    const socket = new WebSocket(key)
+    socket.addEventListener('message', (event) => next(null, event.data))
+    socket.addEventListener('error', (event) => next(event.error))
+    return () => socket.close()
+  })
+  if (error) return <div>failed to load</div>
+  if (!data) return <div>loading...</div>
+  return <div>hello {data}!</div>
+}
+```
+
+يمكنك أيضا التحقق من أمثلة TypeScript ل `useSWRSubscription` في [هذه الصفحة](/docs/typescript#useswrsubscription) رقم 
+ 
+### إلغاء الازدواجية  رقم [#deduplication]
+ 
+`useSWRSubscription` يزيل تكرار طلبات الاشتراك بنفس المفتاح. رقم 
+إذا كانت هناك مكونات متعددة تستخدم نفس المفتاح، فسيشاركون نفس الاشتراك. رقم 
+عندما يتم إلغاء تحميل المكون الأخير الذي يستخدم المفتاح، سيتم إغلاق الاشتراك. رقم 
+ 
+هذا يعني أنه إذا كان لديك مكونات متعددة تستخدم نفس المفتاح، فستتلقى جميعها نفس البيانات. رقم 
+وهناك اشتراك واحد فقط في مصدر البيانات في الوقت الفعلي لكل مفتاح.

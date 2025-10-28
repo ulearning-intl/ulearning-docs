@@ -1,13 +1,14 @@
 import { Callout } from 'nextra-theme-docs'
 
-# Usage with Next.js
+# Utilisation avec Next.js 
 
-## App Router [#app-dir]
+## Routeur d'application [#app-dir] 
 
-### Server Components [#rsc]
+### Composants du serveur [#rsc]
+
 
 <Callout type="default" emoji="✅">
-   In Next.js App Router, all components are React Server Components (RSC) by default. **You could only import the key serialization APIs from SWR in RSC.**
+ Dans Next.js App Router, tous les composants sont React Server Components (RSC) par défaut. **Vous ne pouviez importer que les API de sérialisation des clés à partir de SWR dans RSC.**
 </Callout>
 
 ```tsx filename="app/page.tsx" copy
@@ -16,16 +17,16 @@ import { unstable_serialize as infinite_unstable_serialize } from 'swr/infinite'
 ```
 
 <Callout type="error">
-   You could not import any other APIs from SWR since they are not available in RSC.
+  Vous ne pouvez pas importer d'autres API de SWR car elles ne sont pas disponibles dans RSC.
 </Callout>
 
 ```tsx filename="app/page.tsx" highlight={1}
 import useSWR from 'swr' // ❌ This is not available in server components
 ```
 
-### Client Components
+### Composants clients 
 
-You can mark your components with `'use client'` directive or import SWR from client components, both ways will allow you to use the SWR client data fetching hooks.
+Vous pouvez marquer vos composants avec la directive `"use client"` ou importer SWR à partir de composants client, les deux façons vous permettront d'utiliser les crochets de récupération de données client SWR.
 
 ```tsx filename="app/page.tsx" highlight={1} copy
 'use client'
@@ -36,7 +37,7 @@ export default Page() {
 }
 ```
 
-If you need to use `SWRConfig` to configure global settings in server components `layout` or `page`, creating a separate provider client component to setup the provider and configuration then use it in the server component pages.
+Si vous avez besoin d'utiliser `SWRConfig` pour configurer les paramètres globaux dans les composants du serveur `layout` ou `page`, en créant un composant client fournisseur distinct pour configurer le fournisseur et la configuration, puis utilisez-le dans les pages des composants du serveur.
 
 ```tsx filename="app/swr-provider.tsx" copy
 'use client';
@@ -59,27 +60,28 @@ export default Page() {
 ```
 
 
-## Client Side Data Fetching [#client-side-data-fetching]
+## Récupération des données côté client [#client-side-data-fetching] 
 
-If your page contains frequently updating data, and you don’t need to pre-render the data, SWR is a perfect fit and no special setup needed: just import `useSWR` and use the hook inside any components that use the data.
+Si votre page contient des données fréquemment mises à jour, et que vous n'avez pas besoin de pré-rendu les données, SWR est un ajustement parfait et aucune configuration spéciale n'est nécessaire : il suffit d'importer `useSWR` et d'utiliser le crochet à l'intérieur de tous les composants qui utilisent les données. 
+ 
+Voici comment cela fonctionne : 
 
-Here’s how it works:
+- Tout d'abord, affichez immédiatement la page sans données. Vous pouvez afficher les états de chargement des données manquantes. 
+- Ensuite, récupérez les données du côté client et affichez-les lorsque vous êtes prêt. 
+ 
+Cette approche fonctionne bien pour les pages de tableau de bord des utilisateurs, par exemple. Étant donné qu'un tableau de bord est une page privée et spécifique à l'utilisateur, le référencement n'est pas pertinent et la page n'a pas besoin d'être pré-rendue. Les données sont fréquemment mises à jour, ce qui nécessite la récupération des données au moment de la demande. 
 
-- First, immediately show the page without data. You can show loading states for missing data.
-- Then, fetch the data on the client side and display it when ready.
+## Pré-rendu avec des données par défaut [#pré-rendu avec-données par défaut] 
+ 
+Si la page doit être pré-rendu, Next.js prend en charge [2 formes de pré-rendu](https://nextjs.org/docs/basic-features/data-fetching) : 
+**Gn génération statique (SSG)** et **Renrage côté serveur (SSR)**. 
+ 
+Avec SWR, vous pouvez pré-rendu la page pour le référencement, et également avoir des fonctionnalités telles que la mise en cache, la revalidation, le suivi de la mise au point, la re-forte sur l'intervalle du côté client. 
+ 
+Vous pouvez utiliser l'option `fallback` de [`SWRConfig`](/docs/global-configuration) pour passer les données pré-retched comme valeur initiale de tous les crochets SWR. 
+ 
+Par exemple avec `getStaticProps` :
 
-This approach works well for user dashboard pages, for example. Because a dashboard is a private, user-specific page, SEO is not relevant and the page doesn’t need to be pre-rendered. The data is frequently updated, which requires request-time data fetching.
-
-## Pre-rendering with Default Data [#pre-rendering-with-default-data]
-
-If the page must be pre-rendered, Next.js supports [2 forms of pre-rendering](https://nextjs.org/docs/basic-features/data-fetching):
-**Static Generation (SSG)** and **Server-side Rendering (SSR)**.
-
-Together with SWR, you can pre-render the page for SEO, and also have features such as caching, revalidation, focus tracking, refetching on interval on the client side.
-
-You can use the `fallback` option of [`SWRConfig`](/docs/global-configuration) to pass the pre-fetched data as the initial value of all SWR hooks.
-
-For example with `getStaticProps`:
 ```jsx
  export async function getStaticProps () {
   // `getStaticProps` is executed on the server side.
@@ -109,15 +111,15 @@ export default function Page({ fallback }) {
 }
 ```
 
-The page is still pre-rendered. It's SEO friendly, fast to response, but also fully powered by SWR on the client side. The data can be dynamic and self-updated over time.
+La page est toujours pré-rendue. Il est convivial pour le référencement, rapide à répondre, mais aussi entièrement alimenté par SWR du côté du client. Les données peuvent être dynamiques et auto-mises à jour au fil du temps.
 
 <Callout emoji="💡">
-  The `Article` component will render the pre-generated data first, and after the page is hydrated, it will fetch the latest data again to keep it refresh.
+  Le composant `Article` rendra d'abord les données pré-générées, et une fois la page hydratée, il récupérera à nouveau les dernières données pour les maintenir actualisées.
 </Callout>
 
-### Complex Keys [#complex-keys]
+### Clés complexes [#clés complexes]
 
-`useSWR` can be used with keys that are `array` and `function` types. Utilizing pre-fetched data with these kinds of keys requires serializing the `fallback` keys with `unstable_serialize`.
+`useSWR` peut être utilisé avec des clés qui sont de type `array` et `function`. L'utilisation de données pré-récupées avec ce type de clés nécessite la sérialisation des clés `fallback` avec `unstable_serialize`.
 
 ```jsx
 import useSWR, { unstable_serialize } from 'swr'
