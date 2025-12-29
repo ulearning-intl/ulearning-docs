@@ -41,6 +41,11 @@
     "type": "page",
     "display": "hidden"
   },
+  "ULCMS": {
+    "title": "ULCMS",
+    "type": "page",
+    "display": "hidden"
+  },
   "docs": {
     "title": "Api 文档",
     "type": "page",
