@@ -1,0 +1,10 @@
+{
+  "create": "创建一个课堂",
+  "prepare": "准备教学内容",
+  "attend": "开始上课",
+  "rollCall": "课堂点名",
+  "resource": "演示PPT、视频等教学资源",
+  "discuss": "课堂讨论",
+  "activity": "课堂活动",
+  "report": "课堂报告"
+}

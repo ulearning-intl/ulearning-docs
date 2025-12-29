@@ -1,3 +1,9 @@
 {
-  "start": "开始"
+  "start": "智慧课堂介绍",
+  "log":"登录",
+  "personalSpace":"个人空间",
+  "interactive":"课堂互动",
+  "resources":"资源中心",
+  "app":"应用中心",
+  "active":"学生参与课堂活动"
 }

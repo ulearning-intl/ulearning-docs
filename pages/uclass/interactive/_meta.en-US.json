@@ -1,0 +1,10 @@
+{
+  "create": "Create a Class",
+  "prepare": "Prepare Teaching Content",
+  "attend": "Start Class Session",
+  "rollCall": "Class Roll Call",
+  "resource": "Present Teaching Resources such as PPTs and Videos",
+  "discuss": "Classroom Discussion",
+  "activity": "Classroom Activities",
+  "report": "Session Report"
+}

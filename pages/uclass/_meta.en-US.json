@@ -1,3 +1,9 @@
 {
-  "start": "start"
+  "start": "Smart Classroom Introduction",
+  "log":"Login",
+  "personalSpace":"Space",
+  "interactive":"Classroom",
+  "resources":"Resources",
+  "app":"App Center",
+  "active":"Students Participate in Classroom"
 }
