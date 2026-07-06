@@ -25,15 +25,21 @@
       }
     }
   },
-  "new": {
+  "news": {
     "title": "版本更新",
     "type": "page",
-    "display": "hidden"
+    "href": "/news",
+    "theme": {
+      "sidebar": false
+    }
   },
   "questions": {
     "title": "常见问题",
     "type": "page",
-    "display": "hidden"
+    "href": "/questions",
+    "theme": {
+      "sidebar": false
+    }
   },
   "index": {
     "title": "介绍",
