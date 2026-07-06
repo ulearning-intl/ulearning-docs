@@ -4,22 +4,36 @@
     "type": "menu",
     "items": {
       "ULearning": {
-        "title": "学习管理系统",
+        "title": "uLMS学习管理系统",
         "href": "/ulearning/getting-started"
       },
       "UClass": {
-        "title": "智慧教室",
+        "title": "uClass课堂互动系统",
         "href": "/uclass/start"
       },
-      "utest": {
-        "title": "考试系统",
-        "href": "/utest/introduction"
+      "UAgent": {
+        "title": "uAgent智能体系统",
+        "href": "/uclass/agent"
       },
+       "utest": {
+        "title": "考试系统",
+          "href": "/utest/introduction"
+        },
       "ULCMS":{
-        "title":"录播系统",
+        "title":"uRecord录播及评价系统",
         "href": "/ulcms/introduction"
       }
     }
+  },
+  "new": {
+    "title": "版本更新",
+    "type": "page",
+    "display": "hidden"
+  },
+  "questions": {
+    "title": "常见问题",
+    "type": "page",
+    "display": "hidden"
   },
   "index": {
     "title": "介绍",
