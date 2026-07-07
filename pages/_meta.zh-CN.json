@@ -15,20 +15,24 @@
         "title": "uAgent智能体系统",
         "href": "/uclass/agent"
       },
-       "utest": {
-        "title": "考试系统",
-          "href": "/utest/introduction"
-        },
       "ULCMS":{
         "title":"uRecord录播及评价系统",
         "href": "/ulcms/introduction"
       }
     }
   },
-  "news": {
+  "quickstart": {
+    "title": "快速开始",
+    "type": "page",
+    "href": "/quickstart",
+    "theme": {
+      "sidebar": false
+    }
+  },
+  "Update": {
     "title": "版本更新",
     "type": "page",
-    "href": "/news",
+    "href": "/Update",
     "theme": {
       "sidebar": false
     }
@@ -37,53 +41,6 @@
     "title": "常见问题",
     "type": "page",
     "href": "/questions",
-    "theme": {
-      "sidebar": false
-    }
-  },
-  "index": {
-    "title": "介绍",
-    "type": "page",
-    "display": "hidden"
-  },
-  "ulearning": {
-    "title": "文档",
-    "type": "page",
-    "href": "/ulearning/getting-started"
-  },
-  "utest": {
-    "title": "UTest",
-    "type": "page",
-    "display": "hidden"
-  },
-  "uclass": {
-    "title": "UTest",
-    "type": "page",
-    "display": "hidden"
-  },
-  "ULCMS": {
-    "title": "ULCMS",
-    "type": "page",
-    "display": "hidden"
-  },
-  "docs": {
-    "title": "Api 文档",
-    "type": "page",
-    "href": "/docs/api",
-    "display": "hidden"
-  },
-  "solutions": {
-    "title": "解决方案",
-    "type": "page"
-  },
-  "practices": {
-    "title": "最佳实践",
-    "type": "page"
-  },
-  "blog": {
-    "title": "变更日志",
-    "type": "page",
-    "href": "/blog",
     "theme": {
       "sidebar": false
     }
