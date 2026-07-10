@@ -102,6 +102,7 @@ title: 页面标题
 ### 3. 多语言文件
 - **所有语言必须同步新增**：新增一个页面时，需要同时在所有已激活语言目录下创建对应文件
 - 当前已激活语言：`en-US`、`zh-CN`、`fr-FR`、`ar`
+- **ar 语言后缀注意**：`ar` 语言的 MDX 文件和 `_meta.json` 后缀为 `ar`（而非 `ar-AR`），如 `getting-started.ar.mdx`、`_meta.ar.json`
 - 新增页面时请在 `next.config.js` 的 `locales` 数组中确认语言已激活
 
 ### 4. 导航配置
@@ -142,8 +143,9 @@ title: 页面标题
 - `prompts/demos/` 目录下的文件为用户可复制使用的 demo 模板，用户可以复制这些内容到对话框中使用。
 - 两个目录下的文件名保持一一对应，便于查找和管理。
 - **提示词模板路径**：
-  - 提示词01（顶部栏菜单）：`prompts/templates/01-topbar-menu.md`
-  - 提示词02（产品子目录页面/目录）：`prompts/templates/02-subpage.md`
+ - 提示词01（顶部栏菜单）：`prompts/templates/01-topbar-menu.md`
+ - 提示词02（产品子目录页面/目录）：`prompts/templates/02-subpage.md`
+ - 提示词03（写入文档内容）：`prompts/templates/03-content-write.md`
 
 ### 8. AI 任务执行前置约束
 - **必须先读取详细提示词**：当用户输入「使用提示词XX」开头的指令时，AI 必须首先读取 `prompts/templates/XX-*.md` 对应的详细提示词模板文件，理解完整的执行逻辑和规则后，才能开始执行任务。

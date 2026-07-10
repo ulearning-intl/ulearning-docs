@@ -31,6 +31,7 @@
 ### 步骤2：项目约束
 
 1. **多语言同步**：`en-US`、`zh-CN`、`fr-FR`、`ar` 四个语言目录必须同步新增文件（以 `next.config.js` 中 `i18n.locales` 为准）
+   - **语言后缀注意**：MDX 文件和 `_meta.json` 的语言后缀以 locales 数组中的值为准，其中 `ar` 语言的后缀为 `ar`（而非 `ar-AR`）。文件命名示例：`getting-started.ar.mdx`、`_meta.ar.json`
 2. **Frontmatter**：每个 MDX 文件头部必须有 `title` 字段，**正文内容为空**，不自动生成任何描述性文字
 3. **目录结构参考**：
    - 有侧边栏：参考 `pages/ulearning/`（含 `_meta.{locale}.json`），子目录的 `_meta.{locale}.json` 格式为简单键值对：`{"slug": "标题"}`
