@@ -24,9 +24,11 @@ ulearning-docs/
 ├── theme.config.js           # Nextra 主题配置（顶部栏/页脚/logo等）
 └── prompts/                  # AI 提示词示例库
     ├── templates/            # AI 自读模式提示词模板（不可修改）
-    │   └── 01-topbar-menu.md
+    │   ├── 01-topbar-menu.md    # 顶部栏菜单操作
+    │   └── 02-subpage.md        # 产品子目录页面/目录操作
     └── demos/                # 可复制使用的 demo 模板（可复制修改）
-        └── 01-topbar-menu.md
+        ├── 01-topbar-menu.md
+        └── 02-subpage.md
 ```
 
 ## 页面类型说明
@@ -139,3 +141,11 @@ title: 页面标题
 - `prompts/templates/` 目录下的文件为 AI 自读模式的提示词模板，**禁止修改**。这些文件定义了 AI 执行任务的逻辑和规则。
 - `prompts/demos/` 目录下的文件为用户可复制使用的 demo 模板，用户可以复制这些内容到对话框中使用。
 - 两个目录下的文件名保持一一对应，便于查找和管理。
+- **提示词模板路径**：
+  - 提示词01（顶部栏菜单）：`prompts/templates/01-topbar-menu.md`
+  - 提示词02（产品子目录页面/目录）：`prompts/templates/02-subpage.md`
+
+### 8. AI 任务执行前置约束
+- **必须先读取详细提示词**：当用户输入「使用提示词XX」开头的指令时，AI 必须首先读取 `prompts/templates/XX-*.md` 对应的详细提示词模板文件，理解完整的执行逻辑和规则后，才能开始执行任务。
+- **禁止直接执行**：未读取详细提示词模板前，AI 不得根据用户输入的简短指令直接执行任何文件创建或修改操作。
+- **严格遵循模板规则**：AI 必须严格按照提示词模板中定义的步骤、格式和约束执行，不得擅自简化或省略步骤。
