@@ -23,46 +23,92 @@
 
 从用户输入中提取以下信息：
 - **文件路径**：MDX 文件相对于 `pages/` 目录的路径（不含语言后缀），必填
-- **语言**：目标语言版本，必填（如 `en-US`、`zh-CN`、`fr-FR`、`ar`）
+- **语言**：本次操作的基准语言，必填（如 `en-US`、`zh-CN`、`fr-FR`、`ar`）
 - **内容**：用户提供的文档内容，支持 Markdown 和 MDX 语法，必填
+- **翻译同步**（可选）：是否将内容翻译同步到其他语言，默认为 `false`（仅写入指定语言）
+- **插入位置**（可选）：在文件已有内容中的哪个标题/段落**之后**插入新内容，不填则**覆盖**文件全部内容
 - **Title**（可选）：frontmatter 中的 `title` 字段，未填写时由 AI 根据内容自动提取
 
-### 步骤2：确定文件路径
+### 步骤2：语言后缀映射
 
-根据语言参数拼接完整的文件名：
-- `en-US` → `{path}.en-US.mdx`
-- `zh-CN` → `{path}.zh-CN.mdx`
-- `fr-FR` → `{path}.fr-FR.mdx`
-- `ar` → `{path}.ar.mdx`
+根据 `next.config.js` 中 `i18n.locales` 确认所有已激活语言及其文件后缀：
 
-文件完整路径为 `pages/{path}.{locale}.mdx`。
+| 语言 | 文件后缀 |
+|---|---|
+| `en-US` | `.en-US.mdx` |
+| `zh-CN` | `.zh-CN.mdx` |
+| `fr-FR` | `.fr-FR.mdx` |
+| `ar` | `.ar.mdx` |
 
 **注意**：`ar` 语言的 MDX 文件后缀为 `ar`（而非 `ar-AR`）。
 
-### 步骤3：生成 Frontmatter
+### 步骤3：执行基准语言写入
 
-自动生成文件头部：
+将 frontmatter 和用户内容写入基准语言文件。
+
+### 步骤4：翻译同步（仅当翻译同步开启时）
+
+遍历所有**其他**语言（`en-US`、`fr-FR`、`ar`，排除基准语言），对每种语言按以下三层判断：
+
+#### 第一层：文件是否存在
+
+- **不存在**：进入第二层判断
+- **存在**：读取文件内容，进入第三层判断
+
+#### 第二层：文件是否为空
+
+读取文件内容（排除 frontmatter 的 `---` 分隔符）判断正文是否为空：
+- **正文为空**（仅有 frontmatter `title` 或完全空白）：视为新增，直接翻译写入
+- **正文有内容**：进入第三层判断
+
+#### 第三层：操作类型判断
+
+**不指定插入位置（覆盖模式）时**：
+- 对已存在且有内容的文件**跳过**，不覆盖
+- 理由：覆盖操作有风险，可能覆盖用户手动精心翻译的内容
+
+**指定插入位置（插入模式）时**：
+- 在该语言文件中尝试匹配插入位置标题
+- **匹配成功**：在该位置**插入**翻译内容，其余内容保持不变
+- **匹配失败（找不到对应标题）**：**跳过**，不写入
+
+#### 翻译输出要求
+
+每种语言的同步结果需明确标注：
+- `翻译生成（空文件新建）` — 原文件不存在或正文为空，直接翻译写入
+- `翻译插入（标题匹配）` — 原文件有内容，插入位置标题匹配成功
+- `已存在，跳过未修改` — 原文件有内容且未指定插入位置（覆盖保护）
+- `已存在，跳过（插入标题未找到）` — 原文件有内容且指定了插入位置，但该标题在该语言文件中不存在
+
+### 步骤5：Frontmatter 生成规则
+
 ```yaml
 ---
 title: {title}
 ---
 ```
 
-- 若用户在参数中指定了 `Title`，直接使用指定值
-- 若未指定，AI 从内容中提取首个 `#` 标题作为 `title` 值
-- 若内容无标题，则以文件路径中的最后一段作为 `title`（如 `ulearning/getting-started` → `Getting Started`）
+- 用户在参数中指定了 `Title` → 直接使用指定值
+- 未指定时，AI 从内容中提取首个 `#` 标题作为 `title`
+- 内容无标题时，以文件路径最后一段作为 `title`（如 `getting-started` → `Getting Started`）
+- **修改场景下**：若原文件已有 `title`，且用户未指定新 `Title`，**保留原 title 不变**
 
-### 步骤4：写入文件
+### 步骤6：翻译规则
 
-将 frontmatter 和用户内容合并后写入目标文件：
-- 文件不存在时：直接创建新文件
-- 文件已存在时：**覆盖**文件内容（保留原有 frontmatter 中的 `title`，其他字段由用户内容决定）
+翻译时遵循以下原则：
+- **翻译内容**：正文内容完整翻译为目标语言
+- **保留 MDX 组件**：`<Callout>`、`<Steps>`、`<Tabs>` 等组件标签保留原文不做翻译
+- **翻译 frontmatter title**：frontmatter 中的 `title` 也翻译为目标语言
+- **保留代码块**：代码片段内容不翻译，仅翻译注释
 
-### 步骤5：输出要求
+### 步骤7：输出要求
 
-1. 列出目标文件的完整路径
-2. 显示文件的完整内容（含 frontmatter）
-3. 提示用户是否需要同步写入其他语言版本
+1. 列出本次所有写入操作的文件及其操作类型
+2. 明确标注每个文件是「新建」还是「覆盖」还是「插入」
+3. 标注翻译生成的文件与直接写入的文件
+4. 标注跳过的文件及其跳过原因
+5. 若涉及插入操作，说明插入位置和插入后的文件预览
+6. 完成后提示用户检查各语言版本
 
 ---
 
@@ -70,37 +116,120 @@ title: {title}
 
 1. **仅写入文件内容**：提示词03仅负责将内容写入 MDX 文件，**不涉及**目录结构或 `_meta.{locale}.json` 的创建/更新
 2. **语言后缀**：MDX 文件语言后缀以 `next.config.js` 中 `i18n.locales` 为准，`ar` 语言后缀为 `ar`
-3. **内容兼容性**：支持标准 Markdown 语法和 MDX 语法（如 `<Callout>`、`<Steps>`、`<Tabs>` 等组件嵌入）
+3. **内容兼容性**：支持标准 Markdown 语法和 MDX 语法（如嵌入 `<Callout>`、`<Steps>`、`<Tabs>` 等组件）
 4. **正文内容**：用户提供的内容即为准，无论长短，AI 不自动补充任何描述性文字
 5. **MDX 语法安全**：用户内容中的尖括号 `<>` 会被 MDX 解析器当作 JSX 标签处理，必须进行转义：`<` → `&lt;`，`>` → `&gt;`。例如 `openspec/changes/<name>/` 需要转换为 `openspec/changes/&lt;name&gt;/`
+6. **覆盖保护**：修改场景下，对其他语言版本**已有内容且未指定插入位置**的文件不覆盖，避免丢失用户手动编辑的内容
+7. **插入位置匹配**：插入时以 Markdown 标题（`#`、`##`、`###` 等）作为定位标记，需精确匹配对应语言文件中的标题文本
 
 ---
 
 ## 示例
 
-### 示例1：写入已有文件
+### 示例1：新增文件（翻译同步）
 
 **输入：**
 ```
-使用提示词03：文件路径：【ulearning/getting-started】 语言：【zh-CN】 内容：【# 快速入门\n\n欢迎使用 ULearning 学习管理系统。本指南将帮助你快速上手。\n\n## 环境要求\n\n- Node.js 18+\n- npm 9+\n\n## 安装步骤\n\n1. 克隆仓库\n2. 运行 npm install\n3. 配置环境变量\n\n<Callout type="warning">\n请确保 Node.js 版本符合要求。\n</Callout>】}
+使用提示词03：文件路径：【ulearning/getting-started】 语言：【zh-CN】 内容：【# 快速入门\n\n欢迎使用 ULearning 学习管理系统。\n\n## 环境要求\n\n- Node.js 18+\n- npm 9+\n\n## 安装步骤\n\n1. 克隆仓库\n2. 运行 npm install\n\n<Callout type="warning">\n请确保 Node.js 版本符合要求。\n</Callout>】 翻译同步：【是】
 ```
 
 **预期执行：**
-- 确定文件路径：`pages/ulearning/getting-started.zh-CN.mdx`
-- 提取 title：`快速入门`
-- 生成 frontmatter：`title: 快速入门`
-- 写入完整文件内容
+- 写入 `zh-CN`：直接写入基准语言内容
+- `en-US` → 不存在 → **翻译生成（空文件新建）**
+- `fr-FR` → 不存在 → **翻译生成（空文件新建）**
+- `ar` → 不存在 → **翻译生成（空文件新建）**
 
 ---
 
-### 示例2：写入新文件（指定 title）
+### 示例2：修改文件（覆盖模式，保护已有翻译）
 
 **输入：**
 ```
-使用提示词03：文件路径：【ulearning/admin/user-management】 语言：【en-US】 Title：【User Management】 内容：【# User Management\n\nThis section covers user management features...】}
+使用提示词03：文件路径：【ulearning/getting-started】 语言：【zh-CN】 内容：【# 快速入门（更新版）\n\n新增了视频教程入口...】 翻译同步：【是】
 ```
 
-**预期执行：**
-- 确定文件路径：`pages/ulearning/admin/user-management.en-US.mdx`
-- 使用指定 title：`User Management`
-- 写入完整文件内容
+**当前状态假设：**
+- `zh-CN` → **覆盖写入**
+- `en-US` → 正文有内容 → **已存在，跳过未修改**
+- `fr-FR` → 正文有内容 → **已存在，跳过未修改**
+- `ar` → 正文为空 → **翻译生成（空文件新建）**
+
+**输出：**
+```
+本次操作：
+- pages/ulearning/getting-started.zh-CN.mdx（已覆盖）
+- pages/ulearning/getting-started.en-US.mdx（已存在，跳过未修改）
+- pages/ulearning/getting-started.fr-FR.mdx（已存在，跳过未修改）
+- pages/ulearning/getting-started.ar.mdx（翻译生成，空文件新建）
+
+提示：en-US 和 fr-FR 已有内容未自动覆盖，如需同步请手动更新或清除后重新触发。
+```
+
+---
+
+### 示例3：修改文件（插入模式，同步翻译插入）
+
+**输入：**
+```
+使用提示词03：文件路径：【ulearning/getting-started】 语言：【zh-CN】 插入位置：【## 安装步骤之后】 内容：【### 常见问题\n\nQ: 如何重置密码？\nA: 联系管理员重置。】 翻译同步：【是】
+```
+
+**原文件 `zh-CN` 内容（基准语言）：**
+```mdx
+---
+title: 快速入门
+---
+
+# 快速入门
+
+欢迎使用 ULearning。
+
+## 安装步骤
+
+1. 克隆仓库
+2. 运行 npm install
+
+## 其他说明
+```
+
+**各语言处理结果：**
+
+- `zh-CN`：找到 `## 安装步骤`，在其之后插入，**覆盖写入（插入模式）**
+- `en-US`：正文有内容，找到 `## Installation Steps`，在其之后插入，**翻译插入（标题匹配）**
+- `fr-FR`：正文有内容，找到 `## Étapes d'installation`，在其之后插入，**翻译插入（标题匹配）**
+- `ar`：正文为空，直接翻译写入，**翻译生成（空文件新建）**
+
+**输出：**
+```
+本次操作：
+- pages/ulearning/getting-started.zh-CN.mdx（已覆盖，插入位置：## 安装步骤之后）
+- pages/ulearning/getting-started.en-US.mdx（翻译插入，插入位置：## Installation Steps 之后）
+- pages/ulearning/getting-started.fr-FR.mdx（翻译插入，插入位置：## Étapes d'installation 之后）
+- pages/ulearning/getting-started.ar.mdx（翻译生成，空文件新建）
+```
+
+---
+
+### 示例4：修改文件（插入模式，标题未匹配）
+
+**输入：**
+```
+使用提示词03：文件路径：【ulearning/getting-started】 语言：【zh-CN】 插入位置：【## 安装步骤之后】 内容：【### 常见问题\n\nQ: 如何重置密码？\nA: 联系管理员重置。】 翻译同步：【是】
+```
+
+**当前状态假设：**
+- `zh-CN` → **覆盖写入（插入模式）**
+- `en-US` → 正文有内容，但找不到 `## Installation Steps`（可能为 `## Setup` 或标题已修改）→ **已存在，跳过（插入标题未找到）**
+- `fr-FR` → 正文有内容，找到 `## Étapes d'installation` → **翻译插入（标题匹配）**
+- `ar` → 正文为空 → **翻译生成（空文件新建）**
+
+**输出：**
+```
+本次操作：
+- pages/ulearning/getting-started.zh-CN.mdx（已覆盖，插入位置：## 安装步骤之后）
+- pages/ulearning/getting-started.en-US.mdx（已存在，跳过（插入标题未找到））
+- pages/ulearning/getting-started.fr-FR.mdx（翻译插入，插入位置：## Étapes d'installation 之后）
+- pages/ulearning/getting-started.ar.mdx（翻译生成，空文件新建）
+
+警告：en-US 版本中未找到「## 安装步骤」对应的英文标题，请确认英文版中的等效标题后重试。
+```
