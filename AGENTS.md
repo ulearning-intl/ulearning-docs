@@ -137,6 +137,7 @@ title: 页面标题
 - 新增下拉菜单时，同时更新所有语言的 `_meta.{locale}.json`
 - 新增产品子目录后，在 `pages/{product}/` 下创建 `_meta.{locale}.json` 并添加入口条目
 - **禁止自行运行构建命令**：AI 不得在未经用户明确指令的情况下运行 `npm run build`、`npm run dev` 等命令
+- **禁止自行执行 Git 操作**：AI 不得在未经用户明确指令的情况下执行任何 Git 命令（包括 `git add`、`git commit`、`git pull`、`git push` 等）。所有 Git 操作必须由用户输入「使用提示词05」开头的指令后才能执行
 
 ### 7. 提示词文件约束
 - `prompts/templates/` 目录下的文件为 AI 自读模式的提示词模板，**禁止修改**。这些文件定义了 AI 执行任务的逻辑和规则。
