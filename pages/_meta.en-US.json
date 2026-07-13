@@ -26,6 +26,30 @@
     "type": "page",
     "display": "hidden"
   },
+  "test-dropdown-menu-1": {
+    "title": "Test Dropdown Menu 1",
+    "type": "menu",
+    "items": {
+      "dropdown-page-1": {
+        "title": "Dropdown Page 1",
+        "href": "/dropdown-page-1/introduction"
+      },
+      "data-analysis": {
+        "title": "Data Analysis",
+        "href": "/data-analysis"
+      }
+    }
+  },
+  "dropdown-page-1": {
+    "title": "Dropdown Page 1",
+    "type": "page",
+    "display": "hidden"
+  },
+  "data-analysis": {
+    "title": "Data Analysis",
+    "type": "page",
+    "display": "hidden"
+  },
   "ulearning": {
     "title": "Docs",
     "type": "page",

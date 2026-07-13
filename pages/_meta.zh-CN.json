@@ -26,6 +26,30 @@
     "type": "page",
     "display": "hidden"
   },
+  "test-dropdown-menu-1": {
+    "title": "测试下拉菜单1",
+    "type": "menu",
+    "items": {
+      "dropdown-page-1": {
+        "title": "下拉页面1",
+        "href": "/dropdown-page-1/introduction"
+      },
+      "data-analysis": {
+        "title": "数据分析",
+        "href": "/data-analysis"
+      }
+    }
+  },
+  "dropdown-page-1": {
+    "title": "下拉页面1",
+    "type": "page",
+    "display": "hidden"
+  },
+  "data-analysis": {
+    "title": "数据分析",
+    "type": "page",
+    "display": "hidden"
+  },
   "ulearning": {
     "title": "文档",
     "type": "page",

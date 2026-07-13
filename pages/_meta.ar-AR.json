@@ -18,7 +18,31 @@
     }
   },
   "index": {
-    "title": "Introduction",
+    "title": "مقدمة",
+    "type": "page",
+    "display": "hidden"
+  },
+  "test-dropdown-menu-1": {
+    "title": "قائمة منسدلة اختبار 1",
+    "type": "menu",
+    "items": {
+      "dropdown-page-1": {
+        "title": "صفحة منسدلة 1",
+        "href": "/dropdown-page-1/introduction"
+      },
+      "data-analysis": {
+        "title": "تحليل البيانات",
+        "href": "/data-analysis"
+      }
+    }
+  },
+  "dropdown-page-1": {
+    "title": "صفحة منسدلة 1",
+    "type": "page",
+    "display": "hidden"
+  },
+  "data-analysis": {
+    "title": "تحليل البيانات",
     "type": "page",
     "display": "hidden"
   },
