@@ -1,7 +1,23 @@
 {
+  "ulms": {
+    "title": "uLMS",
+    "type": "page",
+    "href": "/ulms"
+  },
+  "uclass": {
+    "title": "uClass",
+    "type": "page",
+    "href": "/uclass"
+  },
+  "uagent": {
+    "title": "uAgent",
+    "type": "page",
+    "href": "/uagent"
+  },
   "products": {
     "title": "产品",
     "type": "menu",
+    "display": "hidden",
     "items": {
       "ULearning": {
         "title": "学习管理系统",
@@ -25,14 +41,10 @@
   "ulearning": {
     "title": "文档",
     "type": "page",
-    "href": "/ulearning/getting-started"
-  },
-  "utest": {
-    "title": "UTest",
-    "type": "page",
+    "href": "/ulearning/getting-started",
     "display": "hidden"
   },
-  "uclass": {
+  "utest": {
     "title": "UTest",
     "type": "page",
     "display": "hidden"
@@ -45,16 +57,19 @@
   },
   "solutions": {
     "title": "解决方案",
-    "type": "page"
+    "type": "page",
+    "display": "hidden"
   },
   "practices": {
     "title": "最佳实践",
-    "type": "page"
+    "type": "page",
+    "display": "hidden"
   },
   "blog": {
     "title": "变更日志",
     "type": "page",
     "href": "/blog",
+    "display": "hidden",
     "theme": {
       "sidebar": false
     }

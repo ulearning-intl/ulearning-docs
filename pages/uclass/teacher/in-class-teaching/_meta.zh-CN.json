@@ -1,0 +1,12 @@
+{
+  "index": {
+    "title": "课中授课",
+    "display": "hidden"
+  },
+  "start-interaction": "发起互动（点名/选人/抢答/投票等）",
+  "use-resources": "使用资源",
+  "in-class-quiz": "课上测验",
+  "notify-students": "通知学生上课",
+  "ai-workbench": "AI工作台",
+  "end-restart-class-and-return": "下课/再次开课/返回课堂列表"
+}

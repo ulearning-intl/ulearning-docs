@@ -1,3 +1,8 @@
 {
-  "start": "开始"
+  "index": "uClass极速体验之老师",
+  "teacher": "教师",
+  "start": {
+    "title": "开始",
+    "display": "hidden"
+  }
 }
