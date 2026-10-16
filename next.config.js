@@ -24,6 +24,9 @@ const locales = [
 ];
 
 module.exports = withNextra({
+  experimental: {
+    cpus: 1,
+  },
   i18n: {
     locales,
     defaultLocale: "en-US",
