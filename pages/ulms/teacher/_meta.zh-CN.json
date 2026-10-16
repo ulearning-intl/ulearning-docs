@@ -1,0 +1,17 @@
+{
+  "index": {
+    "title": "教师",
+    "display": "hidden"
+  },
+  "account-management": "账号管理",
+  "course-management": "管理课程",
+  "menu-settings": "设置菜单",
+  "course-member-management": "管理课程人员",
+  "course-resource-management": "管理课程资源",
+  "exam-resource-management": "管理考试资源",
+  "teaching-schedule-and-settings": "教学安排及设置",
+  "pre-class-preparation": "课前准备",
+  "in-class-teaching": "课中授课",
+  "post-class-work": "课后工作",
+  "view-teaching-data": "查看教学数据"
+}

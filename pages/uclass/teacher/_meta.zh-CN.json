@@ -1,5 +1,8 @@
 {
-  "index": "教师",
+  "index": {
+    "title": "教师",
+    "display": "hidden"
+  },
   "software-download-and-account-management": "软件下载及账号管理",
   "software-settings": "软件设置",
   "pre-class-preparation": "课前准备",

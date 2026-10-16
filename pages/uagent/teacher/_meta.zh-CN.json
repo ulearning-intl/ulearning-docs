@@ -1,0 +1,10 @@
+{
+  "index": {
+    "title": "教师",
+    "display": "hidden"
+  },
+  "login": "登录",
+  "personal-agent": "个人智能体",
+  "team-agent": "团队智能体",
+  "agent-marketplace": "智能体广场"
+}

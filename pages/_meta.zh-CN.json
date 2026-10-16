@@ -2,17 +2,17 @@
   "ulms": {
     "title": "uLMS",
     "type": "page",
-    "href": "/ulms"
+    "href": "/ulms/overview"
   },
   "uclass": {
     "title": "uClass",
     "type": "page",
-    "href": "/uclass"
+    "href": "/uclass/quick-start-for-teachers"
   },
   "uagent": {
     "title": "uAgent",
     "type": "page",
-    "href": "/uagent"
+    "href": "/uagent/quick-start-for-teachers"
   },
   "products": {
     "title": "产品",
@@ -46,6 +46,11 @@
   },
   "utest": {
     "title": "UTest",
+    "type": "page",
+    "display": "hidden"
+  },
+  "ulcms": {
+    "title": "ULCMS",
     "type": "page",
     "display": "hidden"
   },

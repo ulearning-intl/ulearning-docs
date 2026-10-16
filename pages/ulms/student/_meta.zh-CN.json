@@ -1,0 +1,10 @@
+{
+  "index": {
+    "title": "学生",
+    "display": "hidden"
+  },
+  "account-management": "账号管理",
+  "pre-class-preparation": "课前准备",
+  "in-class-learning": "课中学习",
+  "post-class-review": "课后复习"
+}
