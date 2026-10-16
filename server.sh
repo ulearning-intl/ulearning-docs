@@ -12,8 +12,8 @@ if [ -s "$NVM_DIR/nvm.sh" ]; then
 fi
 
 NODE_MAJOR="$(node -p "process.versions.node.split('.')[0]")"
-if [ "$NODE_MAJOR" -lt 18 ]; then
-  echo "Node.js 18 or newer is required. Current version: $(node --version)"
+if [ "$NODE_MAJOR" -lt 16 ]; then
+  echo "Node.js 16 or newer is required. Current version: $(node --version)"
   exit 1
 fi
 
@@ -22,7 +22,7 @@ export NODE_OPTIONS="${NODE_OPTIONS:---max-old-space-size=6144}"
 
 echo "--- install dependencies ---"
 npm install
-npm install pm2 -g
+npm install pm2@5.4.3 -g
 
 echo "--- start build ---"
 npm run build
