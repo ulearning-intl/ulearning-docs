@@ -2,5 +2,10 @@
   "index": {
     "title": "课前准备",
     "display": "hidden"
-  }
+  },
+  "ai-assistant-management": "管理AI助手",
+  "using-ai-assistants-and-tools": "使用AI助手&工具",
+  "live-stream-management": "管理直播",
+  "classroom-management": "管理课堂",
+  "announcement-management": "管理公告"
 }

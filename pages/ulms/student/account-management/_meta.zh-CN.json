@@ -2,5 +2,8 @@
   "index": {
     "title": "账号管理",
     "display": "hidden"
-  }
+  },
+  "registration-and-login": "注册登录",
+  "reset-or-change-password": "重置/修改密码",
+  "personal-profile": "个人资料"
 }

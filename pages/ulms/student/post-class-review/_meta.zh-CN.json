@@ -2,5 +2,8 @@
   "index": {
     "title": "课后复习",
     "display": "hidden"
-  }
+  },
+  "participate-in-discussions": "参与讨论",
+  "complete-assignments": "完成作业",
+  "take-exams": "参加考试"
 }

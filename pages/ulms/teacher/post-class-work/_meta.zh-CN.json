@@ -2,5 +2,8 @@
   "index": {
     "title": "课后工作",
     "display": "hidden"
-  }
+  },
+  "discussion-management": "管理讨论",
+  "publish-and-grade-assignments": "发布/批改作业",
+  "publish-and-grade-exams": "发布/批改考试"
 }

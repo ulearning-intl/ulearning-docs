@@ -2,5 +2,8 @@
   "index": {
     "title": "教学安排及设置",
     "display": "hidden"
-  }
+  },
+  "teaching-plan-unit": "编排教学计划（单元）",
+  "learning-plan": "设置学习计划",
+  "assessment-and-certificate": "设置考核与证书"
 }

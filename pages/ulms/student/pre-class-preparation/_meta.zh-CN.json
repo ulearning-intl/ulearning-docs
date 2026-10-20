@@ -2,5 +2,8 @@
   "index": {
     "title": "课前准备",
     "display": "hidden"
-  }
+  },
+  "join-class": "加入班课",
+  "view-units-resources-and-courseware": "查看单元/资源/课件",
+  "view-announcements": "查看公告"
 }
