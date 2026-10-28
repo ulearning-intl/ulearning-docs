@@ -1,0 +1,24 @@
+.entry {
+  position: fixed;
+  right: max(140px, env(safe-area-inset-right));
+  bottom: max(40px, env(safe-area-inset-bottom));
+  z-index: 30;
+  display: block;
+}
+
+.entry img {
+  display: block;
+}
+
+@media (max-width: 767px) {
+  .entry {
+    right: max(132px, env(safe-area-inset-right));
+    bottom: calc(88px + env(safe-area-inset-bottom));
+  }
+}
+
+@media print {
+  .entry {
+    display: none;
+  }
+}
