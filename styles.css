@@ -1,5 +1,33 @@
 @tailwind utilities;
 
+:root {
+  --color-primary: #ea5947;
+  --color-primary-hover: #d84a39;
+  --el-color-primary-light-9: #fdeeed;
+}
+
+/* Match Nextra's accent utilities to the exact brand color. */
+html:root .nx-text-primary-600,
+html:root .nx-text-primary-800,
+html:root .hover\:nx-text-primary-600:hover,
+html:root.dark .dark\:nx-text-primary-600 {
+  color: var(--color-primary);
+}
+
+/* Shared selected state for navigation, search results and dropdown options. */
+html:root .nx-bg-primary-100,
+html:root .nx-bg-primary-50,
+html:root .nx-bg-primary-500\/10,
+html:root.dark .dark\:nx-bg-primary-400\/10,
+html:root.dark .dark\:nx-bg-primary-500\/10 {
+  background: linear-gradient(
+      0deg,
+      var(--el-color-primary-light-9, #fdeeed) 0%,
+      var(--el-color-primary-light-9, #fdeeed) 100%
+    ),
+    #fff;
+}
+
 html {
   font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1, "ss06" 1 !important;
 }

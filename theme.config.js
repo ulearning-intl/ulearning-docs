@@ -16,6 +16,8 @@ import {
 /** @type {import('nextra-theme-docs').DocsThemeConfig} */
 const themeConfig = {
   // Global
+  primaryHue: 6.625767,
+  primarySaturation: 79.512195,
   docsRepositoryBase: "https://github.com/ulearning-intl/ulearning-docs",
   useNextSeoProps() {
     return {

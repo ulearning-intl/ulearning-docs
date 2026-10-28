@@ -6,20 +6,12 @@ export default function Logo() {
   const title = useLocalesMap(titleMap);
 
   return (
-    <>
-      <Image
-        src="/img/logo.png"
-        alt="logo"
-        title={title}
-        width={143}
-        height={32}
-      />
-      <span
-        className="mx-2 font-extrabold hidden md:inline select-none text-blue-600 text-xl"
-        title={title}
-      >
-        Docs
-      </span>
-    </>
+    <Image
+      src="/img/docs-logo.png"
+      alt="ULearning Docs"
+      title={title}
+      width={256}
+      height={32}
+    />
   );
 }

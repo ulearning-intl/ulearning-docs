@@ -17,7 +17,7 @@ export default function HomePage() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <button className="bg-blue-600 text-white py-2 px-4 rounded-md shadow-md hover:bg-blue-700 transition-colors">
+              <button className="bg-brand text-white py-2 px-4 rounded-md shadow-md hover:bg-brand-hover transition-colors">
                 探索视频教程
               </button>
             </a>
@@ -29,7 +29,7 @@ export default function HomePage() {
             <h3 className="text-xl text-gray-800 font-semibold">
               ULearning 学习管理系统
             </h3>
-            <ul className="mt-4 text-blue-600">
+            <ul className="mt-4 text-brand">
               <li className="mt-1 mb-1">
                 <Link href="/ulearning/admin/overview">管理员</Link>
               </li>
@@ -43,7 +43,7 @@ export default function HomePage() {
             <h3 className="text-xl text-gray-800 font-semibold">
               UClass 智慧教室
             </h3>
-            <ul className="mt-4 text-blue-600">
+            <ul className="mt-4 text-brand">
               <li className="mt-1 mb-1">管理员</li>
               <li className="mt-1 mb-1">教师</li>
               <li className="mt-1 mb-1">学生</li>
@@ -55,7 +55,7 @@ export default function HomePage() {
             <h3 className="text-xl text-gray-800 font-semibold">
               UTest 考试系统
             </h3>
-            <ul className="mt-4 text-blue-600">
+            <ul className="mt-4 text-brand">
               <li className="mt-1 mb-1">管理员</li>
               <li className="mt-1 mb-1">教师</li>
               <li className="mt-1 mb-1">学生</li>
@@ -73,7 +73,7 @@ export default function HomePage() {
             <div className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
               <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                 <svg
-                  className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+                  className="h-6 w-6 text-gray-600 group-hover:text-brand"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
@@ -101,7 +101,7 @@ export default function HomePage() {
             <div className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
               <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                 <svg
-                  className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+                  className="h-6 w-6 text-gray-600 group-hover:text-brand"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
@@ -129,7 +129,7 @@ export default function HomePage() {
             <div className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
               <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                 <svg
-                  className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+                  className="h-6 w-6 text-gray-600 group-hover:text-brand"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
@@ -157,7 +157,7 @@ export default function HomePage() {
             <div className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
               <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                 <svg
-                  className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+                  className="h-6 w-6 text-gray-600 group-hover:text-brand"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
@@ -185,7 +185,7 @@ export default function HomePage() {
             <div className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
               <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                 <svg
-                  className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+                  className="h-6 w-6 text-gray-600 group-hover:text-brand"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
@@ -213,7 +213,7 @@ export default function HomePage() {
             <div className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
               <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                 <svg
-                  className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+                  className="h-6 w-6 text-gray-600 group-hover:text-brand"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
@@ -241,7 +241,7 @@ export default function HomePage() {
             <div className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
               <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                 <svg
-                  className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+                  className="h-6 w-6 text-gray-600 group-hover:text-brand"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
@@ -276,7 +276,7 @@ export default function HomePage() {
             <div className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
               <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                 <svg
-                  className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+                  className="h-6 w-6 text-gray-600 group-hover:text-brand"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
@@ -309,7 +309,7 @@ export default function HomePage() {
             <div className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
               <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                 <svg
-                  className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+                  className="h-6 w-6 text-gray-600 group-hover:text-brand"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
@@ -337,7 +337,7 @@ export default function HomePage() {
             <div className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
               <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                 <svg
-                  className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+                  className="h-6 w-6 text-gray-600 group-hover:text-brand"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
@@ -365,7 +365,7 @@ export default function HomePage() {
             <div className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
               <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                 <svg
-                  className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+                  className="h-6 w-6 text-gray-600 group-hover:text-brand"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
@@ -393,7 +393,7 @@ export default function HomePage() {
             <div className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
               <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                 <svg
-                  className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+                  className="h-6 w-6 text-gray-600 group-hover:text-brand"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
@@ -421,7 +421,7 @@ export default function HomePage() {
             <div className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
               <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                 <svg
-                  className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+                  className="h-6 w-6 text-gray-600 group-hover:text-brand"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
@@ -468,7 +468,7 @@ export default function HomePage() {
                   <li>修复了一些小错误，提升了应用的可靠性。</li>
                   <li>更新了用户界面，拥有焕然一新的设计和更好的可访问性。</li>
                 </ul>
-                <div className="text-sm text-blue-600 mt-2 ">
+                <div className="text-sm text-brand mt-2 ">
                   <a href="#" className="underline">
                     用户指南
                   </a>
@@ -491,7 +491,7 @@ export default function HomePage() {
                 <p className="text-sm mt-2 text-gray-600">
                   UClass平台已充实了AI功能，赋予了先进的学习功能。通过集成的AI推荐系统体验个性化的内容建议。通过基于AI的评估工具获得准确的反馈。通过AI算法驱动的智能内容组织，享受增强的用户体验。经过严格测试，确保AI功能的无缝集成。
                 </p>
-                <div className="text-sm text-blue-600 mt-2">
+                <div className="text-sm text-brand mt-2">
                   <a href="#" className="underline">
                     用户指南
                   </a>
