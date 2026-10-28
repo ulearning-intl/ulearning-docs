@@ -7,12 +7,12 @@
   "uclass": {
     "title": "uClass",
     "type": "page",
-    "href": "/uclass/quick-start-for-teachers"
+    "href": "/uclass/quick-start/quick-start-for-teachers"
   },
   "uagent": {
     "title": "uAgent",
     "type": "page",
-    "href": "/uagent/quick-start-for-teachers"
+    "href": "/uagent/quick-start/quick-start-for-teachers"
   },
   "products": {
     "title": "产品",

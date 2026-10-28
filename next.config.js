@@ -35,6 +35,21 @@ module.exports = withNextra({
   async redirects() {
     return [
       {
+        source: "/uclass/quick-start-for-teachers",
+        destination: "/uclass/quick-start/quick-start-for-teachers",
+        statusCode: 301,
+      },
+      {
+        source: "/uagent/quick-start-for-teachers",
+        destination: "/uagent/quick-start/quick-start-for-teachers",
+        statusCode: 301,
+      },
+      {
+        source: "/uagent/quick-start-for-administrators",
+        destination: "/uagent/quick-start/quick-start-for-administrators",
+        statusCode: 301,
+      },
+      {
         source: "/docs",
         destination: "/docs/getting-started",
         statusCode: 301,
