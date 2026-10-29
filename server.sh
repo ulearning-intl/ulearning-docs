@@ -17,15 +17,31 @@ if [ "$NODE_MAJOR" -lt 16 ]; then
   exit 1
 fi
 
-# Nextra's production indexing can exceed Node's default 4 GB heap.
-export NODE_OPTIONS="${NODE_OPTIONS:---max-old-space-size=6144}"
-
 echo "--- install dependencies ---"
 npm install
 npm install pm2@5.4.3 -g
 
 echo "--- start build ---"
-npm run build
+# Respect explicit heap settings; otherwise leave headroom within host/cgroup limits.
+if [[ "${NODE_OPTIONS:-}" =~ --max[-_]old[-_]space[-_]size(=|[[:space:]]) ]]; then
+  node scripts/build-memory.cjs --report
+  echo "Using the explicitly configured Node heap limit."
+else
+  BUILD_HEAP_MB="$(node scripts/build-memory.cjs)"
+  export NODE_OPTIONS="${NODE_OPTIONS:+$NODE_OPTIONS }--max-old-space-size=$BUILD_HEAP_MB"
+fi
+
+if npm run build; then
+  echo "--- build completed ---"
+else
+  BUILD_EXIT_CODE=$?
+  echo "--- build failed (exit $BUILD_EXIT_CODE) ---"
+  node scripts/build-memory.cjs --report || true
+  if [ "$BUILD_EXIT_CODE" -eq 137 ]; then
+    echo "SIGKILL received. Check the remote host's kernel OOM log and cgroup memory.events; increase available memory if OOM is confirmed."
+  fi
+  exit "$BUILD_EXIT_CODE"
+fi
 
 echo "--- running ---"
 pm2 delete ulearning-docs || true
