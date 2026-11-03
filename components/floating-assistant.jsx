@@ -1,10 +1,12 @@
 import Image from "next/image";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import { getAssistantUrl } from "../utils/assistant-routing";
 import styles from "./floating-assistant.module.css";
 
 export default function FloatingAssistant() {
   const { pathname } = useRouter();
+  const [hovered, setHovered] = useState(false);
 
   return (
     <a
@@ -13,9 +15,13 @@ export default function FloatingAssistant() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="访问 ta.tongshike.cn（在新标签页打开）"
+      onPointerEnter={(event) => {
+        if (event.pointerType === "mouse") setHovered(true);
+      }}
+      onPointerLeave={() => setHovered(false)}
     >
       <Image
-        src="/img/floating-assistant.gif"
+        src={hovered ? "/img/floating-assistant.gif" : "/img/floating-assistant.png"}
         alt="智能助手"
         width={108}
         height={108}
