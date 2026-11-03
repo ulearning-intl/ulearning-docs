@@ -26,7 +26,7 @@ export function middleware(req, event) {
   return localize(req, event);
 }
 
-// Nextra's locale middleware does not exclude GIF assets by default.
+// Nextra's locale middleware does not exclude GIF or WebM assets by default.
 export const config = {
-  matcher: ["/((?!.*\\.gif$).*)"],
+  matcher: ["/((?!.*\\.(?:gif|webm)$).*)"],
 };

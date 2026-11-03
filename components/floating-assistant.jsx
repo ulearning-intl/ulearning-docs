@@ -20,13 +20,27 @@ export default function FloatingAssistant() {
       }}
       onPointerLeave={() => setHovered(false)}
     >
-      <Image
-        src={hovered ? "/img/小蜜蜂@4x.gif" : "/img/floating-assistant.png"}
-        alt="智能助手"
-        width={108}
-        height={108}
-        unoptimized
-      />
+      {hovered ? (
+        <video
+          src="/img/floating-assistant.webm"
+          poster="/img/floating-assistant.png"
+          width={108}
+          height={108}
+          autoPlay
+          loop
+          muted
+          playsInline
+          aria-hidden="true"
+        />
+      ) : (
+        <Image
+          src="/img/floating-assistant.png"
+          alt="智能助手"
+          width={108}
+          height={108}
+          unoptimized
+        />
+      )}
     </a>
   );
 }

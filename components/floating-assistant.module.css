@@ -6,7 +6,8 @@
   display: block;
 }
 
-.entry img {
+.entry img,
+.entry video {
   display: block;
 }
 
@@ -16,7 +17,8 @@
     bottom: 24px;
   }
 
-  .entry img {
+  .entry img,
+  .entry video {
     width: 72px;
     height: 72px;
   }
