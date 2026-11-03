@@ -1,8 +1,4 @@
 {
   "quick-start": "极速体验",
-  "teacher": "教师",
-  "start": {
-    "title": "开始",
-    "display": "hidden"
-  }
+  "teacher": "教师"
 }

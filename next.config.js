@@ -49,50 +49,31 @@ module.exports = withNextra({
         destination: "/uagent/quick-start/quick-start-for-administrators",
         statusCode: 301,
       },
+      // Preserve links in the retained homepages without keeping old manuals.
       {
-        source: "/docs",
-        destination: "/docs/getting-started",
+        source: "/ulearning/student/:path*",
+        destination: "/ulms/student/account-management/registration-and-login",
         statusCode: 301,
       },
       {
-        source: "/advanced/performance",
-        destination: "/docs/advanced/performance",
+        source: "/ulearning/teacher/:path*",
+        destination: "/ulms/teacher/account-management/registration-and-login",
         statusCode: 301,
       },
-      {
-        source: "/advanced/cache",
-        destination: "/docs/advanced/cache",
+      ...["ulearning", "utest", "ulcms"].map((product) => ({
+        source: `/${product}/:path*`,
+        destination: "/ulms/overview",
         statusCode: 301,
-      },
-      {
-        source: "/docs/cache",
-        destination: "/docs/advanced/cache",
+      })),
+      ...["docs", "blog", "solutions", "practices", "examples", "advanced"].map((section) => ({
+        source: `/${section}/:path*`,
+        destination: "/index",
         statusCode: 301,
-      },
-      {
-        source: "/docs/options",
-        destination: "/docs/api",
-        statusCode: 301,
-      },
+      })),
       {
         source: "/change-log",
-        destination: "/docs/change-log",
+        destination: "/index",
         statusCode: 301,
-      },
-      {
-        source: "/blog/swr-1",
-        destination: "/blog/swr-v1",
-        statusCode: 301,
-      },
-      {
-        source: "/docs",
-        destination: "/docs/getting-started",
-        statusCode: 302,
-      },
-      {
-        source: "/examples",
-        destination: "/examples/basic",
-        statusCode: 302,
       },
     ];
   },

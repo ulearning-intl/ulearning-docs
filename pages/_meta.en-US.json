@@ -1,71 +1,22 @@
 {
-  "products": {
-    "title": "Products",
-    "type": "menu",
-    "items": {
-      "ULearning": {
-        "title": "Ulearning",
-        "href": "/ulearning/getting-started"
-      },
-      "UClass": {
-        "title": "UClass",
-        "href": "/uclass/start"
-      },
-      "utest": {
-        "title": "UTest Online Exam",
-        "href": "/utest/introduction"
-      },
-      "ULCMS":{
-        "title":"ULCMS",
-        "href": "/ulcms/introduction"
-      }
-    }
+  "ulms": {
+    "title": "uLMS",
+    "type": "page",
+    "href": "/ulms/overview"
+  },
+  "uclass": {
+    "title": "uClass",
+    "type": "page",
+    "href": "/uclass/quick-start/quick-start-for-teachers"
+  },
+  "uagent": {
+    "title": "uAgent",
+    "type": "page",
+    "href": "/uagent/quick-start/quick-start-for-teachers"
   },
   "index": {
     "title": "Introduction",
     "type": "page",
     "display": "hidden"
-  },
-  "ulearning": {
-    "title": "Docs",
-    "type": "page",
-    "href": "/ulearning/getting-started"
-  },
-  "utest": {
-    "title": "UTest",
-    "type": "page",
-    "display": "hidden"
-  },
-  "uclass": {
-    "title": "UTest",
-    "type": "page",
-    "display": "hidden"
-  },
-  "ulcms": {
-    "title": "ULCMS",
-    "type": "page",
-    "display": "hidden"
-  },
-  "docs": {
-    "title": "Api Docs",
-    "type": "page",
-    "href": "/docs/api",
-    "display": "hidden"
-  },
-  "solutions": {
-    "title": "Solutions",
-    "type": "page"
-  },
-  "practices": {
-    "title": "Best Practices",
-    "type": "page"
-  },
-  "blog": {
-    "title": "Blog",
-    "type": "page",
-    "href": "/blog",
-    "theme": {
-      "sidebar": false
-    }
   }
 }

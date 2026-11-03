@@ -2,7 +2,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const root = path.resolve(__dirname, "..");
-const products = ["ulms", "uclass", "uagent", "ulearning", "utest", "ulcms"];
+const products = ["ulms", "uclass", "uagent"];
 const directoryRoles = {
   admin: "admin",
   administrator: "admin",

@@ -21,12 +21,12 @@ test("every listed document resolves to its assigned role without overlaps", () 
 test("role directories and quick-start pages match their intended audiences", () => {
   const cases = [
     ["/uagent/administrator/login", "admin"],
-    ["/ulearning/admin/system-settings/site-settings", "admin"],
     ["/uagent/quick-start/quick-start-for-administrators", "admin"],
     ["/uagent/quick-start-for-administrators", "admin"],
     ["/ulms/student/account-management/personal-profile", "student"],
     ["/ulms/quick-start/quick-start-for-students", "student"],
-    ["/ulcms/student/teacher/checkTask", "student"],
+    ["/ulms/student/account-management/registration-and-login", "student"],
+    ["/ulms/teacher/account-management/registration-and-login", "teacher"],
     ["/uclass/teacher/in-class-teaching/ai-workbench", "teacher"],
     ["/uclass/quick-start/quick-start-for-teachers", "teacher"],
     ["/uagent/quick-start/quick-start-for-teachers", "teacher"],

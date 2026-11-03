@@ -1,22 +1,22 @@
 {
+  "ulms": {
+    "title": "uLMS",
+    "type": "page",
+    "href": "/ulms/overview"
+  },
+  "uclass": {
+    "title": "uClass",
+    "type": "page",
+    "href": "/uclass/quick-start/quick-start-for-teachers"
+  },
+  "uagent": {
+    "title": "uAgent",
+    "type": "page",
+    "href": "/uagent/quick-start/quick-start-for-teachers"
+  },
   "index": {
     "title": "Введение",
     "type": "page",
     "display": "hidden"
-  },
-  "docs": {
-    "title": "Документация",
-    "type": "page"
-  },
-  "examples": {
-    "title": "Примеры",
-    "type": "page"
-  },
-  "blog": {
-    "title": "Блог",
-    "type": "page",
-    "theme": {
-      "sidebar": false
-    }
   }
 }

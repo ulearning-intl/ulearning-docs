@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import Logo from "./components/logo";
 import Head from "./components/head";
 import Footer from "./components/footer";
+import ProductNavbar from "./components/navbar";
 import useLocalesMap from "./components/use-locales-map";
 import { useRouter as useRouter7 } from "next/router";
 import {
@@ -29,6 +30,9 @@ const themeConfig = {
   // Navbar
   logo: Logo,
   logoLink: "/index",
+  navbar: {
+    component: ProductNavbar,
+  },
   search: {
     placeholder: () => useLocalesMap(searchPlaceholderMap),
   },

@@ -1,62 +1,22 @@
 {
-  "products": {
-    "title": "Produits",
-    "type": "menu",
-    "items": {
-      "ULearning": {
-        "title": "ULearning LMS",
-        "href": "/ulearning/getting-started"
-      },
-      "UClass": {
-        "title": "Salle de classe intelligente",
-        "href": "/uclass/start"
-      },
-      "utest": {
-        "title": "Examen en ligne UTest",
-        "href": "/utest/introduction"
-      }
-    }
+  "ulms": {
+    "title": "uLMS",
+    "type": "page",
+    "href": "/ulms/overview"
+  },
+  "uclass": {
+    "title": "uClass",
+    "type": "page",
+    "href": "/uclass/quick-start/quick-start-for-teachers"
+  },
+  "uagent": {
+    "title": "uAgent",
+    "type": "page",
+    "href": "/uagent/quick-start/quick-start-for-teachers"
   },
   "index": {
     "title": "Présentation",
     "type": "page",
     "display": "hidden"
-  },
-  "ulearning": {
-    "title": "Documentation",
-    "type": "page",
-    "href": "/ulearning/getting-started"
-  },
-  "utest": {
-    "title": "UTest",
-    "type": "page",
-    "display": "hidden"
-  },
-  "uclass": {
-    "title": "UTest",
-    "type": "page",
-    "display": "hidden"
-  },
-  "docs": {
-    "title": "API Documentation",
-    "type": "page",
-    "href": "/docs/api",
-    "display": "hidden"
-  },
-  "solutions": {
-    "title": "Nos solutions",
-    "type": "page"
-  },
-  "practices": {
-    "title": "Meilleures pratiques",
-    "type": "page"
-  },
-  "blog": {
-    "title": "Journal des modifications",
-    "type": "page",
-    "href": "/blog",
-    "theme": {
-      "sidebar": false
-    }
   }
 }
