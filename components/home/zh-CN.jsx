@@ -1,4 +1,5 @@
 import Link from "next/link";
+import navigation from "../../pages/_meta.zh-CN.json";
 
 export default function HomePage() {
   return (
@@ -27,40 +28,53 @@ export default function HomePage() {
         <div className="mt-4 grid grid-cols-3 gap-4">
           <div>
             <h3 className="text-xl text-gray-800 font-semibold">
-              ULearning 学习管理系统
+              <Link href={navigation.ulms.href}>ULms学习管理系统</Link>
             </h3>
             <ul className="mt-4 text-brand">
               <li className="mt-1 mb-1">
-                <Link href="/ulearning/admin/overview">管理员</Link>
+                <Link href="/ulms/quick-start/quick-start-for-teachers">极速体验之老师</Link>
               </li>
-              <li className="mt-1 mb-1">教师</li>
-              <li className="mt-1 mb-1">学生</li>
-              <li className="mt-1 mb-1">所有功能</li>
-              <li className="mt-1 mb-1">最佳实践</li>
+              <li className="mt-1 mb-1">
+                <Link href="/ulms/quick-start/quick-start-for-students">极速体验之学生</Link>
+              </li>
+              <li className="mt-1 mb-1">
+                <Link href="/ulms/teacher/account-management/registration-and-login">教师</Link>
+              </li>
+              <li className="mt-1 mb-1">
+                <Link href="/ulms/student/account-management/registration-and-login">学生</Link>
+              </li>
             </ul>
           </div>
           <div>
             <h3 className="text-xl text-gray-800 font-semibold">
-              UClass 智慧教室
+              <Link href={navigation.uclass.href}>UClass 智慧教室</Link>
             </h3>
             <ul className="mt-4 text-brand">
-              <li className="mt-1 mb-1">管理员</li>
-              <li className="mt-1 mb-1">教师</li>
-              <li className="mt-1 mb-1">学生</li>
-              <li className="mt-1 mb-1">所有功能</li>
-              <li className="mt-1 mb-1">最佳实践</li>
+              <li className="mt-1 mb-1">
+                <Link href="/uclass/quick-start/quick-start-for-teachers">极速体验之老师</Link>
+              </li>
+              <li className="mt-1 mb-1">
+                <Link href="/uclass/teacher/software-download-and-account-management/software-download">老师</Link>
+              </li>
             </ul>
           </div>
           <div>
             <h3 className="text-xl text-gray-800 font-semibold">
-              UTest 考试系统
+              <Link href={navigation.uagent.href}>UAgent智能体</Link>
             </h3>
             <ul className="mt-4 text-brand">
-              <li className="mt-1 mb-1">管理员</li>
-              <li className="mt-1 mb-1">教师</li>
-              <li className="mt-1 mb-1">学生</li>
-              <li className="mt-1 mb-1">所有功能</li>
-              <li className="mt-1 mb-1">最佳实践</li>
+              <li className="mt-1 mb-1">
+                <Link href="/uagent/quick-start/quick-start-for-teachers">极速体验之老师</Link>
+              </li>
+              <li className="mt-1 mb-1">
+                <Link href="/uagent/quick-start/quick-start-for-administrators">极速体验之管理员</Link>
+              </li>
+              <li className="mt-1 mb-1">
+                <Link href="/uagent/teacher/login">教师</Link>
+              </li>
+              <li className="mt-1 mb-1">
+                <Link href="/uagent/administrator/login">管理员</Link>
+              </li>
             </ul>
           </div>
         </div>

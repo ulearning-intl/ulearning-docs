@@ -1,7 +1,7 @@
 .entry {
   position: fixed;
-  right: max(140px, env(safe-area-inset-right));
-  bottom: max(40px, env(safe-area-inset-bottom));
+  right: 90px;
+  bottom: 90px;
   z-index: 30;
   display: block;
 }
@@ -10,10 +10,15 @@
   display: block;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 959.98px) {
   .entry {
-    right: max(132px, env(safe-area-inset-right));
-    bottom: calc(88px + env(safe-area-inset-bottom));
+    right: 20px;
+    bottom: 24px;
+  }
+
+  .entry img {
+    width: 72px;
+    height: 72px;
   }
 }
 

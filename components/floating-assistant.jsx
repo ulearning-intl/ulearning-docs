@@ -15,10 +15,11 @@ export default function FloatingAssistant() {
       aria-label="访问 ta.tongshike.cn（在新标签页打开）"
     >
       <Image
-        src="/img/floating-assistant.png"
+        src="/img/floating-assistant.gif"
         alt="智能助手"
-        width={96}
-        height={96}
+        width={108}
+        height={108}
+        unoptimized
       />
     </a>
   );

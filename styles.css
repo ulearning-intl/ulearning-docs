@@ -6,6 +6,46 @@
   --el-color-primary-light-9: #fdeeed;
 }
 
+/* Keep the navigation centered between the logo and search on desktop. */
+@media (min-width: 768px) {
+  .nextra-nav-container > nav {
+    position: relative;
+    justify-content: center;
+  }
+
+  .nextra-nav-container > nav > :first-child {
+    position: absolute;
+    inset-inline-start: max(env(safe-area-inset-left), 1.5rem);
+    margin-inline: 0;
+  }
+
+  .nextra-nav-container > nav > a:not(:first-child) {
+    margin-inline: 0;
+  }
+
+  .nextra-nav-container > nav > .nextra-search {
+    position: absolute;
+    inset-inline-end: max(env(safe-area-inset-right), 1.5rem);
+  }
+}
+
+/* Highlight the current product in the top navigation. */
+.nextra-nav-container > nav > a[aria-current="true"] {
+  position: relative;
+  color: var(--color-primary);
+}
+
+.nextra-nav-container > nav > a[aria-current="true"]::after {
+  content: "";
+  position: absolute;
+  inset-inline: 8px;
+  bottom: calc((100% - var(--nextra-navbar-height)) / 2);
+  height: 2px;
+  border-radius: 999px;
+  background-color: var(--color-primary);
+  pointer-events: none;
+}
+
 /* Match Nextra's accent utilities to the exact brand color. */
 html:root .nx-text-primary-600,
 html:root .nx-text-primary-800,

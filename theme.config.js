@@ -28,6 +28,7 @@ const themeConfig = {
 
   // Navbar
   logo: Logo,
+  logoLink: "/index",
   search: {
     placeholder: () => useLocalesMap(searchPlaceholderMap),
   },
