@@ -28,15 +28,9 @@ export default function HomePage() {
         <div className="mt-4 grid grid-cols-3 gap-4">
           <div>
             <h3 className="text-xl text-gray-800 font-semibold">
-              <Link href={navigation.ulms.href}>ULms学习管理系统</Link>
+              <Link href={navigation.ulms.href}>uLMS学习管理系统</Link>
             </h3>
             <ul className="mt-4 text-brand">
-              <li className="mt-1 mb-1">
-                <Link href="/ulms/quick-start/quick-start-for-teachers">极速体验之老师</Link>
-              </li>
-              <li className="mt-1 mb-1">
-                <Link href="/ulms/quick-start/quick-start-for-students">极速体验之学生</Link>
-              </li>
               <li className="mt-1 mb-1">
                 <Link href="/ulms/teacher/account-management/registration-and-login">教师</Link>
               </li>
@@ -47,28 +41,19 @@ export default function HomePage() {
           </div>
           <div>
             <h3 className="text-xl text-gray-800 font-semibold">
-              <Link href={navigation.uclass.href}>UClass 智慧教室</Link>
+              <Link href={navigation.uclass.href}>uClass课堂互动系统</Link>
             </h3>
             <ul className="mt-4 text-brand">
               <li className="mt-1 mb-1">
-                <Link href="/uclass/quick-start/quick-start-for-teachers">极速体验之老师</Link>
-              </li>
-              <li className="mt-1 mb-1">
-                <Link href="/uclass/teacher/software-download-and-account-management/software-download">老师</Link>
+                <Link href="/uclass/teacher/software-download-and-account-management/software-download">教师</Link>
               </li>
             </ul>
           </div>
           <div>
             <h3 className="text-xl text-gray-800 font-semibold">
-              <Link href={navigation.uagent.href}>UAgent智能体</Link>
+              <Link href={navigation.uagent.href}>uAgent智能体系统</Link>
             </h3>
             <ul className="mt-4 text-brand">
-              <li className="mt-1 mb-1">
-                <Link href="/uagent/quick-start/quick-start-for-teachers">极速体验之老师</Link>
-              </li>
-              <li className="mt-1 mb-1">
-                <Link href="/uagent/quick-start/quick-start-for-administrators">极速体验之管理员</Link>
-              </li>
               <li className="mt-1 mb-1">
                 <Link href="/uagent/teacher/login">教师</Link>
               </li>
