@@ -21,7 +21,7 @@ export default function FloatingAssistant() {
       onPointerLeave={() => setHovered(false)}
     >
       <Image
-        src={hovered ? "/img/floating-assistant.gif" : "/img/floating-assistant.png"}
+        src={hovered ? "/img/小蜜蜂@4x.gif" : "/img/floating-assistant.png"}
         alt="智能助手"
         width={108}
         height={108}
