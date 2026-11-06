@@ -35,7 +35,8 @@ module.exports = withNextra({
   async redirects() {
     return [
       {
-        source: "/",
+        // Next.js adds the default locale before matching locale:false rules.
+        source: "/en-US",
         destination: "/zh-CN/index",
         locale: false,
         permanent: true,
