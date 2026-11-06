@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { useConfig } from "nextra-theme-docs";
 import Logo from "./components/logo";
 import Head from "./components/head";
 import Footer from "./components/footer";
@@ -86,16 +87,21 @@ const themeConfig = {
   // End of Page
   gitTimestamp({ timestamp }) {
     const { locale } = useRouter();
+    const { frontMatter } = useConfig();
     const lastUpdatedOn = useLocalesMap(gitTimestampMap);
+    const updatedAt = frontMatter.lastUpdated
+      ? new Date(frontMatter.lastUpdated)
+      : timestamp;
 
     return (
       <>
         {lastUpdatedOn}{" "}
-        <time dateTime={timestamp.toISOString()}>
-          {timestamp.toLocaleDateString(locale, {
-            day: "numeric",
+        <time dateTime={updatedAt.toISOString()}>
+          {updatedAt.toLocaleDateString(locale, {
+            day: frontMatter.lastUpdated ? "2-digit" : "numeric",
             month: "long",
             year: "numeric",
+            timeZone: frontMatter.lastUpdated ? "UTC" : undefined,
           })}
         </time>
       </>

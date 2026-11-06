@@ -64,7 +64,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="container  mt-12 mb-16">
+        <div hidden className="container  mt-12 mb-16">
           <h2 className="text-2xl font-bold text-gray-800 leading-tight mb-4">
             解决方案
           </h2>
@@ -267,7 +267,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="container mx-auto mt-12 mb-16">
+        <div hidden className="container mx-auto mt-12 mb-16">
           <h2 className="text-2xl font-bold text-gray-800 leading-tight mb-4">
             最佳实践
           </h2>
@@ -447,7 +447,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="mb-40 blue-links max-w-4xl">
+        <div hidden className="mb-40 blue-links max-w-4xl">
           <h2 className="text-2xl font-bold text-gray-800 leading-tight mb-4">
             变更日志
           </h2>

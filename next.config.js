@@ -35,6 +35,12 @@ module.exports = withNextra({
   async redirects() {
     return [
       {
+        source: "/",
+        destination: "/zh-CN/index",
+        locale: false,
+        permanent: true,
+      },
+      {
         source: "/uclass/quick-start-for-teachers",
         destination: "/uclass/quick-start/quick-start-for-teachers",
         statusCode: 301,
