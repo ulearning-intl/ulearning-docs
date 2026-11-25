@@ -1,0 +1,17 @@
+{
+  "index": {
+    "title": "Teacher",
+    "display": "hidden"
+  },
+  "account-management": "Account management",
+  "course-management": "Manage courses",
+  "menu-settings": "Configure the menu",
+  "course-member-management": "Manage course members",
+  "course-resource-management": "Manage course resources",
+  "exam-resource-management": "Manage exam resources",
+  "teaching-schedule-and-settings": "Teaching schedule and settings",
+  "pre-class-preparation": "Pre-class preparation",
+  "in-class-teaching": "Teach the class",
+  "post-class-work": "After-class work",
+  "view-teaching-data": "View teaching data"
+}

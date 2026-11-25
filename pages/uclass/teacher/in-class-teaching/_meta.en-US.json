@@ -1,0 +1,12 @@
+{
+  "index": {
+    "title": "In-class teaching",
+    "display": "hidden"
+  },
+  "start-interaction": "Start interactions (roll call, student selection, Buzzer, voting, and more)",
+  "use-resources": "Use resources",
+  "in-class-quiz": "In-class quiz",
+  "notify-students": "Notify students about class",
+  "ai-workbench": "AI workbench",
+  "end-restart-class-and-return": "End class, restart class, or return to the class list"
+}

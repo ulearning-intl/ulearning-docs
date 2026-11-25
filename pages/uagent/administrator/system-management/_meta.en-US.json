@@ -1,0 +1,10 @@
+{
+  "index": {
+    "title": "System management",
+    "display": "hidden"
+  },
+  "agent-management": "Agent management",
+  "knowledge-base-management": "Knowledge-base management",
+  "application-management": "Application management",
+  "website-management": "Website management"
+}

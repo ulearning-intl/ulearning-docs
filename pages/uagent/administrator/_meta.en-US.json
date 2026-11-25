@@ -1,0 +1,10 @@
+{
+  "index": {
+    "title": "Admin",
+    "display": "hidden"
+  },
+  "login": "Log in",
+  "personal-and-team-agents": "Personal and team agents",
+  "data-analytics": "Data analytics",
+  "system-management": "System management"
+}

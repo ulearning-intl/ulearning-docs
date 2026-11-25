@@ -1,0 +1,12 @@
+{
+  "index": {
+    "title": "Tools",
+    "display": "hidden"
+  },
+  "cloud-drive": "Cloud drive",
+  "applications": "Applications",
+  "screenshot": "Screenshot",
+  "annotation": "Annotation",
+  "screen-casting": "Screen sharing",
+  "recording": "Recording"
+}

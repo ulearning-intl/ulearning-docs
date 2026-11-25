@@ -1,0 +1,11 @@
+{
+  "index": {
+    "title": "Personal agent",
+    "display": "hidden"
+  },
+  "manage-personal-ai-assistant": "Manage personal AI assistants",
+  "build-personal-knowledge-base": "Build a personal knowledge base",
+  "build-personal-workflow": "Build a personal workflow",
+  "build-personal-instruction-set": "Build a personal instruction set",
+  "personal-ai-assistant-analytics-and-feedback": "Personal AI assistant analytics and feedback"
+}

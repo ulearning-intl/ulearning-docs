@@ -1,0 +1,8 @@
+{
+  "index": {
+    "title": "Manage exam resources",
+    "display": "hidden"
+  },
+  "question-bank-management": "Manage the question bank",
+  "test-paper-bank-management": "Manage the exam bank"
+}

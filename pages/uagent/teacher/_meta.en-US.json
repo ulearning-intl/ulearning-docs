@@ -1,0 +1,10 @@
+{
+  "index": {
+    "title": "Teacher",
+    "display": "hidden"
+  },
+  "login": "Log in",
+  "personal-agent": "Personal agent",
+  "team-agent": "Team agent",
+  "agent-marketplace": "Agent marketplace"
+}

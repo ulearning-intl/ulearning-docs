@@ -1,0 +1,11 @@
+{
+  "index": {
+    "title": "Software settings",
+    "display": "hidden"
+  },
+  "language-settings": "Language settings",
+  "software-information-and-version": "Software information and version",
+  "multi-screen-interaction-settings": "Multi-screen interaction settings",
+  "ai-feature-settings": "AI feature settings",
+  "subject-whiteboard-settings": "Subject whiteboard settings"
+}

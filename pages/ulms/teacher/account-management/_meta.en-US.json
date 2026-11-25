@@ -1,0 +1,9 @@
+{
+  "index": {
+    "title": "Account management",
+    "display": "hidden"
+  },
+  "registration-and-login": "Registration and login",
+  "reset-or-change-password": "Reset or change password",
+  "personal-profile": "Personal profile"
+}

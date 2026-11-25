@@ -6,13 +6,30 @@ const localize = withLocales(() => {});
 export function middleware(req, event) {
   const { locale, pathname } = req.nextUrl;
 
+  const isUClassStart =
+    /^\/uclass\/start\/?$/.test(pathname);
+
+  const isEnglishUlmsGuide =
+    locale === "en-US" &&
+    /^\/ulms\/(?:quick-start|student|teacher)(?:\/|$)/.test(pathname);
+
+  const isEnglishUClassGuide =
+    locale === "en-US" &&
+    /^\/uclass\/(?:quick-start|teacher)(?:\/|$)/.test(pathname);
+
+  const isEnglishUAgentGuide =
+    locale === "en-US" &&
+    /^\/uagent\/(?:quick-start|teacher|administrator)(?:\/|$)/.test(pathname);
+
   // Redirect untranslated product guides to Chinese.
-  // English is currently available for uClass start and ULMS quick start.
+  // Keep English access for the translated ULMS sections.
   if (
     locale !== "zh-CN" &&
     /^\/(ulms|uclass|uagent)(\/|$)/.test(pathname) &&
-    !/^\/uclass\/start\/?$/.test(pathname) &&
-    !/^\/ulms\/quick-start(?:\/|$)/.test(pathname)
+    !isUClassStart &&
+    !isEnglishUlmsGuide &&
+    !isEnglishUClassGuide &&
+    !isEnglishUAgentGuide
   ) {
     const url = req.nextUrl.clone();
     url.locale = "zh-CN";
@@ -21,7 +38,9 @@ export function middleware(req, event) {
       return NextResponse.json(
         {},
         {
-          headers: { "x-nextjs-redirect": url.toString() },
+          headers: {
+            "x-nextjs-redirect": url.toString(),
+          },
         }
       );
     }
@@ -32,7 +51,7 @@ export function middleware(req, event) {
   return localize(req, event);
 }
 
-// Nextra's locale middleware does not exclude GIF or WebM assets by default.
+// Exclude GIF and WebM assets from locale middleware.
 export const config = {
   matcher: ["/((?!.*\\.(?:gif|webm)$).*)"],
 };
