@@ -1,0 +1,10 @@
+{
+  "index": {
+    "title": "Student",
+    "display": "hidden"
+  },
+  "account-management": "Account management",
+  "pre-class-preparation": "Pre-class preparation",
+  "in-class-learning": "In-class learning",
+  "post-class-review": "After-class review"
+}

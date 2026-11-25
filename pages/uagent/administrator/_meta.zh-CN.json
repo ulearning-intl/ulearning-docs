@@ -1,0 +1,10 @@
+{
+  "index": {
+    "title": "管理员",
+    "display": "hidden"
+  },
+  "login": "登录",
+  "personal-and-team-agents": "个人智能体&团队智能体",
+  "data-analytics": "数据统计",
+  "system-management": "系统管理"
+}

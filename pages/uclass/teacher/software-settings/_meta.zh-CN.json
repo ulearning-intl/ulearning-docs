@@ -1,0 +1,11 @@
+{
+  "index": {
+    "title": "软件设置",
+    "display": "hidden"
+  },
+  "language-settings": "语言设置",
+  "software-information-and-version": "软件基本信息/版本",
+  "multi-screen-interaction-settings": "多屏互动设置",
+  "ai-feature-settings": "AI功能设置",
+  "subject-whiteboard-settings": "学科白板设置"
+}

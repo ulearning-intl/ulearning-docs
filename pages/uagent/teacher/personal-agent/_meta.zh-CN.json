@@ -1,0 +1,11 @@
+{
+  "index": {
+    "title": "个人智能体",
+    "display": "hidden"
+  },
+  "manage-personal-ai-assistant": "管理个人AI助手",
+  "build-personal-knowledge-base": "构建个人知识库",
+  "build-personal-workflow": "构建个人工作流",
+  "build-personal-instruction-set": "构建个人指令集",
+  "personal-ai-assistant-analytics-and-feedback": "个人AI助手数据统计及反馈"
+}

@@ -1,0 +1,12 @@
+{
+  "index": {
+    "title": "工具",
+    "display": "hidden"
+  },
+  "cloud-drive": "云盘",
+  "applications": "应用",
+  "screenshot": "截图",
+  "annotation": "批注",
+  "screen-casting": "投屏",
+  "recording": "录制"
+}
