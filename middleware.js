@@ -12,7 +12,7 @@ export function middleware(req, event) {
     locale !== "zh-CN" &&
     /^\/(ulms|uclass|uagent)(\/|$)/.test(pathname) &&
     !/^\/uclass\/start\/?$/.test(pathname) &&
-    !/^\/ulms\/(?:quick-start|student)(?:\/|$)/.test(pathname)
+    !/^\/ulms\/quick-start(?:\/|$)/.test(pathname)
   ) {
     const url = req.nextUrl.clone();
     url.locale = "zh-CN";
@@ -22,7 +22,7 @@ export function middleware(req, event) {
         {},
         {
           headers: { "x-nextjs-redirect": url.toString() },
-        },
+        }
       );
     }
 
