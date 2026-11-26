@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import Logo from "./components/logo";
 import Head from "./components/head";
 import Footer from "./components/footer";
+import AssistantLink from "./components/assistant-link";
 import useLocalesMap from "./components/use-locales-map";
 import { useRouter as useRouter7 } from "next/router";
 import {
@@ -32,6 +33,9 @@ const themeConfig = {
 
   // Sidebar
   // ...
+  navbar: {
+    extraContent: <AssistantLink />,
+  },
 
   // TOC Sidebar
   toc: {

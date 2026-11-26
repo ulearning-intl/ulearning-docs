@@ -404,3 +404,30 @@ node cli.js update-meta --folder .\pages\ulearning\teacher
 
 该命令行将会将新添加的文件增加到现有的_meta.json文件最后，而后可手动对排序和目录名称进行调整。这个命令不会更改当前已经设定好的目录。
 
+
+## 内置小蜜蜂服务
+
+`ulearning-docs` 现在同时提供帮助中心和文档问答服务。开发环境运行 `npm run dev` 后，帮助中心和小蜜蜂都使用同一个 Next 服务。问答页位于 `/assistant`，沿用原有小蜜蜂界面和桌面、手机布局，静态资源位于 `public/little-bee`。文档页右上角的“小蜜蜂”入口会打开同服务的问答页，并将当前文章放在推荐问答首位。
+
+问答目录由 `pages` 下的 `.mdx` 文档动态生成。产品目录使用 `pages` 的一级目录，角色目录支持 `teacher`、`student`、`admin` 和 `reviewer`，文件名最后的语种后缀决定问答语种。新增产品或帮助文档只要放入对应目录，服务在下一次索引请求时会自动生成问答项。
+
+问答 API 位于 `pages/api/assistant`，文档索引和图片读取逻辑位于 `lib/assistant-index.js`。当前服务不读取父项目的 FAQ、截图教程或 Python 接口。缺少当前语种的文章时，问答页提示暂无对应语种的文档。图文教程中的截图来自当前文章。反馈记录保存在此服务的 `.assistant-data/feedback.jsonl`。
+
+在 `ulearning-docs` 仓库根目录安装依赖并启动开发服务。
+
+```powershell
+npm ci
+npm run dev
+```
+
+默认端口为 `3000`。帮助中心位于 `/`，小蜜蜂位于 `/assistant`。两者由同一个 Node.js 进程提供服务。
+
+生产环境在仓库根目录安装依赖后构建并启动。
+
+```powershell
+npm ci
+npm run build
+npm start
+```
+
+生产部署需一起保留 `pages` 和 `public` 目录，供运行时读取文档和图片。若要保留重启前的反馈记录，将 `.assistant-data` 放在持久化磁盘上。
