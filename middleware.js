@@ -1,10 +1,15 @@
-import { withLocales } from "nextra/locales";
 import { NextResponse } from "next/server";
+import { withLocales } from "nextra/locales";
 
-const localize = withLocales(() => {});
+const localize = withLocales(() => NextResponse.next());
 
 export function middleware(req, event) {
   const { locale, pathname } = req.nextUrl;
+
+  if (pathname === "/assistant") {
+    return NextResponse.rewrite(new URL("/little-bee/index.html", req.url));
+  }
+  if (pathname.startsWith("/little-bee/")) return NextResponse.next();
 
   const isUClassStart =
     /^\/uclass\/start\/?$/.test(pathname);
@@ -22,7 +27,7 @@ export function middleware(req, event) {
     /^\/uagent\/(?:quick-start|teacher|administrator)(?:\/|$)/.test(pathname);
 
   // Redirect untranslated product guides to Chinese.
-  // Keep English access for the translated ULMS sections.
+  // Keep English access for the translated product sections.
   if (
     locale !== "zh-CN" &&
     /^\/(ulms|uclass|uagent)(\/|$)/.test(pathname) &&

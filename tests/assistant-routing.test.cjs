@@ -3,7 +3,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const test = require("node:test");
 const routesByRole = require("../data/assistant-routes.json");
-const { getAssistantRole, getAssistantUrl } = require("../utils/assistant-routing");
+const { getAssistantContext, getAssistantRole, getAssistantUrl } = require("../utils/assistant-routing");
 
 test("every listed document resolves to its assigned role without overlaps", () => {
   const seen = new Set();
@@ -21,6 +21,9 @@ test("every listed document resolves to its assigned role without overlaps", () 
 test("role directories and quick-start pages match their intended audiences", () => {
   const cases = [
     ["/uagent/administrator/login", "admin"],
+    ["/urecord/administrator/account-management/registration-and-login", "admin"],
+    ["/urecord/supervisor/account-management/registration-and-login", "supervisor"],
+    ["/urecord/quick-start/quick-start-for-supervisors", "supervisor"],
     ["/uagent/quick-start/quick-start-for-administrators", "admin"],
     ["/uagent/quick-start-for-administrators", "admin"],
     ["/ulms/student/account-management/personal-profile", "student"],
@@ -36,15 +39,28 @@ test("role directories and quick-start pages match their intended audiences", ()
   }
 });
 
-test("language prefixes and URL suffixes do not affect role selection", () => {
+test("local assistant URLs preserve locale, role, product, and article context", () => {
   const route = "/uagent/administrator/login";
-  for (const locale of ["zh-CN", "en-US", "fr-FR", "ar", "pt-BR"]) {
-    const url = new URL(getAssistantUrl(`/${locale}${route}/?role=student#teacher`));
-    assert.equal(url.origin, "https://ta.tongshike.cn");
-    assert.equal(url.searchParams.get("language"), "zh");
+  const expectedLanguages = { "zh-CN": "zh", "en-US": "en", "fr-FR": "fr", ar: "ar" };
+  for (const locale of Object.keys(expectedLanguages)) {
+    const url = new URL(getAssistantUrl(`/${locale}${route}/?role=student#teacher`, locale), "https://docs.example");
+    assert.equal(url.origin, "https://docs.example");
+    assert.equal(url.pathname, "/assistant");
+    assert.equal(url.searchParams.get("language"), expectedLanguages[locale]);
     assert.equal(url.searchParams.get("role"), "admin");
-    assert.equal(url.searchParams.size, 2);
+    assert.equal(url.searchParams.get("product"), "uagent");
+    assert.equal(url.searchParams.get("doc"), "uagent/administrator/login");
   }
+});
+
+test("uRecord supervisor pages keep their product and role context", () => {
+  const route = "/urecord/supervisor/imported/管理个人账号/登录.zh-CN";
+  assert.equal(getAssistantRole(route), "supervisor");
+  assert.deepEqual(getAssistantContext(route), {
+    role: "supervisor",
+    product: "urecord",
+    documentId: "urecord/supervisor/imported/管理个人账号/登录",
+  });
 });
 
 test("shared pages and unlisted URLs default to teacher", () => {
@@ -65,13 +81,24 @@ test("each listed route has a source document or an existing redirect", async ()
   const redirects = new Set((await config.redirects()).map(({ source }) => source));
   for (const routes of Object.values(routesByRole)) {
     for (const route of routes) {
-      const base = path.join(root, "pages", route.slice(1));
-      const parent = path.dirname(base);
-      const name = path.basename(base);
-      const exists = fs.existsSync(base) || fs.readdirSync(parent).some(
-        (file) => file.startsWith(name + ".") && file.endsWith(".mdx")
-      );
+      const relative = route.slice(1);
+      const candidates = [path.join(root, "pages", relative), path.join(root, "assistant-content", relative)];
+      const exists = candidates.some((base) => {
+        const parent = path.dirname(base);
+        const name = path.basename(base);
+        return fs.existsSync(base) || (fs.existsSync(parent) && fs.readdirSync(parent).some(
+          (file) => file.startsWith(name + ".") && file.endsWith(".mdx")
+        ));
+      });
       assert(exists || redirects.has(route), `Missing document: ${route}`);
     }
   }
+});
+
+test("legacy uLearning article links use the current uLMS product", () => {
+  const route = routesByRole.teacher.find((entry) => entry.startsWith("/ulearning/teacher/"));
+  assert(route, "Expected preserved uLearning knowledge source");
+  const context = getAssistantContext(route);
+  assert.equal(context.product, "ulms");
+  assert.equal(context.documentId, route.slice(1));
 });
