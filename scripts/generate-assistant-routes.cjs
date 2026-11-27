@@ -2,17 +2,19 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const root = path.resolve(__dirname, "..");
-const products = ["ulms", "uclass", "uagent"];
+const products = ["ulms", "uclass", "uagent", "urecord"];
 const directoryRoles = {
   admin: "admin",
   administrator: "admin",
   student: "student",
   teacher: "teacher",
+  supervisor: "teacher",
 };
 const quickStartRoles = {
   "quick-start-for-administrators": "admin",
   "quick-start-for-students": "student",
   "quick-start-for-teachers": "teacher",
+  "quick-start-for-supervisors": "teacher",
 };
 const routes = { admin: new Set(), student: new Set(), teacher: new Set() };
 

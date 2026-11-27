@@ -1,6 +1,6 @@
 import { Navbar } from "nextra-theme-docs";
 
-const products = new Set(["ulms", "uclass", "uagent"]);
+const products = new Set(["ulms", "uclass", "uagent", "urecord"]);
 
 export default function ProductNavbar({ items, ...props }) {
   // Nextra gives metadata-only links an empty route when a translation is

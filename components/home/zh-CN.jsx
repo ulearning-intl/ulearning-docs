@@ -25,7 +25,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="mt-4 grid grid-cols-3 gap-4">
+        <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
           <div>
             <h3 className="text-xl text-gray-800 font-semibold">
               <Link href={navigation.ulms.href}>uLMS学习管理系统</Link>
@@ -59,6 +59,25 @@ export default function HomePage() {
               </li>
               <li className="mt-1 mb-1">
                 <Link href="/uagent/administrator/login">管理员</Link>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="text-xl text-gray-800 font-semibold">
+              <Link href={navigation.urecord.href}>uRecord录播及评价系统</Link>
+            </h3>
+            <ul className="mt-4 text-brand">
+              <li className="mt-1 mb-1">
+                <Link href="/urecord/teacher/account-management/registration-and-login">教师</Link>
+              </li>
+              <li className="mt-1 mb-1">
+                <Link href="/urecord/supervisor/account-management/registration-and-login">督导员</Link>
+              </li>
+              <li className="mt-1 mb-1">
+                <Link href="/urecord/student/account-management/registration-and-login">学生</Link>
+              </li>
+              <li className="mt-1 mb-1">
+                <Link href="/urecord/administrator/account-management/registration-and-login">管理员</Link>
               </li>
             </ul>
           </div>

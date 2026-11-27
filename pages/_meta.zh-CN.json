@@ -14,6 +14,11 @@
     "type": "page",
     "href": "/uagent/quick-start/quick-start-for-teachers"
   },
+  "urecord": {
+    "title": "uRecord",
+    "type": "page",
+    "href": "/urecord/overview"
+  },
   "index": {
     "title": "介绍",
     "type": "page",
