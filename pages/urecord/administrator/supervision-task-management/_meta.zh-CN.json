@@ -1,0 +1,11 @@
+{
+  "index": {
+    "title": "听评课任务管理",
+    "display": "hidden"
+  },
+  "manage-supervision-teams": "督导团队管理",
+  "manage-manual-evaluation-rubrics": "管理人工评价量表",
+  "evaluation-data-analysis": "评价数据分析",
+  "assign-evaluation-tasks": "听评课任务分配",
+  "online-classroom-inspection": "在线巡课"
+}

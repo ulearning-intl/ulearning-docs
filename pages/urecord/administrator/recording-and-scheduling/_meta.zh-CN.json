@@ -1,0 +1,11 @@
+{
+  "index": {
+    "title": "录直播与排课管理",
+    "display": "hidden"
+  },
+  "manage-schedules": "管理课表",
+  "manage-courses": "管理课程",
+  "classroom-recordings": "课堂回放",
+  "recording-plan-management": "录制计划管理",
+  "live-event-management": "直播活动管理"
+}

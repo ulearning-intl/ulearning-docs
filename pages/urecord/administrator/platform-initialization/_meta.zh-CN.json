@@ -1,0 +1,11 @@
+{
+  "index": {
+    "title": "平台初始化配置（基础配置）",
+    "display": "hidden"
+  },
+  "manage-classrooms": "管理教室",
+  "manage-user-accounts": "人员账号管理",
+  "video-watermark-settings": "视频水印设置",
+  "school-information-settings": "学校信息配置",
+  "host-parameter-settings": "主机参数设置"
+}
