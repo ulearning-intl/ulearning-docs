@@ -115,3 +115,22 @@ body {
     fixed 0 0 / 20px 20px radial-gradient(#313131 1px, transparent 0),
     fixed 10px 10px / 20px 20px radial-gradient(#313131 1px, transparent 0);
 }
+
+
+.ulearning-assistant-link {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  background: #ea5947;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.45rem 0.8rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.ulearning-assistant-link:hover {
+  background: #d94d3d;
+  color: #fff;
+}

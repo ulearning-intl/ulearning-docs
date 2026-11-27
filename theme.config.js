@@ -3,6 +3,7 @@ import { useConfig } from "nextra-theme-docs";
 import Logo from "./components/logo";
 import Head from "./components/head";
 import Footer from "./components/footer";
+import AssistantLink from "./components/assistant-link";
 import ProductNavbar from "./components/navbar";
 import useLocalesMap from "./components/use-locales-map";
 import { useRouter as useRouter7 } from "next/router";
@@ -33,6 +34,7 @@ const themeConfig = {
   logoLink: "/index",
   navbar: {
     component: ProductNavbar,
+    extraContent: <AssistantLink />,
   },
   search: {
     placeholder: () => useLocalesMap(searchPlaceholderMap),

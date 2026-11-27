@@ -1,0 +1,503 @@
+/* Help-center design, 2026-10-27. Keep article/media and maintenance styles intact. */
+[hidden] { display: none !important; }
+.icon-definitions { position: absolute; width: 0; height: 0; overflow: hidden; }
+.ui-icon { display: block; width: 20px; height: 20px; fill: none; stroke: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+body { height: var(--app-height, 100dvh); font-family: var(--help-font-family); font-size: 16px; }
+button, select, textarea { font-family: inherit; }
+button:focus-visible, select:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
+.shell { grid-template-columns: var(--sidebar-width) minmax(0, 1fr); height: var(--app-height, 100dvh); transition: none; }
+.sidebar { height: var(--app-height, 100dvh); padding: 16px 16px 16px; background: var(--sidebar-bg); border-color: var(--line); }
+.brand { gap: 10px; min-height: 40px; margin: 0 0 24px; font-size: 18px; }
+.brand strong { font-weight: 600; letter-spacing: 1px; }
+.brand-status { display: none; }
+.toolbar-button { display: inline-grid; place-items: center; width: 32px; height: 32px; padding: 5px; border: 0; border-radius: 6px; color: var(--muted); background: transparent; }
+.toolbar-button > .ui-icon { width: 16px; height: 16px; }
+.toolbar-button:hover { color: var(--text); background: var(--panel-hover); }
+.sidebar-toggle { margin-left: auto; }
+.bee-mascot { display: inline-block; position: relative; width: 40px; height: 40px; background: url("assets/ui/bee.svg?v=20261030-figma-v1") center / contain no-repeat; transform: none; animation: none; }
+.bee-mascot > *, .bee-mascot::before, .bee-mascot::after { display: none; }
+.bee-avatar { flex: 0 0 40px; width: 40px; height: 40px; }
+.new-chat { flex-shrink: 0; min-height: 44px; gap: 10px; font-size: 14px; font-weight: 600; box-shadow: 0 1px 9px #17213908; }
+.new-chat .ui-icon { width: 16px; height: 16px; }
+.history-section { margin-top: 34px; }
+.section-label { font-size: 14px; color: var(--muted); }
+.history-list { gap: 2px; margin-top: 12px; padding: 0; }
+.history-item { min-height: 38px; padding: 9px 12px; border-radius: 6px; }
+.history-item .history-title { font-size: 14px; font-weight: 400; color: var(--text); }
+.history-item.active .history-title { font-weight: 600; }
+.history-item:hover { background: var(--panel-hover); }
+.history-item.active { background: var(--panel); box-shadow: 0 1px 10px #17213903; }
+.empty-history { font-size: 13px; padding: 12px; }
+.sidebar-footer { display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; height: 48px; padding-top: 16px; border-top: 1px solid var(--line); }
+.language-switcher { display: inline-flex; width: auto; gap: 8px; margin: 0; padding: 0; border: 0; border-radius: 0; background: transparent; color: var(--muted); }
+.language-switcher .ui-icon { width: 16px; height: 16px; }
+.language-current { color: inherit; font-size: 12px; font-weight: 400; }
+.sidebar-footer .toolbar-button { width: 28px; height: 28px; }
+.sidebar-footer .ui-icon { width: 16px; height: 16px; }
+.chat-panel, .chat-panel.is-empty, .chat-panel.has-conversation {
+  --chat-side-space: 32px;
+  --prompt-reserved-space: calc(var(--composer-height, 112px) + 148px); /* toolbar, composer and grid gaps */
+  --composer-bottom-space: 28px; --composer-gap: 24px;
+  display: grid; grid-template-rows: minmax(0, 1fr) auto auto; gap: 24px;
+  height: var(--app-height, 100dvh); min-height: 0; padding: 72px 32px 28px; overflow: hidden;
+}
+.chat-toolbar { position: absolute; z-index: 12; top: 0; left: 0; right: 0; display: flex; align-items: center; gap: 24px; height: 72px; padding: 0 24px; background: var(--panel); }
+.role-hint-mobile { display: none; }
+.role-picker { display: flex; align-items: center; gap: 0; min-width: 0; margin: 0; padding: 0; border: 0; border-radius: 0; background: transparent; }
+.role-picker label { color: var(--text); font-size: 16px; font-weight: 600; white-space: nowrap; }
+.role-select-wrap { position: relative; display: inline-flex; margin-left: 0; flex-shrink: 0; }
+.role-picker select { width: 54px; min-width: 54px; height: 36px; padding: 0 22px 0 0; border: 0; background: transparent; appearance: none; color: var(--text); font-size: 16px; font-weight: 600; cursor: pointer; }
+.role-select-wrap > .ui-icon { position: absolute; right: 0; top: 11px; width: 14px; height: 14px; pointer-events: none; }
+.role-picker small { margin-left: 20px; color: var(--placeholder); font-size: 12px; font-weight: 400; line-height: 1.5; white-space: nowrap; }
+.help-toggle { margin-left: auto; color: var(--text); }
+.help-toggle .ui-icon { width: 20px; height: 20px; stroke-width: 1.8; }
+.collapsed-tools { display: none; align-items: center; gap: 8px; }
+.welcome-heading { position: absolute; top: 88px; left: 50%; display: flex; align-items: center; gap: 20px; width: min(var(--content-width), calc(100% - 64px)); margin: 0; transform: translateX(-50%); }
+.prompt-bee { flex: 0 0 72px; width: 72px; height: 72px; animation: none; }
+.prompt-heading h1 { margin: 0 0 8px; color: var(--text); font-size: 24px; font-weight: 600; line-height: 1.3; }
+.prompt-heading p { margin: 0; font-size: 16px; color: var(--muted); line-height: 1.5; }
+.has-conversation .welcome-heading { display: none; }
+/* The landing view and popover share one card viewport. Reserve space for
+   card shadows, the 6px hover lift and focus rings without drawing a second,
+   full-row panel around a single product card. Negative margins keep the cards
+   aligned with the composer and preserve their original width and spacing. */
+.prompt-strip, .chat-panel.is-empty .prompt-strip {
+  grid-row: 2; align-self: end; justify-self: center;
+  width: min(calc(var(--content-width) + 2 * var(--prompt-edge-space)), calc(100% + 2 * var(--prompt-edge-space)));
+  max-height: calc(var(--app-height, 100dvh) - var(--prompt-reserved-space) + 2 * var(--prompt-edge-space)); min-height: 0;
+  margin: calc(-1 * var(--prompt-edge-space)); padding: var(--prompt-edge-space);
+  border: 0; border-radius: 0; background: transparent; box-shadow: none;
+  overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain;
+  animation: none; transition: none;
+}
+.prompt-panel-content { width: 100%; min-width: 0; }
+.prompt-grid, .prompt-grid-products { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+@media (min-width: 1100px) {
+  .prompt-grid-products:has(> :nth-child(4)):not(:has(> :nth-child(5))) { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (min-width: 650px) and (max-width: 900px) {
+  .prompt-grid-products:has(> :nth-child(4)) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 900px) {
+  .chat-panel.is-empty .prompt-strip {
+    margin-bottom: calc(-1 * var(--composer-gap));
+  }
+}
+.prompt-card { min-height: 68px; padding: 12px 16px; gap: 7px; border: 1px solid transparent; border-radius: 12px; background: var(--panel-soft); color: var(--text); font-size: 14px; font-weight: 600; line-height: 1.5; transition: border-color .15s, background-color .15s, transform .15s; }
+.prompt-card small { color: var(--placeholder); font-size: 12px; font-weight: 400; line-height: 1.5; }
+.prompt-card:hover, .prompt-card:focus-visible { border-color: var(--el-color-primary-light-7); background: var(--brand-soft); color: var(--text); box-shadow: 0 2px 7px #6a31200a; transform: none; }
+.prompt-product-card { grid-template-columns: minmax(0, 1fr); gap: 4px; min-height: 162px; padding: 24px; border: 1px solid var(--line); border-radius: var(--help-card-radius); background: var(--panel); box-shadow: var(--help-card-shadow); }
+.prompt-product-mark { display: none; }
+.prompt-product-title { font-size: 18px; font-weight: 600; }
+.prompt-product-card > small { grid-column: auto; font-size: 14px; line-height: 1.5; }
+.prompt-product-footer { grid-column: auto; margin-top: 12px; min-height: 42px; padding: 10px 16px; border-radius: 24px; background: var(--panel-soft); font-weight: 400; }
+.prompt-product-footer > small { color: var(--muted); font-size: 12px; }
+.prompt-product-footer > span { color: var(--muted); }
+.prompt-product-card:hover .prompt-product-footer { background: var(--panel); }
+.prompt-group { padding: 24px; gap: 24px; border: 1px solid var(--line); border-radius: var(--help-card-radius); background: var(--panel); box-shadow: var(--help-card-shadow); }
+.prompt-group-heading { min-height: 24px; padding: 0; gap: 12px; font-size: 18px; }
+.prompt-group-navigation { flex-wrap: nowrap; gap: 16px; }
+.prompt-group-heading strong { color: var(--text); font-size: 18px; font-weight: 600; }
+.prompt-group-heading > span { color: var(--muted); font-size: 14px; }
+.prompt-back { min-height: 24px; padding: 0; border: 0; background: transparent; color: var(--muted); font-size: 14px; font-weight: 400; }
+.prompt-back:hover { background: transparent; color: var(--brand); }
+.prompt-back { display: inline-flex; align-items: center; justify-content: center; gap: 6px; line-height: 24px; }
+.prompt-back .ui-icon { width: 12px; height: 12px; }
+.prompt-group-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.prompt-card-more { border: 1px solid transparent; background: var(--panel-soft); }
+.prompt-card-more > span > span { display: none; }
+.prompt-card-more small { align-self: end; }
+.prompt-loading { padding: 24px; border-color: var(--line); background: var(--panel-soft); }
+.prompt-collapsed-icon { display: none !important; }
+.chat-panel.has-conversation .prompt-strip,
+.chat-panel.has-conversation .prompt-strip.prompt-open {
+  display: none; position: absolute; z-index: 10; top: auto; right: auto;
+  bottom: calc(164px - var(--prompt-edge-space)); left: 50%;
+  width: min(calc(var(--content-width) + 2 * var(--prompt-edge-space)), calc(100% - 2 * var(--chat-side-space) + 2 * var(--prompt-edge-space)));
+  height: auto; max-height: calc(var(--app-height, 100dvh) - var(--prompt-reserved-space) + 2 * var(--prompt-edge-space));
+  margin: 0; padding: var(--prompt-edge-space); border: 0; border-radius: 0;
+  background: transparent; box-shadow: none; overflow-x: hidden; overflow-y: auto;
+  transform: translateX(-50%); animation: none;
+}
+.chat-panel.has-conversation .prompt-strip.prompt-open { display: block; }
+.chat-panel.has-conversation .prompt-panel-content { visibility: hidden; opacity: 0; transform: none; pointer-events: none; transition: none; }
+.chat-panel.has-conversation .prompt-strip.prompt-open .prompt-panel-content { visibility: visible; opacity: 1; transform: none; pointer-events: auto; }
+.chat-panel.has-conversation .prompt-strip.prompt-open .prompt-panel-close { display: none; }
+.messages, .chat-panel.has-conversation .messages { grid-row: 1; justify-self: center; width: min(var(--content-width), 100%); padding: 16px 0 0; gap: 24px; scrollbar-gutter: auto; scrollbar-width: thin; scroll-behavior: auto; }
+.chat-panel.is-empty .messages { display: block; visibility: hidden; pointer-events: none; }
+.message, .message.assistant, .message.assistant.has-tutorial, .message.assistant.has-help-browser, .message.assistant.has-guidance { max-width: 100%; width: 100%; font-size: 16px; line-height: 1.65; }
+.message.assistant.has-avatar, .message.assistant.has-tutorial.has-avatar, .message.assistant.has-screenshot.has-avatar, .message.assistant.has-guidance.has-avatar, .message.assistant.has-help-browser.has-avatar { grid-template-columns: 40px minmax(0, 1fr); gap: 12px; }
+.message-avatar, .message-avatar:hover { width: 40px; height: 40px; margin-top: 0; animation: none; }
+.message-avatar .bee-mascot { width: 40px; height: 40px; }
+.message.has-screenshot .message-body, .message.has-guidance .message-body { width: 100%; }
+.message-meta { display: none; }
+.message.user { max-width: calc(100% - 60px); width: fit-content; }
+.message.user .message-content { padding: 16px; border-radius: 20px 20px 4px 20px; background: var(--panel-hover); color: var(--text); font-size: 16px; line-height: 1.65; font-weight: 400; text-align: left; }
+.message.user .message-body { gap: 0; }
+.message-tools { display: flex; gap: 12px; min-height: 24px; margin-top: 10px; color: var(--muted); opacity: 1; }
+.message-tools button { display: inline-grid; place-items: center; width: 22px; height: 24px; padding: 3px; border-radius: 4px; color: var(--muted); }
+.message-tools button:hover { background: var(--panel-hover); color: var(--text-regular); }
+.message-tools button.active { color: var(--brand); }
+.message-tools .ui-icon { width: 16px; height: 16px; }
+.message-tools time { font-size: 14px; color: var(--muted); line-height: 24px; }
+.message-tools button::after { position: absolute; z-index: 2; left: 50%; bottom: calc(100% + 8px); width: max-content; max-width: 180px; padding: 6px 10px; border-radius: 6px; background: #202833; color: #fff; content: attr(aria-label); font-size: 12px; opacity: 0; pointer-events: none; transform: translateX(-50%); }
+.message-tools button:hover::after, .message-tools button:focus-visible::after { opacity: 1; }
+.message.user .message-tools { gap: 12px; margin-top: 2px; }
+.message.is-thinking .message-body { padding: 0; border: 0; background: transparent; }
+.thinking-indicator { min-height: 28px; gap: 0; color: var(--text); font-size: 16px; }
+.thinking-spinner { display: none; }
+.guided-next { gap: 10px; margin-top: 12px; padding: 16px; border: 0; border-radius: 12px; background: var(--panel-soft); }
+.guided-action { padding: 6px 12px; border-color: var(--line); color: var(--muted); background: var(--panel); font-size: 14px; font-weight: 400; }
+.guided-action:hover { border-color: var(--el-color-primary-light-7); color: var(--brand); background: var(--brand-soft); }
+.answer-tutorial { border-color: var(--line); border-radius: 12px; box-shadow: 0 3px 16px #26344d05; }
+.tutorial-tabs { padding: 6px; background: var(--panel-soft); border-color: var(--line); }
+.tutorial-tab { min-height: 42px; color: var(--muted); font-size: 16px; font-weight: 600; }
+.tutorial-tab.active, .tutorial-tab:hover { color: var(--brand); }
+.tutorial-tab.active::after { display: none; }
+.tutorial-tab:hover { background: var(--panel); }
+.tutorial-panel { padding: 20px; }
+.help-article-heading { color: var(--text); }
+.help-article-heading-1 { font-size: 20px; }
+.help-article-heading-2 { font-size: 18px; }
+.help-article-paragraph { color: var(--text-regular); }
+.article-image { width: auto; max-width: 100%; border-color: var(--line); }
+.composer, .chat-panel.is-empty .composer, .chat-panel.has-conversation .composer { grid-row: 3; display: grid; grid-template-columns: 1fr auto; grid-template-rows: minmax(44px, 1fr) 32px; align-self: end; align-items: center; justify-self: center; gap: 4px 12px; width: min(var(--content-width), 100%); min-height: 112px; height: auto; margin: 0; padding: 12px 16px 10px; border: 1px solid var(--line); border-radius: 16px; background: var(--panel); box-shadow: 0 3px 9px #1d293b07; }
+.composer:focus-within { border-color: var(--brand); }
+.composer textarea { grid-column: 1 / -1; grid-row: 1; width: 100%; height: 48px; min-height: 44px; max-height: 150px; padding: 0; border: 0; background: transparent; color: var(--text); font-size: 16px; line-height: 1.5; }
+.composer textarea::placeholder { color: var(--placeholder); }
+.composer .icon-button { grid-column: 1; grid-row: 2; display: inline-grid; width: 22px; height: 28px; min-height: 0; padding: 0; border: 0; border-radius: 4px; color: var(--text); background: transparent; }
+.composer .icon-button .ui-icon { width: 16px; height: 16px; }
+.send-button { grid-column: 2; grid-row: 2; width: 32px; height: 32px; padding: 7px; border: 0; border-radius: 50%; color: #fff; background: var(--el-color-primary-light-5); box-shadow: none; transition: background-color .15s; }
+.send-button svg { width: 16px; height: 16px; }
+
+
+.send-button:hover { background: var(--el-color-primary-light-5); box-shadow: none; transform: none; }
+.composer.has-input .send-button { background: var(--brand); }
+
+.stop-icon { display: none; }
+.composer.is-busy .send-button { border: 2px solid var(--brand); padding: 5px; color: var(--brand); background: var(--panel); box-shadow: none; }
+.composer.is-busy .send-icon { display: none; }
+.composer.is-busy .stop-icon { display: block; }
+.shell.sidebar-collapsed { grid-template-columns: 0 minmax(0, 1fr); }
+.shell.sidebar-collapsed .sidebar { visibility: hidden; padding: 0; border: 0; }
+.shell.sidebar-collapsed .collapsed-tools { display: flex; }
+.sidebar-scrim { display: none; }
+/* At the 1200/980px design sizes the 280px sidebar stays expanded. */
+@media (max-width: 1300px) {
+  .chat-panel, .chat-panel.is-empty, .chat-panel.has-conversation { --chat-side-space: 36px; padding-right: 36px; padding-left: 36px; }
+  .welcome-heading { width: calc(100% - 72px); }
+  .prompt-product-card { padding: 24px; }
+}
+@media (max-width: 900px) {
+  .shell, .shell.sidebar-collapsed { grid-template-columns: minmax(0, 1fr); }
+  .sidebar { position: fixed; z-index: 30; top: 0; left: 0; width: 280px; visibility: visible; }
+  .shell.sidebar-collapsed .sidebar { visibility: hidden; width: 0; }
+  .collapsed-tools { display: flex; }
+  .sidebar-scrim:not([hidden]) { position: fixed; z-index: 25; inset: 0; display: block; width: 100%; height: 100%; border: 0; background: #20283355; }
+  .chat-panel, .chat-panel.is-empty, .chat-panel.has-conversation { --chat-side-space: 16px; --prompt-reserved-space: calc(var(--composer-height, 118px) + 112px); padding: 64px 16px max(16px, env(safe-area-inset-bottom)); gap: 16px; }
+  .chat-toolbar { height: 64px; padding: 0 12px; gap: 12px; }
+  .role-picker label, .role-picker select { font-size: 14px; }
+  .role-picker small { display: none; }
+  .role-select-wrap { margin-left: 4px; }
+  .collapsed-tools { gap: 0; }
+  .toolbar-button { width: 28px; }
+  .welcome-heading { top: 88px; width: calc(100% - 32px); gap: 12px; }
+  .prompt-bee { flex-basis: 48px; width: 48px; height: 40px; }
+  .prompt-heading h1 { font-size: 19px; }
+  .prompt-heading p { font-size: 13px; }
+  .prompt-grid-products { grid-template-columns: 1fr; gap: 8px; }
+  .prompt-product-card { grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto; min-height: 90px; padding: 16px; gap: 8px; }
+  .prompt-product-title { grid-column: 1 / -1; font-size: 18px; line-height: 26px; }
+  .prompt-product-card > small { grid-column: 1; grid-row: 2; font-size: 14px; line-height: 22px; }
+  .prompt-product-footer { grid-column: 2; grid-row: 2; align-self: end; min-height: 0; margin: 0; padding: 0; gap: 8px; border-radius: 0; background: transparent; line-height: 22px; }
+  .prompt-product-footer > small { font-size: 14px; white-space: nowrap; }
+  .prompt-product-card:hover .prompt-product-footer { background: transparent; }
+  .prompt-group { padding: 16px; gap: 12px; }
+  .prompt-group-heading, .prompt-group-heading strong { font-size: 18px; line-height: 28px; }
+  .prompt-group-navigation { gap: 16px; }
+  .prompt-group-heading > span { font-size: 14px; line-height: 22px; }
+  .prompt-group-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .prompt-card:not(.prompt-product-card) { min-height: 90px; padding: 12px 16px; font-size: 14px; }
+  .prompt-card:not(.prompt-product-card) small { font-size: 12px; }
+  .chat-panel.has-conversation .prompt-strip, .chat-panel.has-conversation .prompt-strip.prompt-open { bottom: calc(140px - var(--prompt-edge-space)); }
+  .messages, .chat-panel.has-conversation .messages { gap: 24px; padding-top: 12px; }
+  .message, .message.assistant { font-size: 16px; }
+  .message.assistant.has-avatar, .message.assistant.has-tutorial.has-avatar, .message.assistant.has-screenshot.has-avatar, .message.assistant.has-guidance.has-avatar, .message.assistant.has-help-browser.has-avatar { grid-template-columns: 28px minmax(0, 1fr); gap: 10px; }
+  .message-avatar, .message-avatar .bee-mascot { width: 28px; height: 24px; }
+  .message.user { max-width: calc(100% - 28px); }
+  .message.user .message-content { padding: 12px; font-size: 16px; }
+  .message-tools { gap: 8px; }
+  .message-tools time { font-size: 12px; }
+  .composer, .chat-panel.is-empty .composer, .chat-panel.has-conversation .composer { min-height: 108px; padding: 12px; }
+  .composer textarea { font-size: 14px; }
+  .tutorial-panel { padding: 12px; }
+  .tutorial-tab { min-height: 36px; font-size: 13px; }
+}
+@media (max-height: 650px) {
+  .welcome-heading { top: 76px; }
+  .prompt-bee { height: 40px; }
+  .prompt-heading h1 { font-size: 20px; }
+  .prompt-product-card { min-height: 132px; padding: 18px; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; } }
+
+
+
+
+
+
+
+.prompt-loading button { margin-left: 8px; padding: 4px 8px; border: 1px solid var(--el-color-primary-light-7); border-radius: 6px; background: var(--panel); color: var(--brand); }
+
+/* The role menu is drawn by the app, not the platform-native select popup. */
+.role-picker select { position: absolute; width: 1px; min-width: 0; height: 1px; padding: 0; opacity: 0; pointer-events: none; }
+.role-trigger { display: inline-flex; align-items: center; justify-content: space-between; gap: 8px; min-width: 54px; height: 36px; padding: 0; border: 0; border-radius: 4px; background: transparent; color: var(--text); font-size: 16px; font-weight: 600; }
+.role-trigger .ui-icon { width: 12px; height: 12px; }
+.role-picker small { margin-left: 16px; }
+/* Role labels vary by language: size to the longest option, not a fixed
+   Chinese-label width. Cap unusually long copy and wrap it inside the menu. */
+.role-menu { position: absolute; z-index: 20; top: 36px; left: 0; width: max-content; min-width: max(88px, 100%); max-width: min(260px, calc(100dvw - 24px)); padding: 6px 0; border: 1px solid var(--line); border-radius: 5px; background: var(--panel); box-shadow: 0 1px 3px #26344c05; overflow: hidden; }
+.role-menu button { display: block; width: 100%; min-width: 0; padding: 7px 20px; border: 0; outline-offset: -2px; background: transparent; color: var(--text); font-size: 14px; line-height: 18px; text-align: left; white-space: normal; overflow-wrap: anywhere; }
+.role-menu button:hover, .role-menu button:focus-visible { background: var(--panel-soft); }
+.messages { overflow-x: hidden; scrollbar-width: none; }
+.messages::-webkit-scrollbar { display: none; }
+.message-tools button::after { display: none; }
+.message-tools button:hover::after, .message-tools button:focus-visible::after { display: block; }
+.message.user .message-tools button::after { right: 0; left: auto; transform: none; }
+
+
+
+@media (max-width: 900px) { .role-trigger { font-size: 14px; } }
+.messages, .chat-panel.has-conversation .messages { overflow-x: hidden; scrollbar-width: none; }
+.message-avatar, .message-avatar .bee-mascot { transform: none; }
+
+.prompt-card:hover { transform: translateY(-6px); }
+.role-picker small { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.message-tools button.active .ui-icon { fill: currentColor; }
+.chat-panel.has-conversation .prompt-strip { grid-row: auto; grid-column: auto; align-self: auto; justify-self: auto; }
+.prompt-card:not(.prompt-product-card) { gap: 4px; }
+.prompt-card:not(.prompt-product-card) > span { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+.prompt-back { display: inline-flex; align-items: center; gap: 8px; }
+.prompt-back > span { display: inline-block; width: auto; white-space: nowrap; }
+
+@media (max-width: 900px) and (max-height: 650px) {
+  .welcome-heading { display: none; }
+}
+/* Reset the old compact/mobile grid before applying the new drawer layout. */
+.sidebar { display: flex; flex-direction: column; }
+.history-section { display: flex; }
+@media (min-width: 901px) {
+  .prompt-product-card { grid-template-columns: minmax(0, 1fr); }
+  .prompt-product-card > small, .prompt-product-footer { grid-column: auto; }
+}
+@media (max-width: 900px) {
+  .shell, .shell.sidebar-collapsed { grid-template-rows: minmax(0, 1fr); }
+}
+
+/* Four-language picker. The menu opens above the pinned sidebar footer. */
+.sidebar-footer { gap: 12px; }
+.language-picker { position: relative; flex: 1; min-width: 0; }
+.language-switcher { width: 100%; min-height: 36px; padding: 6px 10px; border-radius: 8px; gap: 8px; text-align: start; }
+.language-switcher:hover, .language-switcher[aria-expanded="true"] { background: var(--panel-hover); color: var(--text); }
+.language-current { font-size: 14px; }
+.language-menu { position: absolute; z-index: 30; left: 0; bottom: calc(100% + 10px); width: 236px; max-width: calc(100vw - 32px); padding: 6px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); color: var(--text); box-shadow: 0 8px 20px #1721391c, 0 2px 4px #17213908; direction: ltr; }
+.language-menu button { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; min-height: 40px; padding: 8px 10px; border: 0; border-radius: 6px; background: transparent; color: inherit; font-size: 14px; text-align: left; cursor: pointer; }
+.language-menu button:hover, .language-menu button:focus-visible { background: var(--panel-hover); }
+.language-check { visibility: hidden; font-size: 18px; }
+.language-menu [aria-checked="true"] .language-check { visibility: visible; }
+.language-content-note { max-width: 760px; margin-top: 8px !important; font-size: 12px !important; line-height: 1.5; color: var(--muted); }
+
+
+/* Arabic uses the same LTR layout and controls as every other locale.
+   Plaintext bidi is restricted to text nodes, not flex/grid containers. */
+html[lang="ar"] :is([data-i18n], .history-title, .message-content, .assistant-paragraph, .screenshot-step-text,
+  .prompt-card > span:not(.prompt-product-mark), .prompt-card > small, .help-document-copy > span,
+  .help-document-copy > small, .guided-next > p, .guided-action, .toast) { unicode-bidi: plaintext; }
+html[lang="en"] .role-trigger, html[lang="fr"] .role-trigger { max-width: none; }
+html[lang="fr"] .role-picker small, html[lang="ar"] .role-picker small { white-space: normal; }
+
+/* Bug 622f4e8626087ffe2f9aa01240: component states and complete theme coverage. */
+body, .chat-panel, .chat-toolbar { background: var(--bg); }
+.composer, .chat-panel.is-empty .composer, .chat-panel.has-conversation .composer { background: var(--panel); border-color: var(--line); }
+.send-button { background: var(--el-color-primary-light-5); box-shadow: none; }
+.send-button:hover { background: var(--el-color-primary-light-5); box-shadow: none; }
+.composer.has-input .send-button { background: var(--brand); }
+.composer.has-input .send-button:hover { background: var(--el-color-primary-light-2); }
+.send-button .send-icon { fill: currentColor; stroke: none; }
+.composer.is-busy .send-button { background: var(--panel); }
+.composer .icon-button { color: var(--text); }
+.prompt-card:hover, .prompt-card:focus-visible { background: var(--brand-soft); border-color: var(--el-color-primary-light-7); }
+.prompt-product-card:hover .prompt-product-footer { background: var(--panel); }
+.message-tools { opacity: 0; pointer-events: none; transition: opacity .15s; }
+.message.is-latest-turn .message-tools, .message:focus-within .message-tools { opacity: 1; pointer-events: auto; }
+@media (hover: hover) {
+  .message:hover .message-tools { opacity: 1; pointer-events: auto; }
+}
+.message-tools button { touch-action: manipulation; }
+.message-tools button:focus-visible { outline-offset: 1px; }
+.sidebar-footer { gap: 16px; border-color: var(--line); }
+.language-picker { flex: 1; min-width: 0; }
+.language-switcher { min-height: 32px; padding: 6px 8px; border-radius: 6px; color: var(--text-regular); }
+.language-current { font-size: 12px; }
+.language-menu { width: 100%; min-width: 180px; padding: 4px; border-radius: 6px; box-shadow: var(--shadow); }
+.language-menu button { min-height: 32px; padding: 6px 10px; border-radius: 4px; font-size: 14px; line-height: 20px; }
+.language-menu button[aria-checked="true"] { background: var(--panel-hover); }
+.language-check { display: inline-flex; }
+.language-check .ui-icon { width: 16px; height: 16px; }
+.role-menu { border-color: var(--line); background: var(--panel); }
+.role-menu button { color: var(--text); }
+.role-menu button[aria-selected="true"] { background: var(--panel-soft); }
+.role-menu button:hover, .role-menu button:focus-visible { background: var(--panel-hover); }
+.feedback-dialog { z-index: 60; padding: 16px; }
+.feedback-dialog-card { max-height: calc(var(--app-height, 100dvh) - 32px); overflow-y: auto; border-radius: 8px; background: var(--panel); }
+.dialog-close, .dialog-secondary { color: var(--text-regular); background: var(--panel); }
+.dialog-secondary:hover { color: var(--brand); background: var(--brand-soft); border-color: var(--el-color-primary-light-7); }
+.dialog-primary { color: #fff; border-color: var(--brand); background: var(--brand); border-radius: 999px; }
+.dialog-primary:hover { background: var(--el-color-primary-light-2); border-color: var(--el-color-primary-light-2); }
+.handoff-textarea { border-radius: 6px; background: var(--panel); }
+.handoff-textarea:focus { border-color: var(--brand); box-shadow: 0 0 0 2px var(--el-color-primary-light-8); }
+.help-search:focus-within { border-color: var(--brand); box-shadow: 0 0 0 2px var(--el-color-primary-light-8); }
+.help-document-link:hover, .help-pagination button:not(:disabled):hover { border-color: var(--el-color-primary-light-7); color: var(--brand); background: var(--brand-soft); }
+.help-audience-filters button[aria-pressed="true"], .screenshot-step.active { border-color: var(--el-color-primary-light-7); color: var(--brand); background: var(--brand-soft); box-shadow: none; }
+.help-document-copy mark { color: var(--brand); background: var(--el-color-primary-light-8); }
+.screenshot-step-index, .screenshot-step-image-count { color: var(--brand); }
+.screenshot-nav { background: var(--panel); color: var(--text); border-color: var(--line); }
+.screenshot-nav:hover { color: var(--brand); background: var(--panel-hover); border-color: var(--el-color-primary-light-7); }
+.help-article-paragraph, .thinking-indicator { color: var(--text); }
+.help-article-heading-2 { border-color: var(--line); }
+/* Touch keeps the latest turn visible without sticky hover on older turns. */
+@media (hover: none), (pointer: coarse) {
+  .message-tools button { width: 44px; height: 44px; }
+  .prompt-card:hover { transform: none; }
+  .message-tools button::after { display: none !important; }
+}
+@media (max-width: 900px) {
+  .shell { position: fixed; top: var(--viewport-top, 0px); left: 0; right: 0; height: var(--app-height, 100dvh); }
+  .chat-panel, .chat-panel.is-empty, .chat-panel.has-conversation { padding-bottom: max(16px, env(safe-area-inset-bottom)); }
+  .chat-panel.is-empty { --prompt-reserved-space: calc(var(--composer-height, 118px) + 202px); }
+  .sidebar { top: var(--viewport-top, 0px); width: min(280px, calc(100vw - 48px)); height: var(--app-height, 100dvh);
+    padding-top: max(16px, env(safe-area-inset-top)); padding-bottom: max(16px, env(safe-area-inset-bottom)); }
+  .sidebar-footer { height: auto; min-height: 60px; }
+  .toolbar-button, .sidebar-footer .toolbar-button { width: 44px; height: 44px; flex-shrink: 0; }
+  .chat-toolbar { display: grid; grid-template-columns: 88px minmax(0, 1fr) 88px; gap: 0; padding: 0 4px; }
+  .collapsed-tools { grid-column: 1; grid-row: 1; flex-shrink: 0; gap: 0; }
+  .help-toggle { grid-column: 3; grid-row: 1; margin: 0; justify-self: end; }
+  .role-picker { grid-column: 2; grid-row: 1; display: grid; grid-template-columns: auto minmax(0, auto); grid-template-rows: 24px 14px; justify-content: center; align-items: center; column-gap: 4px; row-gap: 2px; }
+  .role-picker #roleLabel { justify-self: end; }
+  .role-select-wrap { min-width: 0; margin: 0; }
+  .role-picker #roleHint { display: none; }
+  .role-picker .role-hint-mobile { display: block; grid-column: 1 / -1; margin: 0; font-size: 10px; line-height: 14px; text-align: center; white-space: nowrap; }
+  .role-trigger { min-width: 0; max-width: 100%; gap: 6px; }
+  #currentRoleName { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .role-picker label { white-space: nowrap; }
+  .role-picker label, .role-trigger { font-size: 16px; line-height: 24px; }
+  .role-trigger { min-height: 44px; }
+  .role-menu { top: 44px; }
+  .role-menu button, .language-menu button { min-height: 44px; }
+  .language-switcher { min-height: 44px; }
+  .welcome-heading { top: 80px; align-items: flex-start; gap: 16px; }
+  .welcome-heading > div { min-width: 0; }
+  .prompt-bee { flex: 0 0 44px; width: 44px; height: 40px; }
+  .prompt-heading h1 { font-size: 22px; line-height: 30px; margin-bottom: 8px; }
+  .prompt-heading p { font-size: 16px; line-height: 24px; }
+  .prompt-group-heading { align-items: center; flex-wrap: wrap; row-gap: 6px; }
+  .prompt-group-navigation { min-width: 0; flex-wrap: wrap; }
+  .prompt-back { position: relative; min-height: 28px; }
+  .prompt-back::before { position: absolute; inset: -8px -4px; content: ""; }
+  .prompt-back > span { font: inherit; }
+  .composer, .chat-panel.is-empty .composer, .chat-panel.has-conversation .composer { grid-template-rows: minmax(44px, 1fr) 44px; row-gap: 0; min-height: 112px; padding: 10px 12px; }
+  .composer textarea { height: 44px; font-size: 16px; }
+  .composer .icon-button { width: 44px; height: 44px; }
+  .send-button { width: 44px; height: 44px; padding: 11px; }
+  .send-button svg { width: 20px; height: 20px; }
+  .composer.is-busy .send-button { padding: 9px; }
+  .message.assistant.has-avatar, .message.assistant.has-tutorial.has-avatar, .message.assistant.has-screenshot.has-avatar,
+  .message.assistant.has-guidance.has-avatar, .message.assistant.has-help-browser.has-avatar { grid-template-columns: 28px minmax(0, 1fr); gap: 8px; }
+  .message-avatar, .message-avatar .bee-mascot { width: 28px; height: 28px; }
+  .message-tools, .message.user .message-tools { gap: 2px; height: 24px; flex-wrap: nowrap; opacity: 1; pointer-events: auto; }
+  .message-tools button { flex: 0 0 32px; width: 32px; height: 44px; padding: 8px; }
+  .message-tools time { font-size: 14px; white-space: nowrap; }
+  .message-content, .help-documents { overflow-wrap: anywhere; }
+  .help-search input, .help-category select, .handoff-textarea { font-size: 16px; }
+  .help-browser-controls { grid-template-columns: minmax(0, 1fr); }
+  .help-audience-filters, .help-pagination { flex-wrap: wrap; }
+  .help-audience-filters button, .help-pagination button, .help-pagination select, .guided-action, .tutorial-tab { min-height: 44px; }
+  .guided-actions { flex-wrap: wrap; }
+  .feedback-dialog { top: var(--viewport-top, 0px); height: var(--app-height, 100dvh); }
+  .feedback-dialog-card { width: 100%; padding: 20px; }
+  .dialog-actions { flex-wrap: wrap; }
+  .dialog-primary, .dialog-secondary, .dialog-close { min-height: 44px; }
+}
+@media (max-width: 900px) and (max-height: 520px) {
+  .chat-panel.is-empty .welcome-heading { display: none; }
+  .chat-panel.is-empty { --prompt-reserved-space: calc(var(--composer-height, 118px) + 112px); }
+  .prompt-product-card { min-height: 82px; padding: 12px; }
+}
+
+@media (max-width: 900px) {
+  .chat-toolbar { height: calc(56px + env(safe-area-inset-top, 0px)); padding-top: env(safe-area-inset-top, 0px); }
+  .chat-panel, .chat-panel.is-empty, .chat-panel.has-conversation { padding-top: calc(56px + env(safe-area-inset-top, 0px)); }
+  .welcome-heading { top: calc(80px + env(safe-area-inset-top, 0px)); }
+  html[data-keyboard-open="true"] .chat-panel.is-empty .welcome-heading { display: none; }
+  html[data-keyboard-open="true"] .chat-panel.is-empty { --prompt-reserved-space: calc(var(--composer-height, 118px) + 112px); }
+}
+
+@media (max-width: 900px) {
+  .toolbar-button > .ui-icon, .composer .icon-button .ui-icon { width: 20px; height: 20px; }
+}
+
+.chat-panel.has-conversation .prompt-strip,
+.chat-panel.has-conversation .prompt-strip.prompt-open {
+  bottom: calc(var(--composer-height, 112px) + var(--composer-bottom-space) + var(--composer-gap) - var(--prompt-edge-space));
+}
+@media (max-width: 900px) {
+  .chat-panel, .chat-panel.is-empty, .chat-panel.has-conversation {
+    --composer-bottom-space: max(16px, env(safe-area-inset-bottom)); --composer-gap: 12px;
+    gap: 12px;
+  }
+  .chat-panel.has-conversation { --composer-gap: 20px; grid-template-rows: minmax(0, 1fr) auto; gap: 20px; }
+  .chat-panel.has-conversation .composer { grid-row: 2; }
+}
+
+.prompt-product-footer .ui-icon, .help-document-link .ui-icon { width: 12px; height: 12px; }
+.screenshot-nav .ui-icon { width: 20px; height: 20px; }
+
+/* H5 final frames (393px): compact two-line role header and 32px send graphic.
+   The real send/stop target remains 44px; content uses the same card dimensions
+   on the landing view and in the help popover. */
+@media (max-width: 900px) {
+  .send-button, .send-button:hover, .composer.has-input .send-button,
+  .composer.has-input .send-button:hover, .composer.is-busy .send-button {
+    position: relative; isolation: isolate; padding: 12px; border: 0; background: transparent;
+  }
+  .send-button::before { content: ""; position: absolute; z-index: -1; inset: 6px; border-radius: 50%; background: var(--el-color-primary-light-5); }
+  .composer.has-input .send-button::before { background: var(--brand); }
+  .composer.is-busy .send-button::before { border: 2px solid var(--brand); background: var(--panel); }
+  .send-button svg { width: 16px; height: 16px; }
+  .role-trigger[aria-expanded="true"] > .ui-icon { transform: rotate(180deg); }
+}
+@media (max-width: 360px) {
+  html[lang="en"] .role-picker label, html[lang="en"] .role-trigger,
+  html[lang="fr"] .role-picker label, html[lang="fr"] .role-trigger { font-size: 12px; }
+  .welcome-heading { gap: 12px; }
+  .prompt-bee { flex-basis: 36px; width: 36px; }
+  .prompt-heading h1 { font-size: 20px; line-height: 28px; }
+  .prompt-group { padding: 12px; }
+  .prompt-group-navigation { gap: 6px; }
+  .prompt-group-heading strong { font-size: 14px; }
+  .prompt-card:not(.prompt-product-card) { padding: 10px; }
+}
+
+/* XCQM-5048: compact final H5 cards and conversation rhythm. */
+.prompt-detail-compact { display: none; }
+.message.user + .message.assistant { margin-top: -12px; }
+.message.assistant:not(.has-tutorial):not(.has-screenshot):not(.has-help-browser) .message-avatar { display: flex; align-items: center; justify-content: center; height: 1.65em; }
+/* The existing English answer body uses 15px text with a 1.48 line height. */
+html[lang="en"] .message.assistant:not(.has-tutorial):not(.has-screenshot):not(.has-help-browser) .message-avatar { height: calc(15px * 1.48); }
+@media (max-width: 900px) {
+  .prompt-detail-full, .prompt-product-footer > .prompt-detail-full { display: none; }
+  .prompt-detail-compact { display: inline; }
+  .prompt-product-footer > .prompt-detail-compact { display: block; }
+  .message-avatar { font-size: inherit; }
+  .guided-action { text-align: left; }
+}

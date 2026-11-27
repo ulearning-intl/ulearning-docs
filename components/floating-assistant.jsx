@@ -5,16 +5,16 @@ import { getAssistantUrl } from "../utils/assistant-routing";
 import styles from "./floating-assistant.module.css";
 
 export default function FloatingAssistant() {
-  const { pathname } = useRouter();
+  const { asPath, pathname, locale } = useRouter();
   const [hovered, setHovered] = useState(false);
 
   return (
     <a
       className={styles.entry}
-      href={getAssistantUrl(pathname)}
+      href={getAssistantUrl(asPath || pathname, locale)}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="访问 ta.tongshike.cn（在新标签页打开）"
+      aria-label="打开小蜜蜂文档问答（在新标签页打开）"
       onPointerEnter={(event) => {
         if (event.pointerType === "mouse") setHovered(true);
       }}
