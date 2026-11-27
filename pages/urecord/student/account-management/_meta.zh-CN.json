@@ -1,0 +1,8 @@
+{
+  "index": {
+    "title": "管理个人账号",
+    "display": "hidden"
+  },
+  "registration-and-login": "登录",
+  "reset-or-change-password": "修改密码"
+}
