@@ -1,0 +1,11 @@
+{
+  "index": {
+    "title": "我的督导听课任务",
+    "display": "hidden"
+  },
+  "supervision-tasks": "督导听课任务",
+  "view-evaluation-records": "听评课记录查看",
+  "online-observation": "线上听课",
+  "offline-observation": "线下听课",
+  "view-evaluated-records": "查看被评记录"
+}

@@ -1,0 +1,10 @@
+{
+  "index": {
+    "title": "教师",
+    "display": "hidden"
+  },
+  "account-management": "管理个人账号",
+  "supervision-tasks": "我的督导听课任务",
+  "recording-management": "课堂回放管理",
+  "ai-analysis": "AI智能分析（需要有AI算力服务器）"
+}
