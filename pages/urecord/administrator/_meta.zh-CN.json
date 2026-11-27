@@ -1,0 +1,12 @@
+{
+  "index": {
+    "title": "管理员",
+    "display": "hidden"
+  },
+  "account-management": "管理个人账号",
+  "operations-monitoring": "运维检测",
+  "ai-classroom-evaluation": "AI课堂评价（需有AI算力服务器）",
+  "supervision-task-management": "听评课任务管理",
+  "platform-initialization": "平台初始化配置（基础配置）",
+  "recording-and-scheduling": "录直播与排课管理"
+}

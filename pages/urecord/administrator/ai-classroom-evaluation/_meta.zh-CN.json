@@ -1,0 +1,10 @@
+{
+  "index": {
+    "title": "AI课堂评价（需有AI算力服务器）",
+    "display": "hidden"
+  },
+  "manage-ai-evaluation-rubrics": "管理AI评价量表",
+  "classroom-behavior-analysis": "课堂行为分析",
+  "configure-ai-indicator-library": "设置AI指标库",
+  "ai-classroom-evaluation-report": "AI课堂评价报告"
+}
